@@ -23,29 +23,32 @@
       "@/*": [
         "./src/*"
       ],
-      "@/store": [
-        "./src/store/index.ts"
+      "@/store/*": [
+        "./src/app/store/*"
       ],
-      "@/screens": [
+      "@/screens/*": [
         "./src/app/components/screens/*"
       ],
-      "@/components": [
+      "@/components/*": [
         "./src/app/components/*"
       ],
-      "@/ui": [
+      "@/ui/*": [
         "./src/app/components/ui/*"
       ],
-      "@/hooks": [
+      "@/hooks/*": [
         "./src/app/hooks/*"
       ],
-      "@/services": [
+      "@/services/*": [
         "./src/app/services/*"
       ],
-      "@/types": [
-        "./src/app/types"
+      "@/types/*": [
+        "./src/app/types/*"
       ],
-      "@/utils": [
-        "./src/app/utils"
+      "@/utils/*": [
+        "./src/app/utils/*"
+      ],
+      "@/config/*": [
+        "./src/app/config/*"
       ]
     },
     "plugins": [

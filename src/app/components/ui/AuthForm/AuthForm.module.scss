@@ -1,0 +1,19 @@
+.AuthForm {
+  background-color: #131215;
+  width: 500px;
+  min-height: 500px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 64px 64px;
+  box-shadow: 0 0 20px #111839;
+  color: white;
+  position: relative;
+  label {
+    margin-top: 25px;
+  }
+  button {
+    margin-top: 50px;
+  }
+}
