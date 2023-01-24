@@ -1,16 +1,25 @@
 import type { AppProps } from 'next/app'
-import { Provider } from 'react-redux'
-import { store } from '@/app/store'
 import { ChakraProvider } from '@chakra-ui/provider'
 import { theme } from '@/app/config/chakra-config'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false
+		}
+	}
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<Provider store={store}>
+		<QueryClientProvider client={queryClient}>
 			<ChakraProvider theme={theme}>
 				<Component {...pageProps} />
 			</ChakraProvider>
-		</Provider>
+			<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
 	)
 }
 export default MyApp

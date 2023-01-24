@@ -25,7 +25,12 @@ const LoginForm: FC = () => {
 				<FormLabel>Пароль</FormLabel>
 				<Input type='password' />
 			</FormControl>
-			<Button size={'lg'} variant={'solid'} width={'50%'}>
+			<Button
+				size={'lg'}
+				variant={'solid'}
+				width={'100%'}
+				colorScheme={'facebook'}
+			>
 				Войти
 			</Button>
 			<Box marginTop={'25px'}>

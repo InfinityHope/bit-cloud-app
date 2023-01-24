@@ -23,9 +23,6 @@
       "@/*": [
         "./src/*"
       ],
-      "@/store/*": [
-        "./src/app/store/*"
-      ],
       "@/screens/*": [
         "./src/app/components/screens/*"
       ],

@@ -1,5 +1,5 @@
 import Layout from '@/ui/layout/Layout'
-import LoginForm from '@/ui/AuthForm/loginForm/LoginForm'
+import LoginForm from '@/ui/AuthForm/login-form/LoginForm'
 
 const Login = () => {
 	return (

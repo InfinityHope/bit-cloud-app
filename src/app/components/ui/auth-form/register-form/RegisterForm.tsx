@@ -36,14 +36,19 @@ const LoginForm: FC = () => {
 				<Input type='password' />
 			</FormControl>
 			<FormControl isRequired>
-				<FormLabel>Пароль</FormLabel>
-				<Input type='password' />
+				<FormLabel>Имя</FormLabel>
+				<Input type='text' />
 			</FormControl>
 			<FormControl isRequired>
-				<FormLabel>Пароль</FormLabel>
-				<Input type='password' />
+				<FormLabel>Никнейм</FormLabel>
+				<Input type='text' />
 			</FormControl>
-			<Button size={'lg'} variant={'solid'} width={'100%'}>
+			<Button
+				size={'lg'}
+				colorScheme={'facebook'}
+				variant={'solid'}
+				width={'100%'}
+			>
 				Зарегестрироваться
 			</Button>
 		</Flex>
