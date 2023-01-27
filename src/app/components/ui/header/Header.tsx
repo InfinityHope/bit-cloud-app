@@ -5,13 +5,23 @@ import Link from 'next/link'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useHistory } from '@/hooks/useHistory'
 import { useAuth } from '@/hooks/useAuth'
+import { motion } from 'framer-motion'
+import { animationsConfig } from '@/config/animations.config'
 
 const Header: FC = () => {
 	const { back } = useHistory()
 	const { user } = useAuth()
 
 	return (
-		<header>
+		<motion.header
+			initial={'initialFromTop'}
+			animate={'animateFromTop'}
+			transition={{
+				opacity: { ease: 'linear' },
+				duration: 0.5
+			}}
+			variants={animationsConfig}
+		>
 			<Flex color={'primaryTextColor'} alignItems={'center'} justifyContent={'space-between'}>
 				<Heading as='h1' size='xl' noOfLines={1}>
 					Sound Cloud
@@ -29,7 +39,7 @@ const Header: FC = () => {
 					</Flex>
 				</Flex>
 			</Flex>
-		</header>
+		</motion.header>
 	)
 }
 

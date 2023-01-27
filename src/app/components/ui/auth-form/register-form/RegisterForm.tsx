@@ -23,6 +23,10 @@ import { IAuthResponse, IRegisterFields } from '@/types/interfaces/auth.interfac
 import { useMutation } from 'react-query'
 import { AuthService } from '@/services/auth-services/auth.service'
 import { useMaskInput } from '@/hooks/useMaskInput'
+import { motion } from 'framer-motion'
+import { animationsConfig } from '@/config/animations.config'
+
+const MotionFlex = motion(Flex)
 
 const RegisterForm: FC = () => {
 	const { setAuthType, setUser } = useAuth()
@@ -86,7 +90,18 @@ const RegisterForm: FC = () => {
 	}
 
 	return (
-		<Flex as={'form'} className={styles.AuthForm} onSubmit={handleSubmit(onSubmit)}>
+		<MotionFlex
+			as={'form'}
+			className={styles.AuthForm}
+			onSubmit={handleSubmit(onSubmit)}
+			initial={'initialFadeScale'}
+			animate={'animateFadeScale'}
+			transition={{
+				opacity: { ease: 'linear' },
+				duration: 0.4
+			}}
+			variants={animationsConfig}
+		>
 			<Button
 				onClick={() => setAuthType('login')}
 				variant={'outline'}
@@ -214,7 +229,7 @@ const RegisterForm: FC = () => {
 			>
 				Зарегестрироваться
 			</Button>
-		</Flex>
+		</MotionFlex>
 	)
 }
 

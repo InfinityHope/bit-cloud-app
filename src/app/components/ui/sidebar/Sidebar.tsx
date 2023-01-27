@@ -9,6 +9,10 @@ import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/router'
 import NavLink from '@/ui/nav-link/NavLink'
 import styles from './Sidebar.module.scss'
+import { motion } from 'framer-motion'
+import { animationsConfig } from '@/config/animations.config'
+
+const MotionStack = motion(Stack)
 
 const Sidebar: FC = () => {
 	const { setUser, setAuthType, user } = useAuth()
@@ -22,12 +26,19 @@ const Sidebar: FC = () => {
 	}
 
 	return (
-		<Stack
+		<MotionStack
 			divider={<StackDivider borderColor='secondaryTextColor' />}
 			spacing={20}
 			align={'normal'}
 			as={'nav'}
 			className={styles.Sidebar}
+			initial={'initialFromLeft'}
+			animate={'animateFromLeft'}
+			transition={{
+				opacity: { ease: 'linear' },
+				duration: 0.7
+			}}
+			variants={animationsConfig}
 		>
 			<List spacing={10} color={'primaryTextColor'}>
 				<ListItem className={pathname === '/' ? styles.LinkActive : ''}>
@@ -66,7 +77,7 @@ const Sidebar: FC = () => {
 					Выйти
 				</ListItem>
 			</List>
-		</Stack>
+		</MotionStack>
 	)
 }
 

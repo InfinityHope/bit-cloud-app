@@ -17,6 +17,10 @@ import { useMutation } from 'react-query'
 import { AuthService } from '@/services/auth-services/auth.service'
 import { useAuth } from '@/hooks/useAuth'
 import { useNotification } from '@/hooks/useNotification'
+import { motion } from 'framer-motion'
+import { animationsConfig } from '@/config/animations.config'
+
+const MotionFlex = motion(Flex)
 
 const LoginForm: FC = () => {
 	const { setUser, setAuthType } = useAuth()
@@ -56,7 +60,18 @@ const LoginForm: FC = () => {
 	const onSubmit: SubmitHandler<ILoginFields> = data => login(data)
 
 	return (
-		<Flex as={'form'} className={styles.AuthForm} onSubmit={handleSubmit(onSubmit)}>
+		<MotionFlex
+			as={'form'}
+			className={styles.AuthForm}
+			onSubmit={handleSubmit(onSubmit)}
+			initial={'initialFadeScale'}
+			animate={'animateFadeScale'}
+			transition={{
+				opacity: { ease: 'linear' },
+				duration: 0.4
+			}}
+			variants={animationsConfig}
+		>
 			<Heading as='h2' size='xl'>
 				Войти
 			</Heading>
@@ -101,7 +116,7 @@ const LoginForm: FC = () => {
 					</Button>
 				</Text>
 			</Box>
-		</Flex>
+		</MotionFlex>
 	)
 }
 
