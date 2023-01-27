@@ -6,6 +6,7 @@ export interface IUser {
 	nickName: string
 	email: string
 	role: string
+	avatar: string
 	socialLinks: string[]
 	telephone: string
 	tracks: ITrack[]

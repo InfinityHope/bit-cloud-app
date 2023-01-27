@@ -5,7 +5,7 @@ import { NextPage } from 'next'
 const HomePage: NextPage = () => {
 	return (
 		<Layout title={'Sound Cloud Home'}>
-			<h2>Главная</h2>
+			<audio></audio>
 		</Layout>
 	)
 }

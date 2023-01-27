@@ -3,6 +3,7 @@ export interface IAuthResponse {
 		id: number
 		email: string
 		nickName: string
+		avatar: string
 		role: string
 	}
 	accessToken: string
@@ -14,6 +15,7 @@ export interface IRegisterFields {
 	nickName: string
 	telephone: string
 	isMusician: boolean
+	avatar: File
 }
 
 export interface ILoginFields {

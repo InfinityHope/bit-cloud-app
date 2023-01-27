@@ -1,5 +1,6 @@
-import React, { FC, useState } from 'react'
+import React, { ChangeEvent, FC, useRef, useState } from 'react'
 import {
+	Avatar,
 	Button,
 	Checkbox,
 	Flex,
@@ -10,7 +11,8 @@ import {
 	Input,
 	InputGroup,
 	InputLeftElement,
-	InputRightElement
+	InputRightElement,
+	Text
 } from '@chakra-ui/react'
 import { ArrowBackIcon, PhoneIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import styles from '../AuthForm.module.scss'
@@ -26,7 +28,11 @@ const RegisterForm: FC = () => {
 	const { setAuthType, setUser } = useAuth()
 	const { errorMessage, successMessage } = useNotification()
 	const { handlePhoneInput } = useMaskInput()
+
+	const [image, setImage] = useState<File | null>(null)
 	const [showPass, setShowPass] = useState<boolean>(false)
+
+	const inputFileRef = useRef<HTMLInputElement>(null)
 
 	const {
 		register,
@@ -42,7 +48,7 @@ const RegisterForm: FC = () => {
 
 	const { mutate: registration } = useMutation(
 		'login',
-		(data: IRegisterFields) => AuthService.register(data),
+		(data: FormData) => AuthService.register(data),
 		{
 			onSuccess(data: IAuthResponse) {
 				if (setUser) setUser(data.user)
@@ -58,7 +64,26 @@ const RegisterForm: FC = () => {
 		}
 	)
 
-	const onSubmit: SubmitHandler<IRegisterFields> = data => registration(data)
+	const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files) {
+			const file = e.target.files[0]
+			setImage(file)
+		}
+	}
+
+	const onSubmit: SubmitHandler<IRegisterFields> = data => {
+		const formData = new FormData()
+		if (image) {
+			formData.append('avatar', image)
+		}
+		formData.append('email', data.email)
+		formData.append('password', data.password)
+		formData.append('name', data.name)
+		formData.append('nickName', data.nickName)
+		formData.append('telephone', data.telephone)
+		setImage(null)
+		registration(formData)
+	}
 
 	return (
 		<Flex as={'form'} className={styles.AuthForm} onSubmit={handleSubmit(onSubmit)}>
@@ -75,6 +100,27 @@ const RegisterForm: FC = () => {
 			<Heading as='h2' size='xl'>
 				Регистрация
 			</Heading>
+			<FormControl textAlign={'center'} marginTop={'1.5em'}>
+				{!image?.name ? (
+					<Avatar
+						onClick={() => inputFileRef.current && inputFileRef.current.click()}
+						cursor={'pointer'}
+						name='Dan Abrahmov'
+						src={'http://localhost:5000/image/noAvatar.png'}
+					/>
+				) : (
+					<Text
+						cursor={'pointer'}
+						whiteSpace={'nowrap'}
+						overflow={'hidden'}
+						textOverflow={'ellipsis'}
+						onClick={() => inputFileRef.current && inputFileRef.current.click()}
+					>
+						Ваш аватар: {image.name}
+					</Text>
+				)}
+				<Input ref={inputFileRef} type='file' onChange={handleChangeFile} hidden />
+			</FormControl>
 			<FormControl isInvalid={!!errors.email}>
 				<FormLabel>E-mail</FormLabel>
 				<Input

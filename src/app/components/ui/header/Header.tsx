@@ -1,22 +1,20 @@
-import React, { FC, useEffect } from 'react'
-import { Button, Flex, Heading } from '@chakra-ui/react'
+import React, { FC } from 'react'
+import { Avatar, Button, Flex, Heading } from '@chakra-ui/react'
 import SearchInput from '@/ui/header/search-input/SearchInput'
 import Link from 'next/link'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useHistory } from '@/hooks/useHistory'
+import { useAuth } from '@/hooks/useAuth'
 
 const Header: FC = () => {
-	const { back, history, setHistory } = useHistory()
-
-	useEffect(() => {
-		console.log(history)
-	}, [history])
+	const { back } = useHistory()
+	const { user } = useAuth()
 
 	return (
 		<header>
 			<Flex color={'primaryTextColor'} alignItems={'center'} justifyContent={'space-between'}>
 				<Heading as='h1' size='xl' noOfLines={1}>
-					Sound Cloud App
+					Sound Cloud
 				</Heading>
 
 				<Flex justifyContent={'space-between'} alignItems={'center'} width={'80%'}>
@@ -25,7 +23,9 @@ const Header: FC = () => {
 					</Button>
 					<Flex justifyContent={'space-between'} alignItems={'center'} width={'40%'}>
 						<SearchInput />
-						<Link href={'/profile'}>Профиль</Link>
+						<Link href={'/profile'}>
+							<Avatar src={`${process.env.API_URL}/${user?.avatar}`} />
+						</Link>
 					</Flex>
 				</Flex>
 			</Flex>
