@@ -5,6 +5,7 @@ export interface IUser {
 	name: string
 	nickName: string
 	email: string
+	role: string
 	socialLinks: string[]
 	telephone: string
 	tracks: ITrack[]

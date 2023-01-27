@@ -22,7 +22,6 @@ export const useMaskInput = () => {
 		}
 
 		if (['7', '8', '9'].indexOf(inputNumbersValue[0]) > -1) {
-			// Russian phone number
 			if (inputNumbersValue[0] === '9') {
 				inputNumbersValue = '7' + inputNumbersValue
 			}
@@ -43,7 +42,6 @@ export const useMaskInput = () => {
 				formattedInputValue += '-' + inputNumbersValue.substring(9, 11)
 			}
 		} else {
-			// Not Russian phone number
 			formattedInputValue = '+' + inputNumbersValue.substring(0, 16)
 		}
 

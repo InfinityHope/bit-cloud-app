@@ -3,6 +3,7 @@ export interface IAuthResponse {
 		id: number
 		email: string
 		nickName: string
+		role: string
 	}
 	accessToken: string
 }

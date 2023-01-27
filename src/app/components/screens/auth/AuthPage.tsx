@@ -4,8 +4,10 @@ import RegisterForm from '@/ui/auth-form/register-form/RegisterForm'
 import Layout from '@/ui/layout/Layout'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/router'
+import { Flex } from '@chakra-ui/react'
+import { NextPage } from 'next'
 
-const AuthPage = () => {
+const AuthPage: NextPage = () => {
 	const { user, authType } = useAuth()
 	const { push } = useRouter()
 
@@ -16,16 +18,10 @@ const AuthPage = () => {
 	}, [user])
 
 	return (
-		<Layout
-			meta={{
-				title: 'Sound Cloud Authentication'
-			}}
-			content={{
-				justifyContent: 'center',
-				alignItems: 'center'
-			}}
-		>
-			{authType === 'login' ? <LoginForm /> : <RegisterForm />}
+		<Layout title={'Sound Cloud Authentication'}>
+			<Flex height={'100vh'} justifyContent={'center'} alignItems={'center'}>
+				{authType === 'login' ? <LoginForm /> : <RegisterForm />}
+			</Flex>
 		</Layout>
 	)
 }

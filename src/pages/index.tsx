@@ -1,16 +1,8 @@
 import React from 'react'
-import Layout from '@/ui/layout/Layout'
+import HomePage from '@/screens/home/HomePage'
 
 const Home = () => {
-	return (
-		<>
-			<Layout
-				meta={{
-					title: 'Sound Cloud Home'
-				}}
-			/>
-		</>
-	)
+	return <HomePage />
 }
 
 export default Home

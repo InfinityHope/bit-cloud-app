@@ -4,6 +4,7 @@ import { theme } from '@/app/config/chakra-config'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import AuthProvider from '@/app/providers/auth-provider/AuthProvider'
+import { HistoryProvider } from '@/app/providers/history-provider/HistoryProvider'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -17,10 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<AuthProvider>
-				<ChakraProvider theme={theme}>
-					<Component {...pageProps} />
-				</ChakraProvider>
-				<ReactQueryDevtools initialIsOpen={false} />
+				<HistoryProvider>
+					<ChakraProvider theme={theme}>
+						<Component {...pageProps} />
+					</ChakraProvider>
+					<ReactQueryDevtools initialIsOpen={false} />
+				</HistoryProvider>
 			</AuthProvider>
 		</QueryClientProvider>
 	)

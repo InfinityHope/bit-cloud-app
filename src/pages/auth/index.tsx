@@ -1,7 +1,7 @@
 import AuthPage from '@/screens/auth/AuthPage'
 
-const Auth = () => {
+const Index = () => {
 	return <AuthPage />
 }
 
-export default Auth
+export default Index

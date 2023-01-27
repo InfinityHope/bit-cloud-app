@@ -1,8 +1,7 @@
 import Cookies from 'js-cookie'
-import { IAuthResponse } from '@/types/interfaces/user.interface'
+import { IAuthResponse } from '@/types/interfaces/auth.interface'
 
-export const saveTokenToStorage = (accessToken: string) =>
-	Cookies.set('accessToken', accessToken)
+export const saveTokenToStorage = (accessToken: string) => Cookies.set('accessToken', accessToken)
 
 export const removeTokenFromStorage = () => Cookies.remove('accessToken')
 
