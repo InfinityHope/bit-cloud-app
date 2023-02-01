@@ -1,7 +1,8 @@
-import AuthPage from '@/screens/auth/AuthPage'
+import AuthPage from '@/screens/auth-page/AuthPage'
+import { NextPage } from 'next'
 
-const Index = () => {
+const Auth: NextPage = () => {
 	return <AuthPage />
 }
 
-export default Index
+export default Auth

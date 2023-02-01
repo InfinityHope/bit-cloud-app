@@ -13,14 +13,15 @@ const Header: FC = () => {
 	const { user } = useAuth()
 
 	return (
-		<motion.header
+		<motion.div
 			initial={'initialFromTop'}
-			animate={'animateFromTop'}
 			transition={{
 				opacity: { ease: 'linear' },
 				duration: 0.5
 			}}
+			viewport={{ once: true }}
 			variants={animationsConfig}
+			animate={'animateFromTop'}
 		>
 			<Flex color={'primaryTextColor'} alignItems={'center'} justifyContent={'space-between'}>
 				<Heading as='h1' size='xl' noOfLines={1}>
@@ -39,7 +40,7 @@ const Header: FC = () => {
 					</Flex>
 				</Flex>
 			</Flex>
-		</motion.header>
+		</motion.div>
 	)
 }
 

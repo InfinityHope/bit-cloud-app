@@ -22,15 +22,15 @@ const Layout: FC<PropsWithChildren<IMeta>> = ({ children, ...meta }) => {
 					columnGap={'1em'}
 					padding={'2em 4em'}
 				>
-					<GridItem pl='2' area={'header'}>
+					<GridItem as={'header'} pl='2' area={'header'}>
 						{user ? <Header /> : ''}
 					</GridItem>
 
-					<GridItem area={'nav'}>
+					<GridItem as={'nav'} area={'nav'}>
 						<Sidebar />
 					</GridItem>
-					<GridItem area={'main'}>
-						<main>{children}</main>
+					<GridItem as={'main'} area={'main'} position={'relative'} paddingLeft={'5em'}>
+						{children}
 					</GridItem>
 				</Grid>
 			) : (

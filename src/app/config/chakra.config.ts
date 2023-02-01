@@ -1,6 +1,9 @@
 import { extendTheme } from '@chakra-ui/react'
 
 const config = {
+	fontSizes: {
+		xl: '4em'
+	},
 	colors: {
 		primary: '#101012',
 		secondary: '#11111f',

@@ -5,9 +5,8 @@ import Layout from '@/ui/layout/Layout'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/router'
 import { Flex } from '@chakra-ui/react'
-import { NextPage } from 'next'
 
-const AuthPage: NextPage = () => {
+const AuthPage = () => {
 	const { user, authType } = useAuth()
 	const { push } = useRouter()
 

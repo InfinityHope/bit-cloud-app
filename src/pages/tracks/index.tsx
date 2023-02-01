@@ -1,8 +1,9 @@
 import React from 'react'
-import TracksPage from '@/screens/tracks/TracksPage'
+import TracksPage from '@/screens/tracks-page/TracksPage'
+import { NextPage } from 'next'
 
-const Index = () => {
+const Tracks: NextPage = () => {
 	return <TracksPage />
 }
 
-export default Index
+export default Tracks

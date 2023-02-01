@@ -85,6 +85,7 @@ const RegisterForm: FC = () => {
 		formData.append('name', data.name)
 		formData.append('nickName', data.nickName)
 		formData.append('telephone', data.telephone)
+		formData.append('isMusician', data.isMusician.toString())
 		setImage(null)
 		registration(formData)
 	}

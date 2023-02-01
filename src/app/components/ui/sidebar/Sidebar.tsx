@@ -7,7 +7,6 @@ import { GiMicrophone } from 'react-icons/gi'
 import { AuthService } from '@/services/auth-services/auth.service'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/router'
-import NavLink from '@/ui/nav-link/NavLink'
 import styles from './Sidebar.module.scss'
 import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
@@ -30,7 +29,6 @@ const Sidebar: FC = () => {
 			divider={<StackDivider borderColor='secondaryTextColor' />}
 			spacing={20}
 			align={'normal'}
-			as={'nav'}
 			className={styles.Sidebar}
 			initial={'initialFromLeft'}
 			animate={'animateFromLeft'}
@@ -42,10 +40,10 @@ const Sidebar: FC = () => {
 		>
 			<List spacing={10} color={'primaryTextColor'}>
 				<ListItem className={pathname === '/' ? styles.LinkActive : ''}>
-					<NavLink link={'/'}>
+					<Link href={'/'}>
 						<ListIcon as={RiHomeLine} />
 						Главная
-					</NavLink>
+					</Link>
 				</ListItem>
 				<ListItem className={pathname === '/tracks' ? styles.LinkActive : ''}>
 					<Link href={'/tracks'}>
@@ -53,10 +51,10 @@ const Sidebar: FC = () => {
 						Все треки
 					</Link>
 				</ListItem>
-				<ListItem className={pathname === '/artists' ? styles.LinkActive : ''}>
-					<Link href={'/artists'}>
+				<ListItem className={pathname === '/musicians' ? styles.LinkActive : ''}>
+					<Link href={'/musicians'}>
 						<ListIcon as={GiMicrophone} />
-						Все исполнители
+						Все музыканты
 					</Link>
 				</ListItem>
 			</List>
