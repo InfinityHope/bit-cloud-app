@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useRef, useState } from 'react'
+import { ChangeEvent, FC, useRef, useState } from 'react'
 import {
 	Avatar,
 	Button,
@@ -15,14 +15,14 @@ import {
 	Text
 } from '@chakra-ui/react'
 import { ArrowBackIcon, PhoneIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import styles from '../AuthForm.module.scss'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IRegisterFields } from '@/types/interfaces/auth.interface'
-import { useMaskInput } from '@/hooks/useMaskInput'
 import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
+import { useMaskInput } from '@/hooks/useMaskInput'
 import { useRegister } from '@/hooks/auth-hooks/useRegister'
+import styles from '../AuthForm.module.scss'
 
 const MotionFlex = motion(Flex)
 

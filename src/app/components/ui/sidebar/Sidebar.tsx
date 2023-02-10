@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { List, ListIcon, ListItem, Stack, StackDivider } from '@chakra-ui/react'
 import Link from 'next/link'
 import { BiLogOut } from 'react-icons/bi'

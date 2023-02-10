@@ -1,9 +1,8 @@
-import React from 'react'
-import MusicianPage from '@/screens/musicians-page/musician-page/MusicianPage'
 import { NextPage } from 'next'
+import MusicianScreen from '@/screens/musicians-screen/musician-screen/MusicianScreen'
 
 const Musician: NextPage = () => {
-	return <MusicianPage />
+	return <MusicianScreen />
 }
 
 export default Musician

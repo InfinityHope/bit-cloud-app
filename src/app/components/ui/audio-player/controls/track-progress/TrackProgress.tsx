@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC, useState } from 'react'
 import {
 	Box,
 	Flex,
@@ -24,7 +24,7 @@ const labelStyles = {
 }
 
 const TrackProgress: FC<ITrackProgress> = ({ currentValue, onChange, duration }) => {
-	const [showTooltip, setShowTooltip] = React.useState(false)
+	const [showTooltip, setShowTooltip] = useState(false)
 	return (
 		<Flex justifyContent={'space-evenly'}>
 			<Text>{msToTime(currentValue)}</Text>

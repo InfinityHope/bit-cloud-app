@@ -1,8 +1,8 @@
-import React from 'react'
-import HomePage from '@/screens/home-page/HomePage'
+import { NextPage } from 'next'
+import HomeScreen from '@/screens/home-screen/HomeScreen'
 
-const Home = () => {
-	return <HomePage />
+const Home: NextPage = () => {
+	return <HomeScreen />
 }
 
 export default Home

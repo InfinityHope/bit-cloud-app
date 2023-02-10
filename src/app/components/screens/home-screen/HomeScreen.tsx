@@ -1,7 +1,6 @@
-import React from 'react'
 import Meta from '@/components/meta/Meta'
 
-const HomePage = () => {
+const HomeScreen = () => {
 	return (
 		<>
 			<Meta title={'Sound Cloud Home'} />
@@ -9,4 +8,4 @@ const HomePage = () => {
 	)
 }
 
-export default HomePage
+export default HomeScreen

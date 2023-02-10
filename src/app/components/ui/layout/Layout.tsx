@@ -1,8 +1,6 @@
-import React, { FC, PropsWithChildren } from 'react'
-import Header from '@/ui/header/Header'
+import { FC, PropsWithChildren } from 'react'
 import { Grid, GridItem } from '@chakra-ui/react'
-import Sidebar from '@/ui/sidebar/Sidebar'
-import AudioPlayer from '@/ui/audio-player/AudioPlayer'
+import { AudioPlayer, Header, Sidebar } from '@/components/ui'
 import styles from './Layout.module.scss'
 import { useAuth } from '@/hooks/auth-hooks/useAuth'
 

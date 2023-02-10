@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import styles from './PageHeader.module.scss'
 import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'

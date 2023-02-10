@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import {
 	Box,
 	Button,
@@ -14,9 +14,9 @@ import styles from '../AuthForm.module.scss'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ILoginFields } from '@/types/interfaces/auth.interface'
 import { useAuth } from '@/hooks/auth-hooks/useAuth'
-import { motion } from 'framer-motion'
-import { animationsConfig } from '@/config/animations.config'
 import { useLogin } from '@/hooks/auth-hooks/useLogin'
+import { animationsConfig } from '@/config/animations.config'
+import { motion } from 'framer-motion'
 
 const MotionFlex = motion(Flex)
 

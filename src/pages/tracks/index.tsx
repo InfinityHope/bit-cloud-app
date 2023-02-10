@@ -1,9 +1,8 @@
-import React from 'react'
-import TracksPage from '@/screens/tracks-page/TracksPage'
 import { NextPage } from 'next'
+import TracksScreen from '@/screens/tracks-screen/TracksScreen'
 
 const Tracks: NextPage = () => {
-	return <TracksPage />
+	return <TracksScreen />
 }
 
 export default Tracks

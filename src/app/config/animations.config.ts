@@ -44,7 +44,7 @@ export const animationsConfig = {
 		opacity: 1,
 		x: 0,
 		transition: {
-			delay: 0.3 * i
+			duration: 0.3 * i
 		}
 	}),
 	listInitialRight: {
@@ -55,7 +55,7 @@ export const animationsConfig = {
 		opacity: 1,
 		x: 0,
 		transition: {
-			delay: 0.4 * i
+			duration: 0.4 * i
 		}
 	})
 }

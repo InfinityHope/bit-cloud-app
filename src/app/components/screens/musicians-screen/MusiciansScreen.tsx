@@ -1,11 +1,9 @@
-import React from 'react'
-import CustomSpinner from '@/ui/custom-spinner/CustomSpinner'
-import MusiciansList from '@/ui/musicians-list/MusiciansList'
+import { CustomSpinner, MusiciansList } from '@/components/ui'
 import { Heading } from '@chakra-ui/react'
 import Meta from '@/components/meta/Meta'
 import { useMusicians } from '@/hooks/user-hooks/useMusicians'
 
-const MusiciansPage = () => {
+const MusiciansScreen = () => {
 	const { musicians, isLoading } = useMusicians()
 
 	return (
@@ -24,4 +22,4 @@ const MusiciansPage = () => {
 	)
 }
 
-export default MusiciansPage
+export default MusiciansScreen

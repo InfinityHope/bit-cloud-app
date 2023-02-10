@@ -1,12 +1,10 @@
-import React from 'react'
 import Meta from '@/components/meta/Meta'
 import { Flex, Heading } from '@chakra-ui/react'
-import MusicList from '@/ui/music-list/MusicList'
-import PageHeader from '../../ui/page-header/PageHeader'
-import bgImg from '@/assets/secondary-bg.jpg'
+import { MusicList, PageHeader } from '@/components/ui'
 import { useTracks } from '@/hooks/tracks-hooks/useTracks'
+import bgImg from '@/assets/secondary-bg.jpg'
 
-const TracksPage = () => {
+const TracksScreen = () => {
 	const tracks = useTracks()
 	return (
 		<>
@@ -27,4 +25,4 @@ const TracksPage = () => {
 	)
 }
 
-export default TracksPage
+export default TracksScreen

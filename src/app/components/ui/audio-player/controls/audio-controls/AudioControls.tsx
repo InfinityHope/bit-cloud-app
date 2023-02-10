@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Flex } from '@chakra-ui/react'
 import { RxTrackNext, RxTrackPrevious } from 'react-icons/rx'
 import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai'

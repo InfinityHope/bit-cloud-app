@@ -6,7 +6,7 @@ import { AuthService } from '@/services/auth-services/auth.service'
 
 export const AuthContext = createContext({} as IContext)
 
-const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
+export const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 	const [user, setUser] = useState<TypeUserState>(null)
 	const [authType, setAuthType] = useState<string>('login')
 
@@ -36,5 +36,3 @@ const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 		</AuthContext.Provider>
 	)
 }
-
-export default AuthProvider

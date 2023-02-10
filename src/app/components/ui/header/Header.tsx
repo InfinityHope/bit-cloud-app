@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Avatar, Button, Flex, Heading } from '@chakra-ui/react'
-import SearchInput from '@/ui/header/search-input/SearchInput'
+import { SearchInput } from '@/components/ui'
 import Link from 'next/link'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useHistory } from '@/hooks/useHistory'

@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
-import LoginForm from '@/ui/auth-form/login-form/LoginForm'
-import RegisterForm from '@/ui/auth-form/register-form/RegisterForm'
+import { useEffect } from 'react'
+import { LoginForm, RegisterForm } from '@/components/ui'
 import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { useRouter } from 'next/router'
 import { Flex } from '@chakra-ui/react'
 import Meta from '@/components/meta/Meta'
 
-const AuthPage = () => {
+const AuthScreen = () => {
 	const { user, authType } = useAuth()
 	const { push } = useRouter()
 
@@ -26,4 +25,4 @@ const AuthPage = () => {
 	)
 }
 
-export default AuthPage
+export default AuthScreen

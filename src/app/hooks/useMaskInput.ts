@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const useMaskInput = () => {
 	const PATTERN = /\D/g
 

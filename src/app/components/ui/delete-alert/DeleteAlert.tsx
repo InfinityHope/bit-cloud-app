@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import {
 	AlertDialog,
 	AlertDialogBody,
@@ -18,9 +18,15 @@ interface IDeleteAlert {
 
 const DeleteAlert: FC<IDeleteAlert> = ({ isOpen, cancelRef, onClose, deleteTrack }) => {
 	return (
-		<AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
+		<AlertDialog
+			isOpen={isOpen}
+			leastDestructiveRef={cancelRef}
+			onClose={onClose}
+			colorScheme={''}
+			motionPreset={'slideInBottom'}
+		>
 			<AlertDialogOverlay>
-				<AlertDialogContent>
+				<AlertDialogContent bgColor={'primary'} color={'#fff'}>
 					<AlertDialogHeader fontSize='lg' fontWeight='bold'>
 						Удалить трек
 					</AlertDialogHeader>
@@ -28,7 +34,7 @@ const DeleteAlert: FC<IDeleteAlert> = ({ isOpen, cancelRef, onClose, deleteTrack
 					<AlertDialogBody>Вы уверены, что хотите удалить трек?</AlertDialogBody>
 
 					<AlertDialogFooter>
-						<Button onClick={onClose} ref={cancelRef}>
+						<Button colorScheme={'facebook'} onClick={onClose} ref={cancelRef}>
 							Отменить
 						</Button>
 						<Button colorScheme='red' onClick={() => deleteTrack()} ml={3}>

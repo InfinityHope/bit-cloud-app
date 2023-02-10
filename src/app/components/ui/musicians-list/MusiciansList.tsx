@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { IUser } from '@/types/interfaces/user.interface'
 import { Avatar, Grid, GridItem, Text } from '@chakra-ui/react'
 import Link from 'next/link'

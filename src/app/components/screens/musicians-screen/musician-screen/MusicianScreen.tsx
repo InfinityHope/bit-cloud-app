@@ -1,11 +1,9 @@
-import React from 'react'
-import AuthorInfoSkeleton from '@/ui/skeletons/AuthorInfoSkeleton'
-import MusicianProfile from '@/ui/musician-profile/MusicianProfile'
-import { useRouter } from 'next/router'
+import { AuthorInfoSkeleton, MusicianProfile } from '@/components/ui'
 import Meta from '@/components/meta/Meta'
+import { useRouter } from 'next/router'
 import { useMusician } from '@/hooks/user-hooks/useMusician'
 
-const MusicianPage = () => {
+const MusicianScreen = () => {
 	const { query } = useRouter()
 	const nickName = query?.nickName
 	const { musician, isLoading } = useMusician(nickName)
@@ -19,4 +17,4 @@ const MusicianPage = () => {
 	)
 }
 
-export default MusicianPage
+export default MusicianScreen

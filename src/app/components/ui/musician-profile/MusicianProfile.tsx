@@ -1,8 +1,7 @@
+import { FC } from 'react'
 import { IUser } from '@/types/interfaces/user.interface'
 import { Avatar, Divider, Flex, Heading, Link, List, ListItem, Text } from '@chakra-ui/react'
-import MusicList from '@/ui/music-list/MusicList'
-import React, { FC } from 'react'
-import PageHeader from '@/ui/page-header/PageHeader'
+import { MusicList, PageHeader } from '@/components/ui'
 import styles from './MusicianProfile.module.scss'
 import bgImg from '@/assets/background.jpg'
 

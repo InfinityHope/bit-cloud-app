@@ -1,4 +1,4 @@
-import React, { FC, memo, useRef } from 'react'
+import { FC, memo, useRef } from 'react'
 import { Image, Link, SimpleGrid, Td, Tooltip, Tr, useDisclosure } from '@chakra-ui/react'
 import { ITrack } from '@/types/interfaces/track.interface'
 import { msToTime } from '@/utils/msToTime'
@@ -7,15 +7,15 @@ import { AiOutlineDelete, AiOutlinePauseCircle, AiOutlinePlayCircle } from 'reac
 import { API_URL } from '@/constants/api.constants'
 import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { FiDownload } from 'react-icons/fi'
 import { MdArchive } from 'react-icons/md'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { useDeleteTrack } from '@/hooks/tracks-hooks/useDeleteTrack'
 import { useDownloadAudio } from '@/hooks/tracks-hooks/useDownloadAudio'
 import { useAppSelector } from '@/hooks/redux-hooks/useAppSelector'
 import { useActions } from '@/hooks/redux-hooks/useActions'
 import { createDownloadUrl } from '@/app/utils/createDownloadUrl'
-import DeleteAlert from '@/ui/delete-alert/DeleteAlert'
+import { DeleteAlert } from '@/components/ui'
 
 const MotionTr = motion(Tr)
 
@@ -50,8 +50,8 @@ const TrackItem: FC<ITrackItem> = memo(({ track, author, index, selectTrack }) =
 		<MotionTr
 			key={track.id}
 			variants={animationsConfig}
-			initial={!(index % 2) ? 'listInitialLeft' : 'listInitialRight'}
-			animate={!(index % 2) ? 'listAnimateLeft' : 'listAnimateRight'}
+			initial={'listInitialLeft'}
+			animate={'listAnimateLeft'}
 			custom={index}
 		>
 			<Td w={'30%'}>
