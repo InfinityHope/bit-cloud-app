@@ -1,11 +1,11 @@
 import React from 'react'
-import Layout from '@/ui/layout/Layout'
+import Meta from '@/components/meta/Meta'
 
 const HomePage = () => {
 	return (
-		<Layout title={'Sound Cloud Home'}>
-			<audio></audio>
-		</Layout>
+		<>
+			<Meta title={'Sound Cloud Home'} />
+		</>
 	)
 }
 

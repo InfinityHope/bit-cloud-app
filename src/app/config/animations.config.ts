@@ -18,5 +18,11 @@ export const animationsConfig = {
 	},
 	animateFromTop: {
 		y: 0
+	},
+	initialFromBottom: {
+		y: 200
+	},
+	animateFromBottom: {
+		y: 0
 	}
 }

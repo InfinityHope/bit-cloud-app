@@ -1,36 +1,53 @@
 import React, { FC, PropsWithChildren } from 'react'
-import Meta from '@/components/meta/Meta'
 import { useAuth } from '@/hooks/useAuth'
 import Header from '@/ui/header/Header'
-import { IMeta } from '@/components/meta/meta.interface'
 import { Grid, GridItem } from '@chakra-ui/react'
 import Sidebar from '@/ui/sidebar/Sidebar'
+import AudioPlayer from '@/ui/audio-player/AudioPlayer'
+import styles from './Layout.module.scss'
 
-const Layout: FC<PropsWithChildren<IMeta>> = ({ children, ...meta }) => {
+const Layout: FC<PropsWithChildren> = ({ children }) => {
 	const { user } = useAuth()
 	return (
 		<>
-			<Meta {...meta} />
 			{user ? (
 				<Grid
 					templateAreas={`
-				  "header header"
-                  "nav main"
-                `}
-					gridTemplateColumns={'15% 1fr'}
-					rowGap={'4em'}
+					  "header header"
+					  "nav main"
+					  "player player"
+                	`}
+					gridTemplateColumns={'20% 1fr'}
 					columnGap={'1em'}
-					padding={'2em 4em'}
 				>
-					<GridItem as={'header'} pl='2' area={'header'}>
+					<GridItem
+						as={'header'}
+						area={'header'}
+						height={'10vh'}
+						bgColor={'primary'}
+						p={'2em 2em 0 3em'}
+					>
 						{user ? <Header /> : ''}
 					</GridItem>
 
-					<GridItem as={'nav'} area={'nav'}>
+					<GridItem as={'nav'} area={'nav'} p={'4em 2em 0 3em'}>
 						<Sidebar />
 					</GridItem>
-					<GridItem as={'main'} area={'main'} position={'relative'} paddingLeft={'5em'}>
+
+					<GridItem
+						as={'main'}
+						area={'main'}
+						bgColor={'primary'}
+						height={'90vh'}
+						p={'.5em 2em 8em 2em'}
+						overflowY={'auto'}
+						className={styles.Main}
+					>
 						{children}
+					</GridItem>
+
+					<GridItem area={'player'} height={'10vh'}>
+						{user ? <AudioPlayer /> : ''}
 					</GridItem>
 				</Grid>
 			) : (

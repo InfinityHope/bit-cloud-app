@@ -16,7 +16,8 @@ const config = {
 		global: {
 			body: {
 				bgGradient: 'linear(160deg, primary 25%, secondary 55%, darkBlue 95%)',
-				height: '100vh'
+				height: '100vh',
+				overflowY: 'hidden'
 			},
 			a: {
 				color: 'inherit',

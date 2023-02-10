@@ -1,13 +1,15 @@
 import React from 'react'
-import Layout from '@/ui/layout/Layout'
-import { useRouter } from 'next/router'
-import { UserService } from '@/services/user-service/user.service'
-import { useQuery } from 'react-query'
 import AuthorInfoSkeleton from '@/ui/skeletons/AuthorInfoSkeleton'
 import MusicianProfile from '@/ui/musician-profile/MusicianProfile'
+import { useQuery } from 'react-query'
+import { UserService } from '@/services/user-service/user.service'
+import { useRouter } from 'next/router'
+import Meta from '@/components/meta/Meta'
+import { useActions } from '@/hooks/useActions'
 
 const MusicianPage = () => {
 	const { query } = useRouter()
+	const { setTracks } = useActions()
 	const nickName = query?.nickName
 
 	const { data: user, isLoading } = useQuery(
@@ -20,10 +22,11 @@ const MusicianPage = () => {
 	)
 
 	return (
-		<Layout title={`${query.nickName}`}>
+		<>
+			<Meta title={`Sound Cloud ${nickName}`} />
 			{isLoading ? <AuthorInfoSkeleton /> : null}
 			{user && <MusicianProfile user={user} />}
-		</Layout>
+		</>
 	)
 }
 

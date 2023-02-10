@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import LoginForm from '@/ui/auth-form/login-form/LoginForm'
 import RegisterForm from '@/ui/auth-form/register-form/RegisterForm'
-import Layout from '@/ui/layout/Layout'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/router'
 import { Flex } from '@chakra-ui/react'
+import Meta from '@/components/meta/Meta'
 
 const AuthPage = () => {
 	const { user, authType } = useAuth()
@@ -17,11 +17,12 @@ const AuthPage = () => {
 	}, [user])
 
 	return (
-		<Layout title={'Sound Cloud Authentication'}>
+		<>
+			<Meta title={'Sound Cloud Auth'} />
 			<Flex height={'100vh'} justifyContent={'center'} alignItems={'center'}>
 				{authType === 'login' ? <LoginForm /> : <RegisterForm />}
 			</Flex>
-		</Layout>
+		</>
 	)
 }
 

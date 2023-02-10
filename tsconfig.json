@@ -23,8 +23,17 @@
       "@/*": [
         "./src/*"
       ],
+      "@/assets/*": [
+        "./src/app/assets/*"
+      ],
+      "@/store/*": [
+        "./src/app/store/*"
+      ],
       "@/screens/*": [
         "./src/app/components/screens/*"
+      ],
+      "@/constants/*": [
+        "./src/app/constants/*"
       ],
       "@/components/*": [
         "./src/app/components/*"

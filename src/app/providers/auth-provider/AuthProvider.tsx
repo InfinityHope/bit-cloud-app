@@ -25,7 +25,7 @@ const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
 		if (!accessToken && !user) {
 			AuthService.logout()
-			push('auth').then(r => r)
+			push('/auth').then(r => r)
 			setUser(null)
 		}
 	}, [pathname])

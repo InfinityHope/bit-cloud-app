@@ -1,58 +1,24 @@
-import React, { FC } from 'react'
 import { IUser } from '@/types/interfaces/user.interface'
-import {
-	Avatar,
-	Box,
-	Divider,
-	Flex,
-	Heading,
-	Link,
-	List,
-	ListItem,
-	Stack,
-	Text
-} from '@chakra-ui/react'
+import { Flex, Heading, Text } from '@chakra-ui/react'
 import styles from './MusicianProfile.module.scss'
+import MusicList from '@/ui/music-list/MusicList'
+import { FC } from 'react'
+import MusicianProfileHeader from '@/ui/musician-profile/musician-profile-header/MusicianProfileHeader'
 
 const MusicianProfile: FC<{ user: IUser }> = ({ user }) => {
 	return (
 		<Flex flexDirection={'column'} className={styles.MusicianProfile}>
-			<Box bg='secondary' className={styles.MusicianProfileHeader}>
-				<Heading as={'h2'} size={'4xl'} marginBottom={'0.5em'}>
-					{user.nickName}
-				</Heading>
-
-				<Divider color={'secondary'} marginBottom={'0.5em'} />
-
-				<Text>E-mail: {user.email}</Text>
-				<Flex flexDirection={'column'}>
-					<Text>Социальные сети:</Text>
-					<List>
-						{user.socialLinks.map(link => (
-							<ListItem>
-								<Link href={`https://${link}`} target={'_blank'}>
-									{link}
-								</Link>
-							</ListItem>
-						))}
-					</List>
-				</Flex>
-				<Avatar
-					src={`${process.env.API_URL}/${user.avatar}`}
-					name={user.avatar}
-					boxSize={'10em'}
-				/>
-			</Box>
+			<MusicianProfileHeader user={user} />
 			<Heading as={'h3'} size={'xl'}>
 				Музыка автора
 			</Heading>
-			<Stack spacing={4}>
-				{user.tracks.map(track => (
-					<div>
-						<audio src={`${process.env.API_URL}/${track.audio}`}></audio>
-					</div>
-				))}
-			</Stack>
+			{user.tracks.length > 0 ? (
+				<MusicList tracks={user.tracks} author={user} />
+			) : (
+				<Text mt={'2em'} fontSize={'x-large'}>
+					У данного автора пока нет треков
+				</Text>
+			)}
 		</Flex>
 	)
 }

@@ -5,7 +5,7 @@ const AuthorInfoSkeleton: FC = () => {
 	return (
 		<Box>
 			<Stack position={'relative'}>
-				<Skeleton mt='4' height={'350px'} borderRadius={'10px'} />
+				<Skeleton mt='4' minHeight={'250px'} borderRadius={'10px'} padding={'60px'} />
 				<Stack left={'5%'} top={'40%'} w={'85%'} position={'absolute'} spacing={4}>
 					<Skeleton height='10px' width={'40%'} />
 					<Skeleton height='10px' width={'full'} />

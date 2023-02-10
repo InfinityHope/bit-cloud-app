@@ -1,0 +1,25 @@
+.AudioPlayer {
+	background: #101012;
+	color: #fff;
+	width: 100%;
+	position: fixed;
+	height: inherit;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 1.5em;
+	&Inner {
+		position: relative;
+		z-index: 2;
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		width: 70%;
+		height: inherit;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		background: linear-gradient(3deg, #141839 0%, #101012 40%);
+	}
+}

@@ -1,11 +1,12 @@
 import React from 'react'
-import Layout from '@/ui/layout/Layout'
+import Meta from '@/components/meta/Meta'
 
 const TracksPage = () => {
 	return (
-		<Layout title={'Sound Cloud Tracks'}>
+		<>
+			<Meta title={'Sound Cloud Tracks'} />
 			<h2>Треки</h2>
-		</Layout>
+		</>
 	)
 }
 

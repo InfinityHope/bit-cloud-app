@@ -1,18 +1,19 @@
 import React from 'react'
-import Layout from '@/ui/layout/Layout'
-import { useQuery } from 'react-query'
-import { UserService } from '@/services/user-service/user.service'
 import CustomSpinner from '@/ui/custom-spinner/CustomSpinner'
 import MusiciansList from '@/ui/musicians-list/MusiciansList'
 import { Heading } from '@chakra-ui/react'
+import { useQuery } from 'react-query'
+import { UserService } from '@/services/user-service/user.service'
+import Meta from '@/components/meta/Meta'
 
 const MusiciansPage = () => {
-	const { data, isLoading } = useQuery('musicians-page', () => UserService.getAllMusicians(), {
+	const { data, isLoading } = useQuery('musicians list', () => UserService.getAllMusicians(), {
 		select: ({ data }) => data
 	})
 
 	return (
-		<Layout title={'Sound Cloud Authors'}>
+		<>
+			<Meta title={'Sound Cloud Authors'} />
 			{isLoading ? <CustomSpinner /> : null}
 			{data && (
 				<>
@@ -22,7 +23,7 @@ const MusiciansPage = () => {
 					<MusiciansList users={data} />
 				</>
 			)}
-		</Layout>
+		</>
 	)
 }
 
