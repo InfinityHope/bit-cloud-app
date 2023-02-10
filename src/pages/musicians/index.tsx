@@ -1,8 +1,8 @@
 import React from 'react'
-import MusiciansPage from '@/screens/musicians-page/MusiciansPage'
 import { NextPage } from 'next'
+import MusiciansPage from '@/screens/musicians-page/MusiciansPage'
 
-const Musicians: NextPage = () => {
+const Musicians: NextPage = props => {
 	return <MusiciansPage />
 }
 

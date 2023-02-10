@@ -1,33 +1,39 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Box, Flex, Grid, GridItem, Image, Text, VStack } from '@chakra-ui/react'
 import styles from './AudioPlayer.module.scss'
 import trackImg from '@/assets/background.jpg'
 import TrackProgress from '@/components/ui/audio-player/controls/track-progress/TrackProgress'
 import AudioControls from '@/components/ui/audio-player/controls/audio-controls/AudioControls'
 import TrackVolume from '@/components/ui/audio-player/controls/track-volume/TrackVolume'
-import { useAppSelector } from '@/hooks/useAppSelector'
-import { useActions } from '@/hooks/useActions'
 import { API_URL } from '@/constants/api.constants'
 import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
-import { ITrack } from '@/types/interfaces/track.interface'
+import { usePlayer } from '@/hooks/usePlayer'
+import { useAppSelector } from '@/hooks/redux-hooks/useAppSelector'
+import { useActions } from '@/hooks/redux-hooks/useActions'
 
 const MotionBox = motion(Box)
 
 const AudioPlayer: FC = () => {
-	const { isPlaying, volume, tracks, currentTime, duration, trackIndex, isRepeat } =
+	const {
+		setAudio,
+		currentTrack,
+		repeat,
+		changeVolume,
+		changeCurrentTime,
+		toPrevTrack,
+		toNextTrack,
+		pause,
+		play,
+		audio
+	} = usePlayer()
+	const { volume, tracks, trackIndex, isRepeat, isPlaying, currentTime, duration } =
 		useAppSelector(state => state.player)
-
-	const { setPause, setCurrentTime, setPlay, setDuration, setVolume, setTrackIndex, setRepeat } =
-		useActions()
-
-	const [currentTrack, setCurrentTrack] = useState<ITrack | null>(null)
-
-	let audio = useRef<any>(new Audio())
+	const { setPause, setCurrentTime, setDuration, setVolume } = useActions()
 
 	useEffect(() => {
 		setAudio()
-	}, [trackIndex])
+	}, [tracks[trackIndex]])
 
 	useEffect(() => {
 		return () => {
@@ -47,11 +53,17 @@ const AudioPlayer: FC = () => {
 		}
 	}, [isPlaying])
 
-	// useEffect(() => {
-	// 	if (!audio.current.ended) {
-	// 		toNextTrack()
-	// 	}
-	// }, [audio.current.ended])
+	useEffect(() => {
+		if (tracks[trackIndex]) {
+			audio.current.onended = () => {
+				if (trackIndex !== tracks.length - 1) {
+					toNextTrack()
+				} else {
+					pause()
+				}
+			}
+		}
+	}, [audio.current.ended, tracks[trackIndex]])
 
 	useEffect(() => {
 		if (isRepeat) {
@@ -59,61 +71,6 @@ const AudioPlayer: FC = () => {
 			play()
 		}
 	}, [isRepeat, audio.current.ended])
-
-	const setAudio = () => {
-		if (tracks[trackIndex]) {
-			setCurrentTrack(tracks[trackIndex])
-			audio.current.src = `${API_URL}/${tracks[trackIndex].audio}`
-			audio.current.volume = volume / 100
-			audio.current.onloadedmetadata = () => {
-				setDuration(Math.ceil(audio.current.duration))
-				play()
-			}
-			audio.current.ontimeupdate = () => {
-				setCurrentTime(Math.ceil(audio.current.currentTime))
-			}
-		}
-	}
-
-	const play = () => {
-		setPlay()
-		audio.current.play()
-	}
-
-	const pause = () => {
-		setPause()
-		audio.current.pause()
-	}
-
-	const repeat = () => {
-		setRepeat(!isRepeat)
-	}
-
-	const toPrevTrack = () => {
-		if (trackIndex - 1 < 0) {
-			setTrackIndex(tracks.length - 1)
-		} else {
-			setTrackIndex(trackIndex - 1)
-		}
-	}
-
-	const toNextTrack = () => {
-		if (trackIndex < tracks.length - 1) {
-			setTrackIndex(trackIndex + 1)
-		} else {
-			setTrackIndex(0)
-		}
-	}
-
-	const changeVolume = (value: number) => {
-		audio.current.volume = value / 100
-		setVolume(value)
-	}
-
-	const changeCurrentTime = (value: number) => {
-		audio.current.currentTime = value
-		setCurrentTime(value)
-	}
 
 	if (!currentTrack) {
 		return null
@@ -138,7 +95,12 @@ const AudioPlayer: FC = () => {
 			>
 				<GridItem>
 					<Flex alignItems={'center'} justifyContent={'space-between'}>
-						<Image boxSize='60px' objectFit='cover' src={trackImg.src} alt={''} />
+						<Image
+							boxSize='65px'
+							objectFit='cover'
+							src={currentTrack ? `${API_URL}/${currentTrack.img}` : trackImg.src}
+							alt={currentTrack?.img}
+						/>
 						<VStack>
 							<Text>{currentTrack ? currentTrack.title : 'Untitled'}</Text>
 							<Text>{currentTrack ? currentTrack.author.nickName : 'Unnamed'}</Text>

@@ -16,23 +16,19 @@ import {
 } from '@chakra-ui/react'
 import { ArrowBackIcon, PhoneIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import styles from '../AuthForm.module.scss'
-import { useAuth } from '@/hooks/useAuth'
-import { useNotification } from '@/hooks/useNotification'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { IAuthResponse, IRegisterFields } from '@/types/interfaces/auth.interface'
-import { useMutation } from 'react-query'
-import { AuthService } from '@/services/auth-services/auth.service'
+import { IRegisterFields } from '@/types/interfaces/auth.interface'
 import { useMaskInput } from '@/hooks/useMaskInput'
 import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
+import { useRegister } from '@/hooks/auth-hooks/useRegister'
 
 const MotionFlex = motion(Flex)
 
 const RegisterForm: FC = () => {
-	const { setAuthType, setUser } = useAuth()
-	const { errorMessage, successMessage } = useNotification()
+	const { setAuthType } = useAuth()
 	const { handlePhoneInput } = useMaskInput()
-
 	const [image, setImage] = useState<File | null>(null)
 	const [showPass, setShowPass] = useState<boolean>(false)
 
@@ -50,23 +46,7 @@ const RegisterForm: FC = () => {
 		}
 	})
 
-	const { mutate: registration } = useMutation(
-		'login',
-		(data: FormData) => AuthService.register(data),
-		{
-			onSuccess(data: IAuthResponse) {
-				if (setUser) setUser(data.user)
-				successMessage('Вы успешно зарегестрировались', '')
-				reset()
-			},
-
-			onError(error: any) {
-				if (error.response) {
-					errorMessage('Ошибка регистрации', error.response.data.message)
-				}
-			}
-		}
-	)
+	const registration = useRegister(reset)
 
 	const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {

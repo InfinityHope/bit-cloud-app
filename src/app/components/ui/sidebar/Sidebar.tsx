@@ -5,7 +5,7 @@ import { BiLogOut } from 'react-icons/bi'
 import { RiHomeLine, RiMusic2Line } from 'react-icons/ri'
 import { GiMicrophone } from 'react-icons/gi'
 import { AuthService } from '@/services/auth-services/auth.service'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { useRouter } from 'next/router'
 import styles from './Sidebar.module.scss'
 import { motion } from 'framer-motion'
@@ -21,7 +21,7 @@ const Sidebar: FC = () => {
 		setUser(null)
 		setAuthType('login')
 		AuthService.logout()
-		push('auth')
+		push('/auth')
 	}
 
 	return (

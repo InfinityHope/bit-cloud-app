@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import LoginForm from '@/ui/auth-form/login-form/LoginForm'
 import RegisterForm from '@/ui/auth-form/register-form/RegisterForm'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { useRouter } from 'next/router'
 import { Flex } from '@chakra-ui/react'
 import Meta from '@/components/meta/Meta'

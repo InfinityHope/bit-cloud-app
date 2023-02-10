@@ -1,13 +1,14 @@
 import React, { FC, PropsWithChildren } from 'react'
-import { useAuth } from '@/hooks/useAuth'
 import Header from '@/ui/header/Header'
 import { Grid, GridItem } from '@chakra-ui/react'
 import Sidebar from '@/ui/sidebar/Sidebar'
 import AudioPlayer from '@/ui/audio-player/AudioPlayer'
 import styles from './Layout.module.scss'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
 	const { user } = useAuth()
+
 	return (
 		<>
 			{user ? (
@@ -39,7 +40,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 						area={'main'}
 						bgColor={'primary'}
 						height={'90vh'}
-						p={'.5em 2em 8em 2em'}
+						p={'.5em 2em 6em 2em'}
 						overflowY={'auto'}
 						className={styles.Main}
 					>

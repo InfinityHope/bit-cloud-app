@@ -1,5 +1,5 @@
 import { bindActionCreators } from 'redux'
-import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { useAppDispatch } from '@/hooks/redux-hooks/useAppDispatch'
 import { playerActions } from '@/store/reducers/player.reducer'
 
 export const useActions = () => {

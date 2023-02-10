@@ -12,12 +12,12 @@ const TrackVolume: FC<ITrackVolume> = ({ volume, changeVolume }) => {
 		<Flex alignItems={'center'} justifyContent={'space-between'}>
 			<FiVolume2 size={40} />
 			<Slider
+				w={'80%'}
 				aria-label='slider-ex-1'
 				defaultValue={volume}
 				min={0}
 				max={100}
 				step={1}
-				width={'80%'}
 				onChange={changeVolume}
 			>
 				<SliderTrack>

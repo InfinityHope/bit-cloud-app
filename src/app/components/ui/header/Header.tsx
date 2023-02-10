@@ -4,7 +4,7 @@ import SearchInput from '@/ui/header/search-input/SearchInput'
 import Link from 'next/link'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useHistory } from '@/hooks/useHistory'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
 

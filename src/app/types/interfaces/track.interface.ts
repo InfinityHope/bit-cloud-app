@@ -12,3 +12,10 @@ export interface ITrack {
 	audio_duration: number
 	author: IUser
 }
+
+export interface ITrackResponse {
+	tracks: ITrack[]
+	pages: number
+	total: number
+	page: number
+}

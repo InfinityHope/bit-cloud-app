@@ -24,5 +24,38 @@ export const animationsConfig = {
 	},
 	animateFromBottom: {
 		y: 0
-	}
+	},
+	listInitialTop: {
+		opacity: 0,
+		y: -100
+	},
+	listAnimateTop: (i: number) => ({
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: i * 0.3
+		}
+	}),
+	listInitialLeft: {
+		opacity: 0,
+		x: -100
+	},
+	listAnimateLeft: (i: number) => ({
+		opacity: 1,
+		x: 0,
+		transition: {
+			delay: 0.3 * i
+		}
+	}),
+	listInitialRight: {
+		opacity: 0,
+		x: 100
+	},
+	listAnimateRight: (i: number) => ({
+		opacity: 1,
+		x: 0,
+		transition: {
+			delay: 0.4 * i
+		}
+	})
 }

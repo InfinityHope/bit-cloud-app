@@ -12,20 +12,15 @@ import {
 } from '@chakra-ui/react'
 import styles from '../AuthForm.module.scss'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { IAuthResponse, ILoginFields } from '@/types/interfaces/auth.interface'
-import { useMutation } from 'react-query'
-import { AuthService } from '@/services/auth-services/auth.service'
-import { useAuth } from '@/hooks/useAuth'
-import { useNotification } from '@/hooks/useNotification'
+import { ILoginFields } from '@/types/interfaces/auth.interface'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
+import { useLogin } from '@/hooks/auth-hooks/useLogin'
 
 const MotionFlex = motion(Flex)
 
 const LoginForm: FC = () => {
-	const { setUser, setAuthType } = useAuth()
-	const { errorMessage, successMessage } = useNotification()
-
 	const {
 		register,
 		handleSubmit,
@@ -39,23 +34,8 @@ const LoginForm: FC = () => {
 		}
 	})
 
-	const { mutate: login } = useMutation(
-		'login',
-		(data: ILoginFields) => AuthService.login(data),
-		{
-			onSuccess(data: IAuthResponse) {
-				if (setUser) setUser(data.user)
-				successMessage('Вы успешно вошли', '')
-				reset()
-			},
-
-			onError(error: any) {
-				if (error.response) {
-					errorMessage('Ошибка авторизации', error.response.data.message)
-				}
-			}
-		}
-	)
+	const { setAuthType } = useAuth()
+	const login = useLogin(reset)
 
 	const onSubmit: SubmitHandler<ILoginFields> = data => login(data)
 
