@@ -2,7 +2,6 @@ import { FC, memo, useRef } from 'react'
 import { Image, Link, SimpleGrid, Td, Tooltip, Tr, useDisclosure } from '@chakra-ui/react'
 import { ITrack } from '@/types/interfaces/track.interface'
 import { msToTime } from '@/utils/msToTime'
-import { IUser } from '@/types/interfaces/user.interface'
 import { AiOutlineDelete, AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai'
 import { API_URL } from '@/constants/api.constants'
 import { motion } from 'framer-motion'
@@ -21,12 +20,11 @@ const MotionTr = motion(Tr)
 
 interface ITrackItem {
 	track: ITrack
-	author?: IUser
 	index: number
 	selectTrack: (value: number) => void
 }
 
-const TrackItem: FC<ITrackItem> = memo(({ track, author, index, selectTrack }) => {
+const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 	const { isPlaying, tracks, trackIndex } = useAppSelector(state => state.player)
 	const { setPlay, setPause } = useActions()
 
@@ -76,7 +74,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, author, index, selectTrack }) =
 						src={`${API_URL}/${track.img}`}
 						alt={track.img}
 					/>
-					{author?.nickName}
+					{track.author?.nickName}
 				</SimpleGrid>
 			</Td>
 			<Td w={'30%'} textAlign={'center'}>
@@ -85,7 +83,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, author, index, selectTrack }) =
 			<Td w={'30%'} textAlign={'center'}>
 				{msToTime(track.audio_duration)}
 			</Td>
-			{user?.id === author?.id ? (
+			{user?.id === track.author?.id ? (
 				<>
 					<Td>
 						<Tooltip label='Скачать аудиозапись' aria-label='download audio'>

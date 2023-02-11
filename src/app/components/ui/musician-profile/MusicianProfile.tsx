@@ -4,8 +4,14 @@ import { Avatar, Divider, Flex, Heading, Link, List, ListItem, Text } from '@cha
 import { MusicList, PageHeader } from '@/components/ui'
 import styles from './MusicianProfile.module.scss'
 import bgImg from '@/assets/background.jpg'
+import { ITrack } from '@/types/interfaces/track.interface'
 
-const MusicianProfile: FC<{ musician: IUser }> = ({ musician }) => {
+interface IMusicianProfile {
+	musician: IUser
+	tracks: ITrack[]
+}
+
+const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 	return (
 		<Flex flexDirection={'column'} className={styles.MusicianProfile}>
 			<PageHeader bgImg={bgImg.src}>
@@ -37,8 +43,8 @@ const MusicianProfile: FC<{ musician: IUser }> = ({ musician }) => {
 			<Heading as={'h3'} size={'xl'}>
 				Музыка автора
 			</Heading>
-			{musician.tracks.length > 0 ? (
-				<MusicList tracks={musician.tracks} author={musician} />
+			{tracks.length > 0 ? (
+				<MusicList tracks={tracks} />
 			) : (
 				<Text mt={'2em'} fontSize={'x-large'}>
 					У данного автора пока нет треков

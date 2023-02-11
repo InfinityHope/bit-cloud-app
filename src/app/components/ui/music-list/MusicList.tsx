@@ -4,24 +4,17 @@ import { Flex, Table, TableContainer, Tbody, Th, Thead, Tr } from '@chakra-ui/re
 import { RiMusic2Line } from 'react-icons/ri'
 import { TrackItem } from '@/components/ui'
 import { BiTimeFive } from 'react-icons/bi'
-import { IUser } from '@/types/interfaces/user.interface'
 import { useActions } from '@/hooks/redux-hooks/useActions'
 
 interface IMusicList {
 	tracks: ITrack[]
-	author?: IUser
 }
 
-const MusicList: FC<IMusicList> = ({ tracks, author }) => {
+const MusicList: FC<IMusicList> = ({ tracks }) => {
 	const { setTracks, setTrackIndex, setPlay } = useActions()
 
 	const selectTrack = (value: number) => {
-		setTracks([
-			...tracks.map(track => ({
-				...track,
-				author: author ? author : track.author
-			}))
-		])
+		setTracks(tracks)
 		setTrackIndex(value)
 		setPlay()
 	}
@@ -53,7 +46,6 @@ const MusicList: FC<IMusicList> = ({ tracks, author }) => {
 							selectTrack={selectTrack}
 							key={track.id}
 							track={track}
-							author={author ? author : track.author}
 							index={index}
 						/>
 					))}
