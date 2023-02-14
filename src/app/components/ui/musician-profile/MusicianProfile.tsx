@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import bgImg from '@/assets/background.jpg'
+import { PageHeader, TrackList } from '@/components/ui'
+import { ITrack } from '@/types/interfaces/track.interface'
 import { IUser } from '@/types/interfaces/user.interface'
 import { Avatar, Divider, Flex, Heading, Link, List, ListItem, Text } from '@chakra-ui/react'
-import { MusicList, PageHeader } from '@/components/ui'
+import { FC } from 'react'
 import styles from './MusicianProfile.module.scss'
-import bgImg from '@/assets/background.jpg'
-import { ITrack } from '@/types/interfaces/track.interface'
 
 interface IMusicianProfile {
 	musician: IUser
@@ -44,7 +44,7 @@ const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 				Музыка автора
 			</Heading>
 			{tracks.length > 0 ? (
-				<MusicList tracks={tracks} />
+				<TrackList tracks={tracks} />
 			) : (
 				<Text mt={'2em'} fontSize={'x-large'}>
 					У данного автора пока нет треков

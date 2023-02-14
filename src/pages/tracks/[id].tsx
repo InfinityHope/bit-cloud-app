@@ -1,19 +1,19 @@
-import { UserService } from '@/app/services/user-service/user.service'
-import MusicianScreen from '@/screens/musicians-screen/musician-screen/MusicianScreen'
+import TrackScreen from '@/app/components/screens/tracks-screen/track-screen/TrackScreen'
+import { TrackService } from '@/app/services/track-service/track.service'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
-const Musician: NextPage = () => {
-	return <MusicianScreen />
+const TrackPage: NextPage = props => {
+	return <TrackScreen />
 }
 
 export const getStaticProps: GetStaticProps = async ctx => {
-	const nickName = ctx.params?.nickName as string
+	const id = ctx.params?.id as string
 
 	const queryClient = new QueryClient()
 
-	await queryClient.fetchQuery(['musicians list', nickName], () =>
-		UserService.getMusician(nickName)
+	await queryClient.fetchQuery(['musicians list', id], () =>
+		TrackService.getTrackById(Number(id))
 	)
 
 	return {
@@ -30,4 +30,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	}
 }
 
-export default Musician
+export default TrackPage

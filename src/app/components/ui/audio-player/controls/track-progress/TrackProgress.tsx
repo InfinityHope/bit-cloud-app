@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { msToTime } from '@/utils/msToTime'
 import {
 	Box,
 	Flex,
@@ -9,7 +9,7 @@ import {
 	Text,
 	Tooltip
 } from '@chakra-ui/react'
-import { msToTime } from '@/utils/msToTime'
+import { FC, useState } from 'react'
 
 interface ITrackProgress {
 	currentValue: number
@@ -29,7 +29,7 @@ const TrackProgress: FC<ITrackProgress> = ({ currentValue, onChange, duration })
 		<Flex justifyContent={'space-evenly'}>
 			<Text>{msToTime(currentValue)}</Text>
 			<Slider
-				width={'70%'}
+				width={'80%'}
 				step={1}
 				aria-label='slider-ex-1'
 				min={0}

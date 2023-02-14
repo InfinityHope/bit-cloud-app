@@ -1,15 +1,15 @@
-import { FC, PropsWithChildren } from 'react'
-import { Grid, GridItem } from '@chakra-ui/react'
 import { AudioPlayer, Header, Sidebar } from '@/components/ui'
+import { Grid, GridItem } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { FC, PropsWithChildren } from 'react'
 import styles from './Layout.module.scss'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
-	const { user } = useAuth()
+	const { pathname } = useRouter()
 
 	return (
 		<>
-			{user ? (
+			{pathname !== '/auth' ? (
 				<Grid
 					templateAreas={`
 					  "header header"
@@ -26,7 +26,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 						bgColor={'primary'}
 						p={'2em 2em 0 3em'}
 					>
-						{user ? <Header /> : ''}
+						<Header />
 					</GridItem>
 
 					<GridItem as={'nav'} area={'nav'} p={'4em 2em 0 3em'}>
@@ -38,7 +38,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 						area={'main'}
 						bgColor={'primary'}
 						height={'90vh'}
-						p={'.5em 2em 6em 2em'}
+						p={'.5em 0em 8em 0em'}
 						overflowY={'auto'}
 						className={styles.Main}
 					>
@@ -46,7 +46,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 					</GridItem>
 
 					<GridItem area={'player'} height={'10vh'}>
-						{user ? <AudioPlayer /> : ''}
+						<AudioPlayer />
 					</GridItem>
 				</Grid>
 			) : (

@@ -1,4 +1,8 @@
-import { FC } from 'react'
+import { animationsConfig } from '@/config/animations.config'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
+import { useLogin } from '@/hooks/auth-hooks/useLogin'
+import { ILoginFields } from '@/types/interfaces/auth.interface'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
 	Box,
 	Button,
@@ -8,15 +12,14 @@ import {
 	FormLabel,
 	Heading,
 	Input,
+	InputGroup,
+	InputRightElement,
 	Text
 } from '@chakra-ui/react'
-import styles from '../AuthForm.module.scss'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { ILoginFields } from '@/types/interfaces/auth.interface'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
-import { useLogin } from '@/hooks/auth-hooks/useLogin'
-import { animationsConfig } from '@/config/animations.config'
 import { motion } from 'framer-motion'
+import { FC, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import styles from '../AuthForm.module.scss'
 
 const MotionFlex = motion(Flex)
 
@@ -34,6 +37,7 @@ const LoginForm: FC = () => {
 		}
 	})
 
+	const [showPass, setShowPass] = useState<boolean>(false)
 	const { setAuthType } = useAuth()
 	const login = useLogin(reset)
 
@@ -71,12 +75,23 @@ const LoginForm: FC = () => {
 			</FormControl>
 			<FormControl isInvalid={!!errors.password}>
 				<FormLabel>Пароль</FormLabel>
-				<Input
-					{...register('password', {
-						required: 'Поле обязательно для заполнения'
-					})}
-					type='password'
-				/>
+				<InputGroup>
+					<Input
+						type={showPass ? 'text' : 'password'}
+						{...register('password', {
+							required: 'Поле обязательно для заполнения'
+						})}
+					/>
+					<InputRightElement>
+						<Button
+							colorScheme={''}
+							variant={'link'}
+							onClick={() => setShowPass(!showPass)}
+						>
+							{showPass ? <ViewOffIcon /> : <ViewIcon />}
+						</Button>
+					</InputRightElement>
+				</InputGroup>
 				{errors.password && <FormErrorMessage>{errors.password?.message}</FormErrorMessage>}
 			</FormControl>
 			<Button
@@ -92,7 +107,7 @@ const LoginForm: FC = () => {
 				<Text>
 					Нет аккаунта?{' '}
 					<Button variant={'link'} onClick={() => setAuthType('register')}>
-						Зарегестрироваться
+						Зарегистрироваться
 					</Button>
 				</Text>
 			</Box>

@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 
-const notFound: NextPage = () => {
+const NotFound: NextPage = () => {
 	return <h1>Not Found</h1>
 }
 
-export default notFound
+export default NotFound

@@ -1,19 +1,19 @@
-import { FC, useEffect } from 'react'
-import { Box, Flex, Grid, GridItem, Image, Text, VStack } from '@chakra-ui/react'
-import styles from './AudioPlayer.module.scss'
 import trackImg from '@/assets/background.jpg'
 import { AudioControls, TrackProgress, TrackVolume } from '@/components/ui'
-import { API_URL } from '@/constants/api.constants'
-import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
-import { usePlayer } from '@/hooks/usePlayer'
-import { useAppSelector } from '@/hooks/redux-hooks/useAppSelector'
+import { API_URL } from '@/constants/api.constants'
 import { useActions } from '@/hooks/redux-hooks/useActions'
+import { useAppSelector } from '@/hooks/redux-hooks/useAppSelector'
+import { usePlayer } from '@/hooks/usePlayer'
+import { Box, Flex, Grid, GridItem, Image, Text, VStack } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+import { FC, useEffect } from 'react'
+import styles from './AudioPlayer.module.scss'
 
 const MotionBox = motion(Box)
 
 const AudioPlayer: FC = () => {
-	const {
+	let {
 		setAudio,
 		currentTrack,
 		repeat,
@@ -27,10 +27,14 @@ const AudioPlayer: FC = () => {
 	} = usePlayer()
 	const { volume, tracks, trackIndex, isRepeat, isPlaying, currentTime, duration } =
 		useAppSelector(state => state.player)
-	const { setPause, setCurrentTime, setDuration, setVolume } = useActions()
+	const { setPause, setCurrentTime, setDuration, setVolume, setTracks } = useActions()
 
 	useEffect(() => {
-		setAudio()
+		if (!audio.current) {
+			audio.current = new Audio()
+		} else {
+			setAudio()
+		}
 	}, [tracks[trackIndex]])
 
 	useEffect(() => {
@@ -39,20 +43,24 @@ const AudioPlayer: FC = () => {
 			setDuration(0)
 			setVolume(50)
 			setPause()
-			audio.current.src = null
+			setTracks([])
+			if (audio.current) {
+				audio.current.src = ''
+				audio.current = null
+			}
 		}
 	}, [])
 
 	useEffect(() => {
-		if (isPlaying) {
-			audio.current.play()
+		if (isPlaying && audio) {
+			audio.current?.play()
 		} else {
-			audio.current.pause()
+			audio.current?.pause()
 		}
 	}, [isPlaying])
 
 	useEffect(() => {
-		if (tracks[trackIndex]) {
+		if (tracks[trackIndex] && audio.current) {
 			audio.current.onended = () => {
 				if (trackIndex !== tracks.length - 1) {
 					toNextTrack()
@@ -61,14 +69,14 @@ const AudioPlayer: FC = () => {
 				}
 			}
 		}
-	}, [audio.current.ended, tracks[trackIndex]])
+	}, [audio.current?.ended, tracks[trackIndex]])
 
 	useEffect(() => {
-		if (isRepeat) {
+		if (isRepeat && audio.current) {
 			setCurrentTime(Math.ceil(audio.current.currentTime))
 			play()
 		}
-	}, [isRepeat, audio.current.ended])
+	}, [isRepeat, audio.current?.ended])
 
 	if (!currentTrack) {
 		return null

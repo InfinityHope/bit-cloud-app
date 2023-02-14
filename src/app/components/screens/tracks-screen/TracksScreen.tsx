@@ -1,11 +1,12 @@
-import Meta from '@/components/meta/Meta'
-import { Flex, Heading } from '@chakra-ui/react'
-import { MusicList, PageHeader } from '@/components/ui'
-import { useTracks } from '@/hooks/tracks-hooks/useTracks'
 import bgImg from '@/assets/secondary-bg.jpg'
+import Meta from '@/components/meta/Meta'
+import { PageHeader, TrackList } from '@/components/ui'
+import { useTracks } from '@/hooks/tracks-hooks/useTracks'
+import { Flex, Heading } from '@chakra-ui/react'
 
 const TracksScreen = () => {
 	const tracks = useTracks()
+
 	return (
 		<>
 			<Meta title={'Sound Cloud Tracks'} />
@@ -17,7 +18,7 @@ const TracksScreen = () => {
 								Все треки
 							</Heading>
 						</PageHeader>
-						<MusicList tracks={tracks.tracks} />
+						<TrackList tracks={tracks.tracks} />
 					</>
 				)}
 			</Flex>

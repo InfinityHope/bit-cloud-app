@@ -1,4 +1,9 @@
-import { ChangeEvent, FC, useRef, useState } from 'react'
+import { animationsConfig } from '@/config/animations.config'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
+import { useRegister } from '@/hooks/auth-hooks/useRegister'
+import { useMaskInput } from '@/hooks/useMaskInput'
+import { IRegisterFields } from '@/types/interfaces/auth.interface'
+import { ArrowBackIcon, PhoneIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
 	Avatar,
 	Button,
@@ -14,14 +19,9 @@ import {
 	InputRightElement,
 	Text
 } from '@chakra-ui/react'
-import { ArrowBackIcon, PhoneIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { IRegisterFields } from '@/types/interfaces/auth.interface'
 import { motion } from 'framer-motion'
-import { animationsConfig } from '@/config/animations.config'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
-import { useMaskInput } from '@/hooks/useMaskInput'
-import { useRegister } from '@/hooks/auth-hooks/useRegister'
+import { ChangeEvent, FC, useRef, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import styles from '../AuthForm.module.scss'
 
 const MotionFlex = motion(Flex)
@@ -66,6 +66,7 @@ const RegisterForm: FC = () => {
 		formData.append('nickName', data.nickName)
 		formData.append('telephone', data.telephone)
 		formData.append('isMusician', data.isMusician.toString())
+
 		setImage(null)
 		registration(formData)
 	}
@@ -139,8 +140,14 @@ const RegisterForm: FC = () => {
 						type={showPass ? 'text' : 'password'}
 						{...register('password', {
 							required: 'Поле обязательно для заполнения',
-							min: 'Пароль должен быть не менее 4 символов',
-							max: 'Пароль должен быть не более 16 символов'
+							minLength: {
+								value: 4,
+								message: 'Пароль должен быть более 4 символов'
+							},
+							maxLength: {
+								value: 16,
+								message: 'Пароль должен быть менее 16 символов'
+							}
 						})}
 					/>
 					<InputRightElement>
@@ -198,7 +205,7 @@ const RegisterForm: FC = () => {
 			</FormControl>
 			<FormControl>
 				<Checkbox checked={defaultValues?.isMusician} {...register('isMusician')}>
-					Зарегестрироваться как исполнитель?
+					Зарегистрироваться как исполнитель?
 				</Checkbox>
 			</FormControl>
 			<Button
@@ -208,7 +215,7 @@ const RegisterForm: FC = () => {
 				width={'100%'}
 				type={'submit'}
 			>
-				Зарегестрироваться
+				Зарегистрироваться
 			</Button>
 		</MotionFlex>
 	)

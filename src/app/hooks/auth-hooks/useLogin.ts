@@ -1,8 +1,9 @@
-import { useMutation } from 'react-query'
-import { IAuthResponse, ILoginFields } from '@/types/interfaces/auth.interface'
-import { AuthService } from '@/services/auth-services/auth.service'
 import { useAuth } from '@/hooks/auth-hooks/useAuth'
 import { useNotification } from '@/hooks/useNotification'
+import { AuthService } from '@/services/auth-services/auth.service'
+import { IAuthResponse, ILoginFields } from '@/types/interfaces/auth.interface'
+import { AxiosError } from 'axios'
+import { useMutation } from 'react-query'
 
 export const useLogin = (reset: () => void) => {
 	const { setUser } = useAuth()
@@ -18,9 +19,14 @@ export const useLogin = (reset: () => void) => {
 				reset()
 			},
 
-			onError(error: any) {
+			onError(error: AxiosError<string[] | { statusCode: number; message: string }>) {
 				if (error.response) {
-					errorMessage('Ошибка авторизации', error.response.data.message)
+					errorMessage(
+						'Ошибка авторизации',
+						Array.isArray(error.response.data)
+							? error.response.data
+							: error.response.data.message
+					)
 				}
 			}
 		}

@@ -1,8 +1,8 @@
-import { AuthorInfoSkeleton, MusicianProfile } from '@/components/ui'
 import Meta from '@/components/meta/Meta'
-import { useRouter } from 'next/router'
-import { useMusician } from '@/hooks/user-hooks/useMusician'
+import { AuthorInfoSkeleton, MusicianProfile } from '@/components/ui'
 import { useAuthorTracks } from '@/hooks/tracks-hooks/useAuthorTracks'
+import { useMusician } from '@/hooks/user-hooks/useMusician'
+import { useRouter } from 'next/router'
 
 const MusicianScreen = () => {
 	const { query } = useRouter()
@@ -12,7 +12,7 @@ const MusicianScreen = () => {
 
 	return (
 		<>
-			<Meta title={`Sound Cloud ${nickName}`} />
+			<Meta title={`Sound Cloud Author: ${nickName}`} />
 			{isLoading || isTracksLoading ? <AuthorInfoSkeleton /> : null}
 			{musician && tracks && <MusicianProfile musician={musician} tracks={tracks} />}
 		</>

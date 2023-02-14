@@ -3,10 +3,10 @@ import { useToast } from '@chakra-ui/react'
 export const useNotification = () => {
 	const toast = useToast()
 
-	const errorMessage = (title: string, description: string) => {
+	const errorMessage = (title: string, description: string | string[]) => {
 		toast({
 			title,
-			description,
+			description: Array.isArray(description) ? description.join(',') : description,
 			status: 'error',
 			duration: 3000,
 			isClosable: true,

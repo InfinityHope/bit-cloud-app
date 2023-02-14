@@ -1,12 +1,12 @@
-import { FC } from 'react'
-import { Avatar, Button, Flex, Heading } from '@chakra-ui/react'
 import { SearchInput } from '@/components/ui'
-import Link from 'next/link'
-import { ArrowBackIcon } from '@chakra-ui/icons'
-import { useHistory } from '@/hooks/useHistory'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
-import { motion } from 'framer-motion'
 import { animationsConfig } from '@/config/animations.config'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
+import { useHistory } from '@/hooks/useHistory'
+import { ArrowBackIcon } from '@chakra-ui/icons'
+import { Avatar, Button, Flex, Heading } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { FC } from 'react'
 
 const Header: FC = () => {
 	const { back } = useHistory()
@@ -34,9 +34,15 @@ const Header: FC = () => {
 					</Button>
 					<Flex justifyContent={'space-between'} alignItems={'center'} width={'40%'}>
 						<SearchInput />
-						<Link href={'/profile'}>
-							<Avatar src={`${process.env.API_URL}/${user?.avatar}`} />
-						</Link>
+						{user ? (
+							<Link href={'/profile'}>
+								<Avatar src={`${process.env.API_URL}/${user?.avatar}`} />
+							</Link>
+						) : (
+							<Link href={'/auth'}>
+								<Button colorScheme={'facebook'}>Войти</Button>
+							</Link>
+						)}
 					</Flex>
 				</Flex>
 			</Flex>

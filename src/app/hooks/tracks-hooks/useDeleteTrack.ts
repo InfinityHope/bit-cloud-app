@@ -1,8 +1,8 @@
-import { useMutation } from 'react-query'
-import { TrackService } from '@/services/track-service/track.service'
 import { useNotification } from '@/hooks/useNotification'
+import { TrackService } from '@/services/track-service/track.service'
 import { ITrack } from '@/types/interfaces/track.interface'
-import { queryClient } from '@/config/react-query.config'
+import { AxiosError } from 'axios'
+import { useMutation } from 'react-query'
 
 interface IOptions {
 	onClose: () => void
@@ -15,18 +15,15 @@ export const useDeleteTrack = ({ track, onClose }: IOptions) => {
 		['delete track', track.id],
 		() => TrackService.deleteTrack(track.id),
 		{
-			onSuccess: response => {
-				Promise.all([
-					queryClient.invalidateQueries(['track list']),
-					queryClient.invalidateQueries(['musician info'])
-				]).then(r => {
-					onClose() //close alert
-					successMessage(`${response.data.message}`, '')
-				})
-			},
-			onError: (error: any) => {
+			onSuccess: (response: { status: number; message: string }) => {
 				onClose() //close alert
-				errorMessage(`${error.response.data.error}`, `${error.response.data.message}`)
+				successMessage(`${response.message}`, '')
+			},
+			onError: (error: AxiosError<{ status: number; message: string }>) => {
+				onClose() //close alert
+				if (error) {
+					errorMessage(`${error.response?.data.status}`, `${error.response?.data.status}`)
+				}
 			}
 		}
 	)
