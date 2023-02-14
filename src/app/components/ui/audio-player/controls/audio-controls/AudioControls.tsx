@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
 import { FC } from 'react'
-import { CiPause1, CiPlay1, CiUndo } from 'react-icons/ci'
+import { CiPause1, CiPlay1, CiRepeat } from 'react-icons/ci'
 import { RxTrackNext, RxTrackPrevious } from 'react-icons/rx'
 
 interface IPlayButton {
@@ -31,7 +31,7 @@ const AudioControls: FC<IPlayButton> = ({
 				<CiPlay1 size={45} cursor={'pointer'} onClick={play} />
 			)}
 			<RxTrackNext size={30} cursor={'pointer'} onClick={next} />
-			<CiUndo
+			<CiRepeat
 				color={isRepeat ? '#3542c6' : 'white'}
 				size={35}
 				cursor={'pointer'}

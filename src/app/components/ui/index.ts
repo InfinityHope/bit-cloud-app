@@ -14,8 +14,10 @@ import MusiciansList from '@/ui/musicians-list/MusiciansList'
 import PageHeader from '@/ui/page-header/PageHeader'
 import Sidebar from '@/ui/sidebar/Sidebar'
 import AuthorInfoSkeleton from '@/ui/skeletons/AuthorInfoSkeleton'
+import TagList from '@/ui/tag-list/TagList'
 import TrackItem from '@/ui/track-list/track-item/TrackItem'
 import TrackList from '@/ui/track-list/TrackList'
+import TrackMenuActions from '@/ui/track-menu-actions/TrackMenuActions'
 
 export {
 	AudioPlayer,
@@ -35,5 +37,7 @@ export {
 	MusiciansList,
 	TrackList,
 	TrackItem,
-	MusicianProfile
+	MusicianProfile,
+	TagList,
+	TrackMenuActions
 }

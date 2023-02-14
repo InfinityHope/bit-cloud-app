@@ -12,9 +12,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
 	const queryClient = new QueryClient()
 
-	await queryClient.fetchQuery(['musicians list', id], () =>
-		TrackService.getTrackById(Number(id))
-	)
+	await queryClient.fetchQuery(['track info', id], () => TrackService.getTrackById(Number(id)))
 
 	return {
 		props: {

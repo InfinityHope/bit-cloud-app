@@ -1,6 +1,10 @@
 import { extendTheme } from '@chakra-ui/react'
+import { menuTheme } from './menu.config'
 
 const config = {
+	components: {
+		Menu: menuTheme
+	},
 	fontSizes: {
 		xl: '4em'
 	},

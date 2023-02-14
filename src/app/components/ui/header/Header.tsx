@@ -1,6 +1,7 @@
+import { API_URL } from '@/app/constants/api.constants'
 import { SearchInput } from '@/components/ui'
 import { animationsConfig } from '@/config/animations.config'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
+import { useAuth } from '@/hooks/auth-hooks'
 import { useHistory } from '@/hooks/useHistory'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { Avatar, Button, Flex, Heading } from '@chakra-ui/react'
@@ -36,7 +37,7 @@ const Header: FC = () => {
 						<SearchInput />
 						{user ? (
 							<Link href={'/profile'}>
-								<Avatar src={`${process.env.API_URL}/${user?.avatar}`} />
+								<Avatar src={`${API_URL}/${user?.avatar}`} />
 							</Link>
 						) : (
 							<Link href={'/auth'}>

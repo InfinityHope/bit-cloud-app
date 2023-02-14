@@ -1,6 +1,5 @@
 import { animationsConfig } from '@/config/animations.config'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
-import { useRegister } from '@/hooks/auth-hooks/useRegister'
+import { useAuth, useRegister } from '@/hooks/auth-hooks'
 import { useMaskInput } from '@/hooks/useMaskInput'
 import { IRegisterFields } from '@/types/interfaces/auth.interface'
 import { ArrowBackIcon, PhoneIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'

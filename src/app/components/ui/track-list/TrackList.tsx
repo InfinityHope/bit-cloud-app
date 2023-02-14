@@ -1,10 +1,10 @@
-import { useActions } from '@/hooks/redux-hooks/useActions'
+import { TrackItem } from '@/components/ui'
+import { useActions } from '@/hooks/redux-hooks'
 import { ITrack } from '@/types/interfaces/track.interface'
 import { Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import { FC } from 'react'
 import { BiTimeFive } from 'react-icons/bi'
 import { RiMusic2Line } from 'react-icons/ri'
-import TrackItem from './track-item/TrackItem'
 
 interface IMusicList {
 	tracks: ITrack[]
@@ -33,7 +33,7 @@ const MusicList: FC<IMusicList> = ({ tracks }) => {
 			fontSize={'1.25em'}
 		>
 			<Flex>
-				<Text mr={'.7em'}>#Author</Text>
+				<Text mr={'.7em'}>#Автор</Text>
 				<Grid alignItems={'center'} templateColumns='repeat(5, 1fr)' width={'100%'}>
 					<GridItem />
 					<GridItem />
@@ -59,40 +59,3 @@ const MusicList: FC<IMusicList> = ({ tracks }) => {
 }
 
 export default MusicList
-
-{
-	/* <TableContainer marginTop={8} height={'100%'} overflowX={'hidden'} ml={'2em'} mr={'.3em'}>
-			<Table variant='simple' size={'lg'} colorScheme={'secondary'}>
-				<Thead>
-					<Tr>
-						<Th>#Author</Th>
-						<Th>
-							<Flex justifyContent={'center'}>
-								<RiMusic2Line />
-							</Flex>
-						</Th>
-						<Th>
-							<Flex justifyContent={'center'}>
-								<BiTimeFive />
-							</Flex>
-						</Th>
-						<Th></Th>
-						<Th></Th>
-						<Th></Th>
-					</Tr>
-				</Thead>
-				<Tbody>
-					{tracks.map((track, index) => (
-						<Link href={`/tracks/${track.id}`} passHref>
-							<TrackItem
-								selectTrack={selectTrack}
-								key={track.id}
-								track={track}
-								index={index}
-							/>
-						</Link>
-					))}
-				</Tbody>
-			</Table>
-		</TableContainer> */
-}

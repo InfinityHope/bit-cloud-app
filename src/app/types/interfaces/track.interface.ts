@@ -11,6 +11,8 @@ export interface ITrack {
 	description: string
 	audio_duration: number
 	author: IUser
+	createdAt: string
+	updatedAt: string
 }
 
 export interface ITrackResponse {

@@ -1,5 +1,5 @@
 import { animationsConfig } from '@/config/animations.config'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
+import { useAuth } from '@/hooks/auth-hooks'
 import { AuthService } from '@/services/auth-services/auth.service'
 import { List, ListIcon, ListItem, Stack, StackDivider } from '@chakra-ui/react'
 import { motion } from 'framer-motion'

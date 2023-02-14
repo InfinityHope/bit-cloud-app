@@ -1,6 +1,5 @@
 import { animationsConfig } from '@/config/animations.config'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
-import { useLogin } from '@/hooks/auth-hooks/useLogin'
+import { useAuth, useLogin } from '@/hooks/auth-hooks'
 import { ILoginFields } from '@/types/interfaces/auth.interface'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {

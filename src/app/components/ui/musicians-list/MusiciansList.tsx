@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { API_URL } from '@/app/constants/api.constants'
+import { animationsConfig } from '@/config/animations.config'
 import { IUser } from '@/types/interfaces/user.interface'
 import { Avatar, Grid, GridItem, Text } from '@chakra-ui/react'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { animationsConfig } from '@/config/animations.config'
+import Link from 'next/link'
+import { FC } from 'react'
 
 const MotionGridItem = motion(GridItem)
 
@@ -20,7 +21,7 @@ const MusiciansList: FC<{ musicians: IUser[] }> = ({ musicians }) => {
 						animate={'listAnimateTop'}
 						custom={index}
 					>
-						<Avatar size='xl' src={`${process.env.API_URL}/${musician.avatar}`} />
+						<Avatar size='xl' src={`${API_URL}/${musician.avatar}`} />
 						<Text color={'primaryTextColor'} fontWeight={'semibold'} marginTop={2}>
 							{musician.nickName}
 						</Text>
