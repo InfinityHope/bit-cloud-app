@@ -58,6 +58,7 @@ const TrackMenuActions: FC<ITrackMenuActions> = ({ track, setEditing }) => {
 				cancelRef={cancelRef}
 				onClose={onClose}
 				deleteTrack={deleteTrack}
+				onCloseHandler={onClose}
 			/>
 		</Box>
 	)

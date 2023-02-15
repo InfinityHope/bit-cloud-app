@@ -31,6 +31,7 @@ const TrackScreen = () => {
 	const [img, setImg] = useState<File | null>(null)
 	const [audio, setAudio] = useState<File | null>(null)
 	const [resources, setResources] = useState<File | null>(null)
+	const [audioDuration, setAudioDuration] = useState<number | null>(null)
 
 	const trackId = query?.id
 
@@ -43,31 +44,32 @@ const TrackScreen = () => {
 	) => {
 		if (e.target.files) {
 			const file = e.target.files[0]
+			if (file.type === 'audio/mpeg') {
+				const audio = new Audio()
+				audio.src = URL.createObjectURL(file)
+				audio.onloadedmetadata = () => {
+					setAudioDuration(Math.ceil(audio.duration))
+				}
+			}
 			setFunction(file)
 		}
 	}
 
 	const onSubmit = (data: any) => {
 		const formData: FormData = new FormData()
-		const newAudio = new Audio()
 		if (track) {
-			if (audio) {
-				formData.append('audio', audio)
-				newAudio.src = URL.createObjectURL(audio)
-			} else {
-				formData.append('audio', track?.audio)
-				formData.append('audio_duration', (track?.audio_duration).toString())
-			}
-
+			formData.append('audio', audio ? audio : track?.audio)
+			formData.append(
+				'audio_duration',
+				audioDuration ? audioDuration.toString() : track?.audio_duration.toString()
+			)
 			formData.append('resources', resources ? resources : track?.resources)
 			formData.append('img', img ? img : track?.img)
 			formData.append('title', data.title ? data.title : track?.title)
 			formData.append('description', data.description ? data.description : track?.description)
+			formData.append('tags', '')
 
-			newAudio.onloadeddata = () => {
-				formData.append('audio_duration', Math.ceil(newAudio.duration).toString())
-				update(formData)
-			}
+			update(formData)
 
 			setImg(null)
 			setAudio(null)
