@@ -6,11 +6,11 @@ import { useRef, useState } from 'react'
 
 export const usePlayer = () => {
 	let audio = useRef<HTMLAudioElement | null>(null)
-	const { setPause, setCurrentTime, setPlay, setDuration, setVolume, setTrackIndex, setRepeat } =
-		useActions()
+	const { setPause, setPlay, setDuration, setVolume, setTrackIndex, setRepeat } = useActions()
 	const { volume, tracks, trackIndex, isRepeat } = useAppSelector(state => state.player)
 
 	const [currentTrack, setCurrentTrack] = useState<ITrack | null>(null)
+	const [currentTime, setCurrentTime] = useState<number>(0)
 
 	const setAudio = () => {
 		if (tracks[trackIndex] && audio.current) {
@@ -86,6 +86,8 @@ export const usePlayer = () => {
 		repeat,
 		setAudio,
 		audio,
-		currentTrack
+		currentTrack,
+		currentTime,
+		setCurrentTime
 	}
 }

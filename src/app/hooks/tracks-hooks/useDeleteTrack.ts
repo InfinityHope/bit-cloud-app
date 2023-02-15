@@ -1,3 +1,4 @@
+import { queryClient } from '@/app/config/react-query.config'
 import { useNotification } from '@/hooks/useNotification'
 import { TrackService } from '@/services/track-service/track.service'
 import { ITrack } from '@/types/interfaces/track.interface'
@@ -16,13 +17,21 @@ export const useDeleteTrack = ({ track, onClose }: IOptions) => {
 		() => TrackService.deleteTrack(track.id),
 		{
 			onSuccess: (response: { status: number; message: string }) => {
-				onClose() //close alert
-				successMessage(`${response.message}`, '')
+				Promise.all([
+					queryClient.invalidateQueries(['track list']),
+					queryClient.invalidateQueries(['musician info'])
+				]).then(r => {
+					onClose() //close alert
+					successMessage(`${response.message}`, '')
+				})
 			},
 			onError: (error: AxiosError<{ status: number; message: string }>) => {
 				onClose() //close alert
 				if (error) {
-					errorMessage(`${error.response?.data.status}`, `${error.response?.data.status}`)
+					errorMessage(
+						`${error.response?.data.status}`,
+						`${error.response?.data.message}`
+					)
 				}
 			}
 		}

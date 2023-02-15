@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import {
 	AlertDialog,
 	AlertDialogBody,
@@ -8,15 +7,23 @@ import {
 	AlertDialogOverlay,
 	Button
 } from '@chakra-ui/react'
+import { FC } from 'react'
 
 interface IDeleteAlert {
 	isOpen: boolean
 	cancelRef: any
 	onClose: () => void
+	onCloseHandler: (e: any) => void
 	deleteTrack: () => void
 }
 
-const DeleteAlert: FC<IDeleteAlert> = ({ isOpen, cancelRef, onClose, deleteTrack }) => {
+const DeleteAlert: FC<IDeleteAlert> = ({
+	isOpen,
+	onCloseHandler,
+	cancelRef,
+	onClose,
+	deleteTrack
+}) => {
 	return (
 		<AlertDialog
 			isOpen={isOpen}
@@ -34,7 +41,7 @@ const DeleteAlert: FC<IDeleteAlert> = ({ isOpen, cancelRef, onClose, deleteTrack
 					<AlertDialogBody>Вы уверены, что хотите удалить трек?</AlertDialogBody>
 
 					<AlertDialogFooter>
-						<Button colorScheme={'facebook'} onClick={onClose} ref={cancelRef}>
+						<Button colorScheme={'facebook'} onClick={onCloseHandler} ref={cancelRef}>
 							Отменить
 						</Button>
 						<Button colorScheme='red' onClick={() => deleteTrack()} ml={3}>

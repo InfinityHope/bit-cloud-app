@@ -47,6 +47,16 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 		setPause()
 	}
 
+	const openAlert = (e: any) => {
+		e.stopPropagation()
+		onOpen()
+	}
+
+	const closeAlert = (e: any) => {
+		e.stopPropagation()
+		onClose()
+	}
+
 	return (
 		<MotionFlex
 			variants={animationsConfig}
@@ -108,21 +118,28 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 							<div>
 								<FiDownload
 									size={30}
-									onClick={() => createDownloadUrl(data, track)}
+									onClick={(e: any) => {
+										e.stopPropagation()
+										createDownloadUrl(data, track)
+									}}
 									cursor={'pointer'}
 								/>
 							</div>
 						</Tooltip>
 
 						<Tooltip label='Скачать архив инструментов' aria-label='download resources'>
-							<Link href={`${API_URL}/${track.resources}`} download>
+							<Link
+								href={`${API_URL}/${track.resources}`}
+								download
+								onClick={(e: any) => e.stopPropagation()}
+							>
 								<MdArchive size={30} />
 							</Link>
 						</Tooltip>
 
 						<Tooltip label='Удаление трека' aria-label='usage'>
 							<div>
-								<AiOutlineDelete size={25} cursor={'pointer'} onClick={onOpen} />
+								<AiOutlineDelete size={25} cursor={'pointer'} onClick={openAlert} />
 							</div>
 						</Tooltip>
 
@@ -130,6 +147,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 							isOpen={isOpen}
 							cancelRef={cancelRef}
 							onClose={onClose}
+							onCloseHandler={closeAlert}
 							deleteTrack={deleteTrack}
 						/>
 					</Flex>

@@ -10,7 +10,7 @@ export const useRegister = (reset: () => void) => {
 	const { errorMessage, successMessage } = useNotification()
 
 	const { mutate: registration } = useMutation(
-		'login',
+		'registration',
 		(data: FormData) => AuthService.register(data),
 		{
 			onSuccess(data: IAuthResponse) {

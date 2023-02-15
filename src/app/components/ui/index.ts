@@ -4,6 +4,8 @@ import TrackProgress from '@/ui/audio-player/controls/track-progress/TrackProgre
 import TrackVolume from '@/ui/audio-player/controls/track-volume/TrackVolume'
 import LoginForm from '@/ui/auth-form/login-form/LoginForm'
 import RegisterForm from '@/ui/auth-form/register-form/RegisterForm'
+import CustomEditableInput from '@/ui/custom-editable-input/CustomEditableInput'
+import CustomEditableTextarea from '@/ui/custom-editable-textarea/CustomEditableTextarea'
 import CustomSpinner from '@/ui/custom-spinner/CustomSpinner'
 import DeleteAlert from '@/ui/delete-alert/DeleteAlert'
 import Header from '@/ui/header/Header'
@@ -39,5 +41,7 @@ export {
 	TrackItem,
 	MusicianProfile,
 	TagList,
-	TrackMenuActions
+	TrackMenuActions,
+	CustomEditableInput,
+	CustomEditableTextarea
 }

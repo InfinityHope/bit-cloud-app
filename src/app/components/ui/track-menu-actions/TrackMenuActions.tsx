@@ -18,10 +18,9 @@ import { FC, useRef } from 'react'
 interface ITrackMenuActions {
 	track: ITrack
 	setEditing: (value: boolean) => void
-	editing: boolean
 }
 
-const TrackMenuActions: FC<ITrackMenuActions> = ({ track, setEditing, editing }) => {
+const TrackMenuActions: FC<ITrackMenuActions> = ({ track, setEditing }) => {
 	const data = useDownloadAudio(track)
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const deleteTrack = useDeleteTrack({ track, onClose })
@@ -37,7 +36,7 @@ const TrackMenuActions: FC<ITrackMenuActions> = ({ track, setEditing, editing })
 					<MenuItem icon={<DeleteIcon />} onClick={onOpen}>
 						Удалить
 					</MenuItem>
-					<MenuItem onClick={() => setEditing(!editing)} icon={<EditIcon />}>
+					<MenuItem onClick={() => setEditing(true)} icon={<EditIcon />}>
 						Обновить
 					</MenuItem>
 					<MenuDivider />

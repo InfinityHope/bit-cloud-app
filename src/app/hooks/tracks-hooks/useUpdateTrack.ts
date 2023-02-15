@@ -1,32 +1,31 @@
 import { useNotification } from '@/hooks/useNotification'
 import { TrackService } from '@/services/track-service/track.service'
-import { ITrack } from '@/types/interfaces/track.interface'
 import { AxiosError } from 'axios'
 import { useMutation } from 'react-query'
+import { queryClient } from './../../config/react-query.config'
 
-interface IOptions {
-	onClose: () => void
-	track: ITrack
-}
-
-export const useDeleteTrack = ({ track, onClose }: IOptions) => {
+export const useUpdateTrack = (trackId: number) => {
 	const { errorMessage, successMessage } = useNotification()
-	const { mutate: deleteTrack } = useMutation(
-		['delete track', track.id],
-		() => TrackService.deleteTrack(track.id),
+	const { mutate: updateTrack } = useMutation(
+		['update track', trackId],
+		(data: FormData) => TrackService.updateTrack(trackId, data),
 		{
-			onSuccess: (response: { status: number; message: string }) => {
-				onClose() //close alert
-				successMessage(`${response.message}`, '')
+			onSuccess: (response: any) => {
+				console.log(response)
+
+				queryClient.invalidateQueries('track info')
+				successMessage(`Успешно`, `${response.message}`)
 			},
 			onError: (error: AxiosError<{ status: number; message: string }>) => {
-				onClose() //close alert
 				if (error) {
-					errorMessage(`${error.response?.data.status}`, `${error.response?.data.status}`)
+					errorMessage(
+						`${error.response?.data.status}`,
+						`${error.response?.data.message}`
+					)
 				}
 			}
 		}
 	)
 
-	return deleteTrack
+	return updateTrack
 }

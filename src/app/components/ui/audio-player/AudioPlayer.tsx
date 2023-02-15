@@ -21,12 +21,15 @@ const AudioPlayer: FC = () => {
 		toPrevTrack,
 		toNextTrack,
 		pause,
+		setCurrentTime,
+		currentTime,
 		play,
 		audio
 	} = usePlayer()
-	const { volume, tracks, trackIndex, isRepeat, isPlaying, currentTime, duration } =
-		useAppSelector(state => state.player)
-	const { setPause, setCurrentTime, setDuration, setVolume, setTracks } = useActions()
+	const { volume, tracks, trackIndex, isRepeat, isPlaying, duration } = useAppSelector(
+		state => state.player
+	)
+	const { setPause, setDuration, setVolume, setTracks } = useActions()
 
 	useEffect(() => {
 		if (!audio.current) {
@@ -127,7 +130,7 @@ const AudioPlayer: FC = () => {
 					<TrackProgress
 						currentValue={currentTime}
 						duration={duration}
-						onChange={value => changeCurrentTime(value)}
+						onChange={changeCurrentTime}
 					/>
 				</GridItem>
 				<GridItem>

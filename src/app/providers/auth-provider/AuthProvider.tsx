@@ -16,6 +16,14 @@ export const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 		}
 	}, [])
 
+	useEffect(() => {
+		const accessToken = Cookies.get('accessToken')
+		if (!accessToken) {
+			setUser(null)
+			localStorage.removeItem('user')
+		}
+	}, [])
+
 	return (
 		<AuthContext.Provider value={{ user, setUser, authType, setAuthType }}>
 			{children}

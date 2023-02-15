@@ -12,8 +12,20 @@ export const TrackService = {
 		const { data } = await axiosClassic.get<ITrack[]>(`track/author/${authorId}`)
 		return data
 	},
+	async createTrack(track: ITrack): Promise<ITrack> {
+		const { data } = await axiosAuth.post(`/track`, track)
+		return data
+	},
 	async deleteTrack(trackId: number): Promise<any> {
 		const { data } = await axiosAuth.delete(`/track/${trackId}`)
+		return data
+	},
+	async updateTrack(trackId: number, newTrack: any): Promise<any> {
+		const { data } = await axiosAuth.patch(`track/${trackId}`, newTrack, {
+			headers: {
+				'Content-type': 'multipart/form-data'
+			}
+		})
 		return data
 	},
 	async downloadAudio(trackId: number): Promise<Blob> {

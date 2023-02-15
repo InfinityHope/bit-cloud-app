@@ -46,7 +46,7 @@ const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 			{tracks.length > 0 ? (
 				<TrackList tracks={tracks} />
 			) : (
-				<Text mt={'2em'} fontSize={'x-large'}>
+				<Text mt={'2em'} ml={'1.5em'} fontSize={'x-large'}>
 					У данного автора пока нет треков
 				</Text>
 			)}

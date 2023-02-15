@@ -1,12 +1,11 @@
+import { ITrack } from '@/types/interfaces/track.interface'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import { ITrack } from '@/types/interfaces/track.interface'
 
 interface IPlayerState {
 	tracks: ITrack[]
 	trackIndex: number
 	volume: number
-	currentTime: number
 	duration: number
 	isPlaying: boolean
 	isRepeat: boolean
@@ -17,7 +16,6 @@ const initialState: IPlayerState = {
 	trackIndex: 0,
 	volume: 50,
 	duration: 0,
-	currentTime: 0,
 	isPlaying: false,
 	isRepeat: false
 }
@@ -31,9 +29,6 @@ export const playerSlice = createSlice({
 		},
 		setPause: state => {
 			state.isPlaying = false
-		},
-		setCurrentTime: (state, action: PayloadAction<number>) => {
-			state.currentTime = action.payload
 		},
 		setDuration: (state, action: PayloadAction<number>) => {
 			state.duration = action.payload
