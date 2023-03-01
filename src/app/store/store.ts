@@ -1,12 +1,17 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import playerReducer from '@/store/reducers/player.reducer'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import createTrackReducer from './reducers/create-track.reducer'
+import updateTrackReducer from './reducers/update-track.reducer'
 
 const rootReducer = combineReducers({
-	player: playerReducer
+	player: playerReducer,
+	updateTrack: updateTrackReducer,
+	createTrack: createTrackReducer
 })
 
 export const store = configureStore({
-	reducer: rootReducer
+	reducer: rootReducer,
+	middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false })
 })
 
 export type RootState = ReturnType<typeof store.getState>

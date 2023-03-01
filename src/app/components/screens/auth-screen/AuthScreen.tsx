@@ -1,9 +1,10 @@
-import { useEffect } from 'react'
-import { LoginForm, RegisterForm } from '@/components/ui'
-import { useAuth } from '@/hooks/auth-hooks/useAuth'
-import { useRouter } from 'next/router'
-import { Flex } from '@chakra-ui/react'
 import Meta from '@/components/meta/Meta'
+import { useAuth } from '@/hooks/auth-hooks/useAuth'
+import { Flex } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import LoginForm from './auth-form/login-form/LoginForm'
+import RegisterForm from './auth-form/register-form/RegisterForm'
 
 const AuthScreen = () => {
 	const { user, authType } = useAuth()
@@ -11,7 +12,7 @@ const AuthScreen = () => {
 
 	useEffect(() => {
 		if (user) {
-			push('/').then(r => r)
+			push('/')
 		}
 	}, [user])
 

@@ -11,8 +11,6 @@ export const useUpdateTrack = (trackId: number) => {
 		(data: FormData) => TrackService.updateTrack(trackId, data),
 		{
 			onSuccess: (response: any) => {
-				console.log(response)
-
 				queryClient.invalidateQueries('track info')
 				successMessage(`Успешно`, `${response.message}`)
 			},

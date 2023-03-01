@@ -1,3 +1,4 @@
+import { playerActions } from '@/app/store/reducers/player.reducer'
 import trackImg from '@/assets/background.jpg'
 import { AudioControls, TrackProgress, TrackVolume } from '@/components/ui'
 import { animationsConfig } from '@/config/animations.config'
@@ -6,12 +7,12 @@ import { useActions, useAppSelector } from '@/hooks/redux-hooks'
 import { usePlayer } from '@/hooks/usePlayer'
 import { Box, Flex, Grid, GridItem, Image, Text, VStack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 import styles from './AudioPlayer.module.scss'
 
 const MotionBox = motion(Box)
 
-const AudioPlayer: FC = () => {
+const AudioPlayer = () => {
 	let {
 		setAudio,
 		currentTrack,
@@ -29,7 +30,7 @@ const AudioPlayer: FC = () => {
 	const { volume, tracks, trackIndex, isRepeat, isPlaying, duration } = useAppSelector(
 		state => state.player
 	)
-	const { setPause, setDuration, setVolume, setTracks } = useActions()
+	const { setPause, setDuration, setVolume, setTracks } = useActions(playerActions)
 
 	useEffect(() => {
 		if (!audio.current) {

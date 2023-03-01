@@ -12,7 +12,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
 	const queryClient = new QueryClient()
 
-	await queryClient.fetchQuery(['musicians list', nickName], () =>
+	await queryClient.fetchQuery(['musician info', nickName], () =>
 		UserService.getMusician(nickName)
 	)
 

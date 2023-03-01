@@ -28,6 +28,9 @@ const config = {
 				textDecoration: 'none',
 				padding: 0,
 				margin: 0
+			},
+			'input:focus-visible, textarea:focus-visible': {
+				boxShadow: 'none !important'
 			}
 		}
 	}

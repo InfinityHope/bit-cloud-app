@@ -25,6 +25,17 @@ export const animationsConfig = {
 	animateFromBottom: {
 		y: 0
 	},
+	listInitialFade: {
+		opacity: 0,
+		scale: 0.5
+	},
+	listAnimateFade: (i: number) => ({
+		opacity: 1,
+		scale: 1,
+		transition: {
+			duration: (i + 1) * 0.2
+		}
+	}),
 	listInitialTop: {
 		opacity: 0,
 		y: -100
@@ -33,7 +44,7 @@ export const animationsConfig = {
 		opacity: 1,
 		y: 0,
 		transition: {
-			duration: i * 0.3
+			duration: (i + 1) * 0.3
 		}
 	}),
 	listInitialLeft: {
@@ -44,7 +55,7 @@ export const animationsConfig = {
 		opacity: 1,
 		x: 0,
 		transition: {
-			duration: 0.3 * i
+			duration: 0.3 * (i + 1)
 		}
 	}),
 	listInitialRight: {
@@ -55,7 +66,7 @@ export const animationsConfig = {
 		opacity: 1,
 		x: 0,
 		transition: {
-			duration: 0.4 * i
+			duration: 0.4 * (i + 1)
 		}
 	})
 }

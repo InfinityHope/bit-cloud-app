@@ -1,7 +1,8 @@
 import Meta from '@/components/meta/Meta'
-import { CustomSpinner, MusiciansList } from '@/components/ui'
+import { CustomSpinner } from '@/components/ui'
 import { useMusicians } from '@/hooks/user-hooks/useMusicians'
 import { Heading } from '@chakra-ui/react'
+import MusiciansList from './musicians-list/MusiciansList'
 
 const MusiciansScreen = () => {
 	const { musicians, isLoading } = useMusicians()

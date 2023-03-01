@@ -1,4 +1,5 @@
 import { animationsConfig } from '@/app/config/animations.config'
+import { playerActions } from '@/app/store/reducers/player.reducer'
 import { createDownloadUrl } from '@/app/utils/createDownloadUrl'
 import { DeleteAlert } from '@/components/ui'
 import { API_URL } from '@/constants/api.constants'
@@ -28,7 +29,7 @@ interface ITrackItem {
 const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 	const { push } = useRouter()
 	const { isPlaying, tracks, trackIndex } = useAppSelector(state => state.player)
-	const { setPlay, setPause } = useActions()
+	const { setPlay, setPause } = useActions(playerActions)
 	const data = useDownloadAudio(track)
 	const { user } = useAuth()
 	const cancelRef = useRef<any>()

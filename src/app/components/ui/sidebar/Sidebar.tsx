@@ -5,15 +5,15 @@ import { List, ListIcon, ListItem, Stack, StackDivider } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
 import { BiLogOut } from 'react-icons/bi'
 import { GiMicrophone } from 'react-icons/gi'
+import { IoIosCreate } from 'react-icons/io'
 import { RiHomeLine, RiMusic2Line } from 'react-icons/ri'
 import styles from './Sidebar.module.scss'
 
 const MotionStack = motion(Stack)
 
-const Sidebar: FC = () => {
+const Sidebar = () => {
 	const { setUser, setAuthType, user } = useAuth()
 	const { pathname } = useRouter()
 
@@ -59,10 +59,16 @@ const Sidebar: FC = () => {
 			</List>
 			{user?.role === 'MUSICIAN' && (
 				<List fontSize={'1.5em'} spacing={10} color={'primaryTextColor'}>
-					<ListItem className={pathname === '/tracks/author/id' ? styles.LinkActive : ''}>
-						<Link href={'/tracks/author/id'}>
+					<ListItem className={pathname === '/my-tracks' ? styles.LinkActive : ''}>
+						<Link href={'/my-tracks'}>
 							<ListIcon as={RiMusic2Line} />
 							Мои треки
+						</Link>
+					</ListItem>
+					<ListItem className={pathname === '/create-track' ? styles.LinkActive : ''}>
+						<Link href={'/create-track'}>
+							<ListIcon as={IoIosCreate} />
+							Добавить трек
 						</Link>
 					</ListItem>
 				</List>

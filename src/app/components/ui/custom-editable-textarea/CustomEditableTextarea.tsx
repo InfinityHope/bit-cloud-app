@@ -12,12 +12,28 @@ const CustomEditableTextarea: FC<ICustomEditableTextarea> = ({ name, control, de
 	return (
 		<Controller
 			name={name}
-			defaultValue={defaultValue ? defaultValue : 'Добавить описание...'}
 			control={control}
+			defaultValue={defaultValue}
 			render={({ field }) => (
-				<Editable value={field.value} mt={'1em'}>
+				<Editable
+					border={'1px solid white'}
+					borderRadius={'10px'}
+					px={'10px'}
+					py={'5px'}
+					minH={'95px'}
+					placeholder={'Изменить описание...'}
+					value={field.value}
+					selectAllOnFocus={false}
+					mt={'1em'}
+				>
 					<EditablePreview />
-					<Textarea onChange={field.onChange} as={EditableTextarea} />
+					<Textarea
+						lineHeight={'1em'}
+						variant={'unstyled'}
+						focusBorderColor={'transparent'}
+						onChange={field.onChange}
+						as={EditableTextarea}
+					/>
 				</Editable>
 			)}
 		/>

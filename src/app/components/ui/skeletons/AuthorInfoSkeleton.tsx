@@ -1,7 +1,6 @@
-import { FC } from 'react'
 import { Box, Skeleton, SkeletonCircle, Stack } from '@chakra-ui/react'
 
-const AuthorInfoSkeleton: FC = () => {
+const AuthorInfoSkeleton = () => {
 	return (
 		<Box>
 			<Stack position={'relative'}>

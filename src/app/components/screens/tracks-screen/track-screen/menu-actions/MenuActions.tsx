@@ -15,12 +15,12 @@ import {
 } from '@chakra-ui/react'
 import { FC, useRef } from 'react'
 
-interface ITrackMenuActions {
+interface IMenuActions {
 	track: ITrack
 	setEditing: (value: boolean) => void
 }
 
-const TrackMenuActions: FC<ITrackMenuActions> = ({ track, setEditing }) => {
+const MenuActions: FC<IMenuActions> = ({ track, setEditing }) => {
 	const data = useDownloadAudio(track)
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const deleteTrack = useDeleteTrack({ track, onClose })
@@ -64,4 +64,4 @@ const TrackMenuActions: FC<ITrackMenuActions> = ({ track, setEditing }) => {
 	)
 }
 
-export default TrackMenuActions
+export default MenuActions

@@ -1,12 +1,14 @@
 import { API_URL } from '@/constants/api.constants'
 import { useActions } from '@/hooks/redux-hooks/useActions'
 import { useAppSelector } from '@/hooks/redux-hooks/useAppSelector'
+import { playerActions } from '@/store/reducers/player.reducer'
 import { ITrack } from '@/types/interfaces/track.interface'
 import { useRef, useState } from 'react'
 
 export const usePlayer = () => {
 	let audio = useRef<HTMLAudioElement | null>(null)
-	const { setPause, setPlay, setDuration, setVolume, setTrackIndex, setRepeat } = useActions()
+	const { setPause, setPlay, setDuration, setVolume, setTrackIndex, setRepeat } =
+		useActions(playerActions)
 	const { volume, tracks, trackIndex, isRepeat } = useAppSelector(state => state.player)
 
 	const [currentTrack, setCurrentTrack] = useState<ITrack | null>(null)

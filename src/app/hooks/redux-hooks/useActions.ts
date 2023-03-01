@@ -1,14 +1,8 @@
-import { bindActionCreators } from 'redux'
 import { useAppDispatch } from '@/hooks/redux-hooks/useAppDispatch'
-import { playerActions } from '@/store/reducers/player.reducer'
+import { bindActionCreators } from 'redux'
 
-export const useActions = () => {
+export const useActions = (actions: any) => {
 	const dispatch = useAppDispatch()
 
-	return bindActionCreators(
-		{
-			...playerActions
-		},
-		dispatch
-	)
+	return bindActionCreators({ ...actions }, dispatch)
 }

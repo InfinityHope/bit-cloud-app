@@ -15,6 +15,17 @@ export interface ITrack {
 	updatedAt: string
 }
 
+export interface ICreateTrackFields {
+	userId: number
+	title: string
+	audio: string
+	img?: string
+	resources: string
+	tags?: string[]
+	description: string
+	audio_duration: number
+}
+
 export interface ITrackResponse {
 	tracks: ITrack[]
 	pages: number

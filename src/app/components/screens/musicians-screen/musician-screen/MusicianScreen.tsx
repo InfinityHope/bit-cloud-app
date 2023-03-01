@@ -1,8 +1,9 @@
 import Meta from '@/components/meta/Meta'
-import { AuthorInfoSkeleton, MusicianProfile } from '@/components/ui'
+import { AuthorInfoSkeleton } from '@/components/ui'
 import { useAuthorTracks } from '@/hooks/tracks-hooks/useAuthorTracks'
 import { useMusician } from '@/hooks/user-hooks/useMusician'
 import { useRouter } from 'next/router'
+import MusicianProfile from './musician-profile/MusicianProfile'
 
 const MusicianScreen = () => {
 	const { query } = useRouter()

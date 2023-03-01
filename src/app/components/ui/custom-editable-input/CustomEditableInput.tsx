@@ -16,13 +16,19 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({ name, defaultValue, con
 			control={control}
 			render={({ field }: any) => (
 				<Editable
-					fontSize={'4xl'}
-					lineHeight={'1.2em'}
+					borderBottom={'1px solid white'}
+					fontSize={'3xl'}
 					fontWeight={'bold'}
+					placeholder={'Введите название'}
 					value={field.value}
 				>
 					<EditablePreview />
-					<Input onChange={field.onChange} as={EditableInput} />
+					<Input
+						variant={'unstyled'}
+						fontSize={'3xl'}
+						onChange={field.onChange}
+						as={EditableInput}
+					/>
 				</Editable>
 			)}
 		/>

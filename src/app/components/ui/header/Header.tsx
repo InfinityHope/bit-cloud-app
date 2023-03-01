@@ -7,9 +7,8 @@ import { ArrowBackIcon } from '@chakra-ui/icons'
 import { Avatar, Button, Flex, Heading } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { FC } from 'react'
 
-const Header: FC = () => {
+const Header = () => {
 	const { back } = useHistory()
 	const { user } = useAuth()
 

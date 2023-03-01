@@ -1,3 +1,4 @@
+import { playerActions } from '@/app/store/reducers/player.reducer'
 import { TrackItem } from '@/components/ui'
 import { useActions } from '@/hooks/redux-hooks'
 import { ITrack } from '@/types/interfaces/track.interface'
@@ -11,7 +12,7 @@ interface IMusicList {
 }
 
 const MusicList: FC<IMusicList> = ({ tracks }) => {
-	const { setTracks, setTrackIndex, setPlay } = useActions()
+	const { setTracks, setTrackIndex, setPlay } = useActions(playerActions)
 
 	const selectTrack = (e: any, value: number) => {
 		e.stopPropagation()
@@ -30,6 +31,7 @@ const MusicList: FC<IMusicList> = ({ tracks }) => {
 			pt={'1em'}
 			pl={'2em'}
 			pr={'.3em'}
+			color={'white'}
 			fontSize={'1.25em'}
 		>
 			<Flex>

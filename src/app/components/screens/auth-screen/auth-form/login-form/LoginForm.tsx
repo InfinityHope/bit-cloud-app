@@ -31,7 +31,7 @@ const LoginForm: FC = () => {
 	} = useForm<ILoginFields>({
 		mode: 'onSubmit',
 		defaultValues: {
-			email: 'exmaple@example.ru',
+			email: 'example@example.com',
 			password: 'example123'
 		}
 	})
