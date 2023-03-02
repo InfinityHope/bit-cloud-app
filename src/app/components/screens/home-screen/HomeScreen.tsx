@@ -3,7 +3,7 @@ import Meta from '@/components/meta/Meta'
 const HomeScreen = () => {
 	return (
 		<>
-			<Meta title={'Sound Cloud Home'} />
+			<Meta title={'Bit Cloud Home'} />
 		</>
 	)
 }

@@ -13,7 +13,7 @@ const MusicianScreen = () => {
 
 	return (
 		<>
-			<Meta title={`Sound Cloud Author: ${nickName}`} />
+			<Meta title={`Bit Cloud Author: ${nickName}`} />
 			{isLoading || isTracksLoading ? <AuthorInfoSkeleton /> : null}
 			{musician && tracks && <MusicianProfile musician={musician} tracks={tracks} />}
 		</>

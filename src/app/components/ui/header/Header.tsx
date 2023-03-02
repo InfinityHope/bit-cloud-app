@@ -25,7 +25,7 @@ const Header = () => {
 		>
 			<Flex color={'primaryTextColor'} alignItems={'center'} justifyContent={'space-between'}>
 				<Heading as='h1' size='xl' noOfLines={1}>
-					Sound Cloud
+					Bit Cloud
 				</Heading>
 
 				<Flex justifyContent={'space-between'} alignItems={'center'} width={'80%'}>

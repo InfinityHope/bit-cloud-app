@@ -15,7 +15,7 @@ const MyTracksScreen = () => {
 			{isTracksLoading ? <CustomSpinner /> : null}
 			{tracks && (
 				<>
-					<Meta title={`Sound Cloud My Tracks`} />
+					<Meta title={`Bit Cloud My Tracks`} />
 					<PageHeader bgImg={bgImg.src}>
 						<Heading as={'h2'} size={'4xl'} marginBottom={'0.5em'} color={'white'}>
 							Мои треки

@@ -18,7 +18,7 @@ const AuthScreen = () => {
 
 	return (
 		<>
-			<Meta title={'Sound Cloud Auth'} />
+			<Meta title={'Bit Cloud Auth'} />
 			<Flex height={'100vh'} justifyContent={'center'} alignItems={'center'}>
 				{authType === 'login' ? <LoginForm /> : <RegisterForm />}
 			</Flex>

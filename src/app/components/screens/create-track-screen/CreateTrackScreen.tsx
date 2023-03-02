@@ -24,7 +24,7 @@ const CreateTrackScreen = () => {
 
 	return (
 		<>
-			<Meta title='Sound Cloud Create Track' />
+			<Meta title='Bit Cloud Create Track' />
 			<Flex color={'white'} p={'2em'} flexDirection={'column'}>
 				<Heading as={'h2'}>Добавить новый трек</Heading>
 				<CreateTrackForm />

@@ -71,7 +71,7 @@ const TrackScreen = () => {
 
 	return (
 		<>
-			<Meta title={`Sound Cloud Track: ${track?.title}`} />
+			<Meta title={`Bit Cloud Track: ${track?.title}`} />
 			{isLoading ? <CustomSpinner /> : null}
 			{track && (
 				<Box p={'3em'} color={'white'} overflowY={'auto'}>

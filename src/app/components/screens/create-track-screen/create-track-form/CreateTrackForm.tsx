@@ -7,6 +7,7 @@ import { useCreateTrack } from '@/app/hooks/tracks-hooks/useCreateTrack'
 import { useNotification } from '@/app/hooks/useNotification'
 import { createTrackActions } from '@/app/store/reducers/create-track.reducer'
 import { ICreateTrackFields } from '@/app/types/interfaces/track.interface'
+import { checkKeyDown } from '@/app/utils/checkKeyDown'
 import {
 	Button,
 	Flex,
@@ -67,6 +68,7 @@ const CreateTrackForm = () => {
 		<MotionFlex
 			as={'form'}
 			onSubmit={handleSubmit(onSubmit)}
+			onKeyDown={(e: KeyboardEvent) => checkKeyDown(e)}
 			mt={'2em'}
 			justifyContent={'space-between'}
 			initial={'initialFadeScale'}
@@ -83,7 +85,7 @@ const CreateTrackForm = () => {
 					<Input
 						placeholder='Введите название'
 						{...register('title', {
-							required: 'Поле обязательно для заполнения"'
+							required: 'Поле обязательно для заполнения'
 						})}
 						type='text'
 					/>

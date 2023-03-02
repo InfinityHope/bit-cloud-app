@@ -11,3 +11,12 @@ export interface IUser {
 	telephone: string
 	tracks: ITrack[]
 }
+
+export interface IProfileFields {
+	name: string
+	nickName: string
+	email: string
+	avatar: string
+	socialLinks: string[]
+	telephone: string
+}

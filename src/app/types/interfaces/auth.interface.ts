@@ -2,8 +2,11 @@ export interface IAuthResponse {
 	user: {
 		id: number
 		email: string
+		name: string
 		nickName: string
 		avatar: string
+		socialLinks: string[]
+		telephone: string
 		role: string
 	}
 	accessToken: string

@@ -9,7 +9,7 @@ const MusiciansScreen = () => {
 
 	return (
 		<>
-			<Meta title={'Sound Cloud Authors'} />
+			<Meta title={'Bit Cloud Authors'} />
 			{isLoading ? <CustomSpinner /> : null}
 			{musicians && (
 				<>

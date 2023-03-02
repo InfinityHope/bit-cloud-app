@@ -9,7 +9,7 @@ const TracksScreen = () => {
 
 	return (
 		<>
-			<Meta title={'Sound Cloud Tracks'} />
+			<Meta title={'Bit Cloud Tracks'} />
 			<Flex color={'#fff'} flexDirection={'column'}>
 				{tracks && (
 					<>

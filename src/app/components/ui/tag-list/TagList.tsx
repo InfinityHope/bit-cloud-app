@@ -43,7 +43,6 @@ const TagList: FC<ITagList> = ({ tags, addTag, removeTag, action = true }) => {
 			if (tagRef.current.value !== '') {
 				addTag(tagRef.current.value)
 				tagRef.current.value = ''
-				onClose()
 			} else {
 				errorMessage('Введите значение', 'Тег не может быть пустым')
 			}
@@ -78,7 +77,13 @@ const TagList: FC<ITagList> = ({ tags, addTag, removeTag, action = true }) => {
 					</List>
 				)}
 				{action && (
-					<Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose} placement='right'>
+					<Popover
+						isOpen={isOpen}
+						onOpen={onOpen}
+						initialFocusRef={tagRef}
+						onClose={onClose}
+						placement='right'
+					>
 						<PopoverTrigger>
 							<Button
 								size={'xs'}
@@ -94,7 +99,14 @@ const TagList: FC<ITagList> = ({ tags, addTag, removeTag, action = true }) => {
 							<HStack spacing={2} alignItems={'flex-end'}>
 								<FormControl>
 									<FormLabel>Название тега</FormLabel>
-									<Input ref={tagRef} />
+									<Input
+										ref={tagRef}
+										onKeyDown={e => {
+											if (e.code === 'Enter') {
+												add()
+											}
+										}}
+									/>
 								</FormControl>
 								<Button
 									_hover={{ bgColor: 'darkBlue' }}
