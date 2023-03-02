@@ -36,10 +36,10 @@ const MotionListItem = motion(ListItem)
 const TagList: FC<ITagList> = ({ tags, addTag, removeTag, action = true }) => {
 	const { onOpen, onClose, isOpen } = useDisclosure()
 	const { errorMessage } = useNotification()
-	const tagRef = useRef<any>('')
+	const tagRef = useRef<HTMLInputElement | null>(null)
 
 	const add = () => {
-		if (addTag) {
+		if (addTag && tagRef.current) {
 			if (tagRef.current.value !== '') {
 				addTag(tagRef.current.value)
 				tagRef.current.value = ''

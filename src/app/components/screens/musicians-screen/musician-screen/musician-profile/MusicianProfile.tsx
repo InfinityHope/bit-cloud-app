@@ -1,3 +1,4 @@
+import { checkSocialLink } from '@/app/utils/checkSocialLink'
 import bgImg from '@/assets/background.jpg'
 import { PageHeader, TrackList } from '@/components/ui'
 import { ITrack } from '@/types/interfaces/track.interface'
@@ -28,7 +29,7 @@ const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 						{musician.socialLinks.map(link => (
 							<ListItem key={link}>
 								<Link href={`https://${link}`} target={'_blank'}>
-									{link}
+									{checkSocialLink(link)}
 								</Link>
 							</ListItem>
 						))}
