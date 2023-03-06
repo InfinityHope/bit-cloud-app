@@ -23,17 +23,23 @@ const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 				<Divider color={'secondary'} marginBottom={'0.5em'} />
 
 				<Text>E-mail: {musician.email}</Text>
-				<Flex flexDirection={'column'}>
+				<Text>Имя: {musician.name}</Text>
+				<Text>Телефон: {musician.telephone}</Text>
+				<Flex>
 					<Text>Социальные сети:</Text>
-					<List>
-						{musician.socialLinks.map(link => (
-							<ListItem key={link}>
-								<Link href={`https://${link}`} target={'_blank'}>
-									{checkSocialLink(link)}
-								</Link>
-							</ListItem>
-						))}
-					</List>
+					{musician.socialLinks.length !== 0 ? (
+						<List display={'flex'}>
+							{musician.socialLinks.map(link => (
+								<ListItem ml={'.5em'} key={link} fontWeight={'bold'}>
+									<Link href={`https://${link}`} target={'_blank'}>
+										{checkSocialLink(link)}
+									</Link>
+								</ListItem>
+							))}
+						</List>
+					) : (
+						<Text ml={'.5em'}>Отсутствуют</Text>
+					)}
 				</Flex>
 				<Avatar
 					src={`${process.env.API_URL}/${musician.avatar}`}
