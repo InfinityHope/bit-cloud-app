@@ -49,13 +49,12 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({
 				<FormControl isInvalid={invalid}>
 					<Editable
 						borderBottom={'1px solid white'}
-						width={'full'}
 						fontSize={fontSize}
 						fontWeight={fontWeight}
 						placeholder={'Введите значение'}
 						value={field.value}
 					>
-						<EditablePreview />
+						<EditablePreview display={'block'} />
 						<Input
 							variant={'unstyled'}
 							fontSize={'3xl'}

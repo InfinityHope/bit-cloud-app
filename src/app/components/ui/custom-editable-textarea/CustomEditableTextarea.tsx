@@ -25,10 +25,11 @@ const CustomEditableTextarea: FC<ICustomEditableTextarea> = ({ name, control, de
 					value={field.value}
 					mt={'1em'}
 				>
-					<EditablePreview />
+					<EditablePreview display={'block'} minHeight={'inherit'} />
 					<Textarea
 						lineHeight={'1em'}
 						variant={'unstyled'}
+						minH={'95px'}
 						focusBorderColor={'transparent'}
 						onChange={field.onChange}
 						as={EditableTextarea}
