@@ -32,14 +32,9 @@ export const createTrackSlice = createSlice({
 		setAudioDuration: (state, action: PayloadAction<number>) => {
 			state.audioDuration = action.payload
 		},
-		setImg: (state, action: PayloadAction<ChangeEvent<HTMLInputElement> | null>) => {
+		setImg: (state, action: PayloadAction<File | null>) => {
 			if (action.payload) {
-				const e = action.payload
-				if (e.target.files) {
-					console.log(e.target.files[0])
-					const file = e.target.files[0]
-					state.img = file
-				}
+				state.img = action.payload
 			}
 		},
 		setResources: (state, action: PayloadAction<ChangeEvent<HTMLInputElement> | null>) => {

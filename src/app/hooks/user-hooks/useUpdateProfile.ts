@@ -14,10 +14,8 @@ export const useUpdateProfile = (userId: number) => {
 			onSuccess: (response: any) => {
 				if (setUser) setUser(response)
 				const prevUser = JSON.parse(localStorage.getItem('user') || '')
-				localStorage.setItem(
-					'user',
-					JSON.stringify({ ...response, isMusician: prevUser?.isMusician })
-				)
+
+				localStorage.setItem('user', JSON.stringify({ ...response, role: prevUser?.role }))
 				successMessage(`Успешно`, `Профиль обновлен`)
 			},
 			onError: (error: AxiosError<{ status: number; message: string }>) => {

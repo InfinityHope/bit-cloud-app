@@ -86,12 +86,10 @@ const TrackScreen = () => {
 						{editing && (
 							<FileActions
 								audio={audio}
-								img={img}
 								resources={resources}
 								setAudio={setAudio}
 								setAudioDuration={setAudioDuration}
 								setResources={setResources}
-								setImg={setImg}
 							/>
 						)}
 

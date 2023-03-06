@@ -1,11 +1,9 @@
-import { animationsConfig } from '@/app/config/animations.config'
-import { API_URL } from '@/app/constants/api.constants'
 import { useAuth } from '@/app/hooks/auth-hooks'
 import { useActions, useAppSelector } from '@/app/hooks/redux-hooks'
 import { updateTrackActions } from '@/app/store/reducers/update-track.reducer'
 import { ITrack } from '@/app/types/interfaces/track.interface'
 import { convertDate } from '@/app/utils/convertDate'
-import { CustomEditableInput } from '@/components/ui'
+import { CustomEditableInput, UploadImage } from '@/components/ui'
 import { Button, ButtonGroup, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FC } from 'react'
@@ -31,27 +29,12 @@ const TrackPageHeader: FC<ITrackPageHeader> = ({
 }) => {
 	const { user } = useAuth()
 
-	const editing = useAppSelector(state => state.updateTrack.editing)
-	const { setEditing } = useActions(updateTrackActions)
+	const { editing, img } = useAppSelector(state => state.updateTrack)
+	const { setEditing, setImg } = useActions(updateTrackActions)
 
 	return (
 		<Flex>
-			<MotionImage
-				variants={animationsConfig}
-				initial={'initialFadeScale'}
-				animate={'animateFadeScale'}
-				transition={{
-					opacity: { ease: 'linear' },
-					duration: 0.4
-				}}
-				width={300}
-				height={300}
-				objectFit={'cover'}
-				borderRadius={'10px'}
-				src={`${API_URL}/${track.img}`}
-				alt={track.img}
-				mr={'1em'}
-			/>
+			<UploadImage upload={editing} image={img} setImage={setImg} initialImage={track.img} />
 			<Flex flexDirection={'column'}>
 				{!editing ? (
 					<Heading as={'h3'}>{track.title}</Heading>

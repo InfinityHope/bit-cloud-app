@@ -16,6 +16,7 @@ import AuthorInfoSkeleton from '@/ui/skeletons/AuthorInfoSkeleton'
 import TagList from '@/ui/tag-list/TagList'
 import TrackItem from '@/ui/track-list/track-item/TrackItem'
 import TrackList from '@/ui/track-list/TrackList'
+import UploadImage from '@/ui/upload-image/UploadImage'
 
 export {
 	AudioPlayer,
@@ -35,5 +36,6 @@ export {
 	CustomEditableInput,
 	CustomEditableTextarea,
 	TagList,
-	FileActions
+	FileActions,
+	UploadImage
 }

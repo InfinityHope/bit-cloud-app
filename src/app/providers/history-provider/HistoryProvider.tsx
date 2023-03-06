@@ -1,6 +1,6 @@
-import { createContext, FC, PropsWithChildren, useEffect, useState } from 'react'
 import { IHistoryContext } from '@/app/providers/history-provider/history.interface'
 import { useRouter } from 'next/router'
+import { createContext, FC, PropsWithChildren, useEffect, useState } from 'react'
 
 export const HistoryContext = createContext<IHistoryContext>({} as IHistoryContext)
 

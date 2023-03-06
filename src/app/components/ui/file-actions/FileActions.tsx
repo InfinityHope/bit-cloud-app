@@ -7,29 +7,24 @@ import { ChangeEvent, FC, useRef } from 'react'
 interface IFileActions {
 	audio: File | null
 	resources: File | null
-	img: File | null
 	setAudio: (e: any) => void
 	setResources: (e: ChangeEvent<HTMLInputElement>) => void
 	setAudioDuration: (value: number) => void
-	setImg: (e: ChangeEvent<HTMLInputElement>) => void
 	variant?: string
 }
 
 const MotionButton = motion(Button)
 
 const FileActions: FC<IFileActions> = ({
-	img,
 	audio,
 	resources,
 	setAudio,
 	variant = 'vertical',
 	setAudioDuration,
-	setImg,
 	setResources
 }) => {
 	const inputAudioRef = useRef<HTMLInputElement | null>(null)
 	const inputResourcesRef = useRef<HTMLInputElement | null>(null)
-	const inputImgRef = useRef<HTMLInputElement | null>(null)
 
 	const setAudioHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {
@@ -46,12 +41,6 @@ const FileActions: FC<IFileActions> = ({
 	}
 
 	const buttons = [
-		{
-			fileName: img ? stringCut(img.name) : 'Загрузить новое изображение',
-			ref: inputImgRef,
-			accept: 'image/*',
-			setFunction: (e: ChangeEvent<HTMLInputElement>) => setImg(e)
-		},
 		{
 			fileName: audio ? stringCut(audio.name) : 'Загрузить новый аудиофайл',
 			ref: inputAudioRef,

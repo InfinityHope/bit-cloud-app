@@ -1,4 +1,4 @@
-import { FileActions } from '@/app/components/ui'
+import { FileActions, UploadImage } from '@/app/components/ui'
 import TagList from '@/app/components/ui/tag-list/TagList'
 import { animationsConfig } from '@/app/config/animations.config'
 import { useAuth } from '@/app/hooks/auth-hooks'
@@ -18,12 +18,14 @@ import {
 	Textarea
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const MotionFlex = motion(Flex)
 
 const CreateTrackForm = () => {
 	const { user } = useAuth()
+	const { push } = useRouter()
 
 	const {
 		register,
@@ -56,9 +58,12 @@ const CreateTrackForm = () => {
 			formData.append('description', data.description)
 			formData.append('tags', tags.join(','))
 
+			console.log(formData)
+
 			create(formData)
 			reset()
 			clearState()
+			push('/my-tracks')
 		} else {
 			errorMessage('Ошибка', 'Загрузите аудио файл и файл с инструментами')
 		}
@@ -112,13 +117,19 @@ const CreateTrackForm = () => {
 					Создать
 				</Button>
 			</Flex>
-			<Flex width={'45%'}>
+			<Flex wrap={'wrap'} width={'45%'}>
+				<UploadImage
+					upload={true}
+					image={img}
+					setImage={setImg}
+					initialImage={`image/noImage.png`}
+					width={'inherit'}
+					height={'inherit'}
+				/>
 				<FileActions
 					audio={audio}
 					resources={resources}
-					img={img}
 					variant={'column'}
-					setImg={setImg}
 					setAudio={setAudio}
 					setResources={setResources}
 					setAudioDuration={setAudioDuration}
