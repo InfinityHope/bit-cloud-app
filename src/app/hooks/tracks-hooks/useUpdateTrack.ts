@@ -11,8 +11,12 @@ export const useUpdateTrack = (trackId: number) => {
 		(data: FormData) => TrackService.updateTrack(trackId, data),
 		{
 			onSuccess: (response: { id: number; status: number; message: string }) => {
-				queryClient.invalidateQueries('track info')
-				successMessage(`Успешно`, `${response.message}`)
+				Promise.all([
+					queryClient.invalidateQueries('track info'),
+					queryClient.invalidateQueries('track list')
+				]).then(() => {
+					successMessage(`Успешно`, `${response.message}`)
+				})
 			},
 			onError: (error: AxiosError<{ status: number; message: string }>) => {
 				if (error) {

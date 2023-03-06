@@ -41,6 +41,7 @@ const TrackPageHeader: FC<ITrackPageHeader> = ({
 				) : (
 					<CustomEditableInput
 						name={'title'}
+						isRequired
 						control={control}
 						defaultValue={track.title}
 					/>

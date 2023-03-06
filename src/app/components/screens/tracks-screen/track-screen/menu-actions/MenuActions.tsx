@@ -21,9 +21,10 @@ interface IMenuActions {
 }
 
 const MenuActions: FC<IMenuActions> = ({ track, setEditing }) => {
-	const data = useDownloadAudio(track)
+	const trackId = track.id
+	const data = useDownloadAudio(trackId)
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const deleteTrack = useDeleteTrack({ track, onClose })
+	const deleteTrack = useDeleteTrack({ trackId, onClose })
 	const cancelRef = useRef<HTMLButtonElement>()
 
 	return (

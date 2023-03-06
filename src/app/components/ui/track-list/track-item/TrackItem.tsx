@@ -121,7 +121,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 				{user?.id === track.author?.id ? (
 					<Flex justifyContent={'space-evenly'} alignItems={'center'}>
 						<Tooltip label='Скачать аудиозапись' aria-label='download audio'>
-							<>
+							<div>
 								<FiDownload
 									size={30}
 									onClick={(e: MouseEvent<SVGElement>) => {
@@ -130,7 +130,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 									}}
 									cursor={'pointer'}
 								/>
-							</>
+							</div>
 						</Tooltip>
 
 						<Tooltip label='Скачать архив инструментов' aria-label='download resources'>

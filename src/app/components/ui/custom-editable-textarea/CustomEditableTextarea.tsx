@@ -23,7 +23,6 @@ const CustomEditableTextarea: FC<ICustomEditableTextarea> = ({ name, control, de
 					minH={'95px'}
 					placeholder={'Изменить описание...'}
 					value={field.value}
-					selectAllOnFocus={false}
 					mt={'1em'}
 				>
 					<EditablePreview />

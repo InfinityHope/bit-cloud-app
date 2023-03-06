@@ -20,8 +20,8 @@ export const useDeleteTrack = ({ trackId, onClose }: IOptions) => {
 		{
 			onSuccess: (response: { status: number; message: string }) => {
 				Promise.all([
-					queryClient.invalidateQueries(['track list']),
-					queryClient.invalidateQueries(['musician info'])
+					queryClient.invalidateQueries('track list'),
+					queryClient.invalidateQueries('musician info')
 				]).then(r => {
 					onClose() //close alert
 					successMessage(`${response.message}`, '')
