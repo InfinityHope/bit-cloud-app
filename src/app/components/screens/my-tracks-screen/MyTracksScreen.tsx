@@ -2,7 +2,7 @@ import { useAuth } from '@/app/hooks/auth-hooks'
 import { useAuthorTracks } from '@/app/hooks/tracks-hooks'
 import bgImg from '@/assets/third-bg.jpg'
 import { CustomSpinner, PageHeader, TrackList } from '@/components/ui'
-import { Heading } from '@chakra-ui/react'
+import { Heading, Text } from '@chakra-ui/react'
 import Meta from '../../meta/Meta'
 
 const MyTracksScreen = () => {
@@ -21,7 +21,13 @@ const MyTracksScreen = () => {
 							Мои треки
 						</Heading>
 					</PageHeader>
-					<TrackList tracks={tracks} />
+					{tracks.length !== 0 ? (
+						<TrackList tracks={tracks} />
+					) : (
+						<Text mt={'1em'} ml={'1em'} fontSize={'2xl'} color={'white'}>
+							У вас пока нет доступных треков
+						</Text>
+					)}
 				</>
 			)}
 		</>

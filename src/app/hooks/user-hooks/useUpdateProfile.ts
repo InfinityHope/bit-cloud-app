@@ -3,6 +3,7 @@ import { AxiosError } from 'axios'
 import { useMutation } from 'react-query'
 import { useAuth } from '../auth-hooks'
 import { useNotification } from '../useNotification'
+import { IUser } from './../../types/interfaces/user.interface'
 
 export const useUpdateProfile = (userId: number) => {
 	const { setUser } = useAuth()
@@ -11,7 +12,7 @@ export const useUpdateProfile = (userId: number) => {
 		['update profile', userId],
 		(data: FormData) => UserService.updateProfile(data, userId),
 		{
-			onSuccess: (response: any) => {
+			onSuccess: (response: IUser) => {
 				if (setUser) setUser(response)
 				const prevUser = JSON.parse(localStorage.getItem('user') || '')
 

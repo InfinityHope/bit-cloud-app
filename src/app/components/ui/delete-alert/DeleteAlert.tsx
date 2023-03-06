@@ -7,13 +7,13 @@ import {
 	AlertDialogOverlay,
 	Button
 } from '@chakra-ui/react'
-import { FC } from 'react'
+import { FC, MouseEvent, MutableRefObject } from 'react'
 
 interface IDeleteAlert {
 	isOpen: boolean
-	cancelRef: any
+	cancelRef: MutableRefObject<HTMLButtonElement | undefined>
 	onClose: () => void
-	onCloseHandler: (e: any) => void
+	onCloseHandler: (e: MouseEvent<HTMLButtonElement>) => void
 	deleteTrack: () => void
 }
 

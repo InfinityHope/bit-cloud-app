@@ -3,7 +3,7 @@ import MusiciansScreen from '@/screens/musicians-screen/MusiciansScreen'
 import { GetStaticProps, NextPage } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
-const Musicians: NextPage = props => {
+const Musicians: NextPage = () => {
 	return <MusiciansScreen />
 }
 

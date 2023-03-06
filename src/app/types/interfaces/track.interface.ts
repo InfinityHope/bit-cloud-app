@@ -15,7 +15,7 @@ export interface ITrack {
 	updatedAt: string
 }
 
-export interface ICreateTrackFields {
+export interface ITrackFields {
 	userId: number
 	title: string
 	audio: string

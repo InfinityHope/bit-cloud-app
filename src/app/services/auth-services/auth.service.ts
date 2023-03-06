@@ -3,12 +3,12 @@ import { removeTokenFromStorage, saveToStorage } from '@/services/auth-services/
 import { IAuthResponse, ILoginFields } from '@/types/interfaces/auth.interface'
 
 export const AuthService = {
-	async login(body: ILoginFields) {
+	async login(body: ILoginFields): Promise<IAuthResponse> {
 		const response = await axiosClassic.post<IAuthResponse>('/auth/login', body)
 		response.data.accessToken ? saveToStorage(response.data) : response.data
 		return response.data
 	},
-	async register(body: FormData) {
+	async register(body: FormData): Promise<IAuthResponse> {
 		const response = await axiosClassic.post<IAuthResponse>('/auth/register', body, {
 			headers: {
 				'Content-type': 'multipart/form-data'

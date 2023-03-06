@@ -10,7 +10,7 @@ export const useCreateTrack = () => {
 		['create track'],
 		(data: FormData) => TrackService.createTrack(data),
 		{
-			onSuccess: (response: any) => {
+			onSuccess: () => {
 				Promise.all([
 					queryClient.invalidateQueries(['track list']),
 					queryClient.invalidateQueries(['musician info'])

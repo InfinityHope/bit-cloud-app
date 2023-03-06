@@ -6,7 +6,7 @@ import {
 	FormErrorMessage,
 	Input
 } from '@chakra-ui/react'
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { Control, Controller } from 'react-hook-form'
 
 interface ICustomEditableInput {
@@ -30,12 +30,6 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({
 	fontSize = '2xl',
 	fontWeight = 'regular'
 }) => {
-	const [errors, setErrors] = useState<any>([])
-
-	useEffect(() => {
-		setErrors(control._formState.errors)
-	}, [control._formState.errors])
-
 	return (
 		<Controller
 			name={name}
@@ -51,8 +45,8 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({
 					message: patternMessage
 				}
 			}}
-			render={({ field }: any) => (
-				<FormControl isInvalid={!!errors[name]}>
+			render={({ field, fieldState: { invalid, error } }) => (
+				<FormControl isInvalid={invalid}>
 					<Editable
 						borderBottom={'1px solid white'}
 						fontSize={fontSize}
@@ -68,7 +62,7 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({
 							as={EditableInput}
 						/>
 					</Editable>
-					{errors[name] && <FormErrorMessage>{errors[name].message}</FormErrorMessage>}
+					{error?.message && <FormErrorMessage>{error?.message}</FormErrorMessage>}
 				</FormControl>
 			)}
 		/>

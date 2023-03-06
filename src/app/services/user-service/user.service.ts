@@ -14,7 +14,7 @@ export const UserService = {
 		return data
 	},
 
-	async updateProfile(formData: any, id: number | undefined) {
+	async updateProfile(formData: FormData, id: number | undefined): Promise<IUser> {
 		const { data } = await axiosAuth.patch<IUser>(`/users/${id}`, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'

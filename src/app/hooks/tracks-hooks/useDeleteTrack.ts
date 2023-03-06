@@ -1,20 +1,22 @@
 import { queryClient } from '@/app/config/react-query.config'
 import { useNotification } from '@/hooks/useNotification'
 import { TrackService } from '@/services/track-service/track.service'
-import { ITrack } from '@/types/interfaces/track.interface'
 import { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 
 interface IOptions {
 	onClose: () => void
-	track: ITrack
+	trackId: number
 }
 
-export const useDeleteTrack = ({ track, onClose }: IOptions) => {
+export const useDeleteTrack = ({ trackId, onClose }: IOptions) => {
 	const { errorMessage, successMessage } = useNotification()
+	const { pathname, push } = useRouter()
+
 	const { mutate: deleteTrack } = useMutation(
-		['delete track', track.id],
-		() => TrackService.deleteTrack(track.id),
+		['delete track', trackId],
+		() => TrackService.deleteTrack(trackId),
 		{
 			onSuccess: (response: { status: number; message: string }) => {
 				Promise.all([
@@ -23,6 +25,9 @@ export const useDeleteTrack = ({ track, onClose }: IOptions) => {
 				]).then(r => {
 					onClose() //close alert
 					successMessage(`${response.message}`, '')
+					if (pathname === `/tracks/[id]`) {
+						push('/my-tracks')
+					}
 				})
 			},
 			onError: (error: AxiosError<{ status: number; message: string }>) => {

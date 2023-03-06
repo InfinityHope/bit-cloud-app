@@ -1,13 +1,14 @@
 import { useActions, useAppSelector } from '@/app/hooks/redux-hooks'
 import { useUpdateTrack } from '@/app/hooks/tracks-hooks/useUpdateTrack'
 import { updateTrackActions } from '@/app/store/reducers/update-track.reducer'
+import { ITrackFields } from '@/app/types/interfaces/track.interface'
 import Meta from '@/components/meta/Meta'
 import { CustomEditableTextarea, CustomSpinner, FileActions, TagList } from '@/components/ui'
 import { useTrack } from '@/hooks/tracks-hooks'
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import TrackPageHeader from './track-page-header/TrackPageHeader'
 
 const TrackScreen = () => {
@@ -15,7 +16,7 @@ const TrackScreen = () => {
 	const trackId = Number(query?.id)
 	const { track, isLoading } = useTrack(trackId)
 
-	const { control, handleSubmit, reset } = useForm()
+	const { control, handleSubmit, reset } = useForm<ITrackFields>()
 
 	const { editing, audio, resources, img, audioDuration, tags } = useAppSelector(
 		state => state.updateTrack
@@ -24,7 +25,6 @@ const TrackScreen = () => {
 		setAudio,
 		setResources,
 		setAudioDuration,
-		setImg,
 		setEditing,
 		clearState,
 		addTag,
@@ -47,7 +47,7 @@ const TrackScreen = () => {
 
 	const update = useUpdateTrack(Number(trackId))
 
-	const onSubmit = (data: any) => {
+	const onSubmit: SubmitHandler<ITrackFields> = data => {
 		const formData: FormData = new FormData()
 		if (track) {
 			formData.append('audio', audio ? audio : track.audio)

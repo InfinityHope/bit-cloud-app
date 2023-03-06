@@ -2,12 +2,12 @@ import { animationsConfig } from '@/app/config/animations.config'
 import { API_URL } from '@/app/constants/api.constants'
 import { Box, Image as Img, Input } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { ChangeEvent, FC, useRef, useState } from 'react'
+import { ChangeEvent, Dispatch, FC, SetStateAction, useRef, useState } from 'react'
 
 interface IUploadImage {
 	upload: boolean
 	image: Blob | null
-	setImage: any
+	setImage: Dispatch<SetStateAction<Blob | null>>
 	initialImage: string
 	borderRadius?: string
 	width?: string

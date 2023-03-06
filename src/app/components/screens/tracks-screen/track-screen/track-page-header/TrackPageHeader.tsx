@@ -1,7 +1,7 @@
 import { useAuth } from '@/app/hooks/auth-hooks'
 import { useActions, useAppSelector } from '@/app/hooks/redux-hooks'
 import { updateTrackActions } from '@/app/store/reducers/update-track.reducer'
-import { ITrack } from '@/app/types/interfaces/track.interface'
+import { ITrack, ITrackFields } from '@/app/types/interfaces/track.interface'
 import { convertDate } from '@/app/utils/convertDate'
 import { CustomEditableInput, UploadImage } from '@/components/ui'
 import { Button, ButtonGroup, Flex, Heading, Image, Text } from '@chakra-ui/react'
@@ -12,10 +12,10 @@ import MenuActions from '../menu-actions/MenuActions'
 
 interface ITrackPageHeader {
 	track: ITrack
-	control: Control
-	reset: UseFormReset<any>
-	handleSubmit: UseFormHandleSubmit<any>
-	onSubmit: (data: any) => void
+	control: Control<ITrackFields>
+	reset: UseFormReset<ITrackFields>
+	handleSubmit: UseFormHandleSubmit<ITrackFields>
+	onSubmit: (data: ITrackFields) => void
 }
 
 const MotionImage = motion(Image)

@@ -3,7 +3,7 @@ import { TrackService } from '@/app/services/track-service/track.service'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
-const TrackPage: NextPage = props => {
+const TrackPage: NextPage = () => {
 	return <TrackScreen />
 }
 

@@ -14,7 +14,7 @@ import { FC, useState } from 'react'
 interface ITrackProgress {
 	currentValue: number
 	duration: number
-	onChange: (value: any) => void
+	onChange: (value: number) => void
 }
 
 const TrackProgress: FC<ITrackProgress> = ({ currentValue, onChange, duration }) => {

@@ -4,7 +4,7 @@ import { Control, Controller } from 'react-hook-form'
 
 interface ICustomEditableTextarea {
 	name: string
-	control: Control
+	control: Control<any, any>
 	defaultValue: string
 }
 

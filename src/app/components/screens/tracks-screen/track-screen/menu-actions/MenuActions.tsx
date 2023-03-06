@@ -24,7 +24,7 @@ const MenuActions: FC<IMenuActions> = ({ track, setEditing }) => {
 	const data = useDownloadAudio(track)
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const deleteTrack = useDeleteTrack({ track, onClose })
-	const cancelRef = useRef<any>()
+	const cancelRef = useRef<HTMLButtonElement>()
 
 	return (
 		<Box mt={'2em'}>

@@ -12,7 +12,7 @@ import { Box, Flex, Grid, GridItem, Image, Tooltip, useDisclosure } from '@chakr
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, memo, useRef } from 'react'
+import { FC, memo, MouseEvent, useRef } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { CiPause1, CiPlay1 } from 'react-icons/ci'
 import { FiDownload } from 'react-icons/fi'
@@ -23,37 +23,42 @@ const MotionFlex = motion(Flex)
 interface ITrackItem {
 	track: ITrack
 	index: number
-	selectTrack: (e: any) => void
+	selectTrack: (e: MouseEvent<SVGElement>) => void
 }
 
 const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 	const { push } = useRouter()
+	const { user } = useAuth()
+	const { isOpen, onOpen, onClose } = useDisclosure()
+
 	const { isPlaying, tracks, trackIndex } = useAppSelector(state => state.player)
 	const { setPlay, setPause } = useActions(playerActions)
-	const data = useDownloadAudio(track)
-	const { user } = useAuth()
-	const cancelRef = useRef<any>()
-	const { isOpen, onOpen, onClose } = useDisclosure()
-	const deleteTrack = useDeleteTrack({ track, onClose })
 
 	const currentTrack = track.id === tracks[trackIndex]?.id
+	const trackId = track.id
 
-	const play = (e: any) => {
+	const data = useDownloadAudio(trackId)
+
+	const cancelRef = useRef<HTMLButtonElement>()
+
+	const deleteTrack = useDeleteTrack({ trackId, onClose })
+
+	const play = (e: MouseEvent<SVGElement>) => {
 		e.stopPropagation()
 		setPlay()
 	}
 
-	const pause = (e: any) => {
+	const pause = (e: MouseEvent<SVGElement>) => {
 		e.stopPropagation()
 		setPause()
 	}
 
-	const openAlert = (e: any) => {
+	const openAlert = (e: MouseEvent<SVGElement>) => {
 		e.stopPropagation()
 		onOpen()
 	}
 
-	const closeAlert = (e: any) => {
+	const closeAlert = (e: MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation()
 		onClose()
 	}
@@ -116,23 +121,23 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 				{user?.id === track.author?.id ? (
 					<Flex justifyContent={'space-evenly'} alignItems={'center'}>
 						<Tooltip label='Скачать аудиозапись' aria-label='download audio'>
-							<div>
+							<>
 								<FiDownload
 									size={30}
-									onClick={(e: any) => {
+									onClick={(e: MouseEvent<SVGElement>) => {
 										e.stopPropagation()
 										createDownloadUrl(data, track)
 									}}
 									cursor={'pointer'}
 								/>
-							</div>
+							</>
 						</Tooltip>
 
 						<Tooltip label='Скачать архив инструментов' aria-label='download resources'>
 							<Link
 								href={`${API_URL}/${track.resources}`}
 								download
-								onClick={(e: any) => e.stopPropagation()}
+								onClick={(e: MouseEvent<HTMLAnchorElement>) => e.stopPropagation()}
 							>
 								<MdArchive size={30} />
 							</Link>

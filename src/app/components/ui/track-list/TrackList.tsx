@@ -11,7 +11,7 @@ interface IMusicList {
 	tracks: ITrack[]
 }
 
-const MusicList: FC<IMusicList> = ({ tracks }) => {
+const TrackList: FC<IMusicList> = ({ tracks }) => {
 	const { setTracks, setTrackIndex, setPlay } = useActions(playerActions)
 
 	const selectTrack = (e: any, value: number) => {
@@ -60,4 +60,4 @@ const MusicList: FC<IMusicList> = ({ tracks }) => {
 	)
 }
 
-export default MusicList
+export default TrackList

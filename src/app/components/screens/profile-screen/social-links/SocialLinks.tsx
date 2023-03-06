@@ -18,12 +18,12 @@ import {
 	Text,
 	useDisclosure
 } from '@chakra-ui/react'
-import { FC, useRef } from 'react'
+import { Dispatch, FC, SetStateAction, useRef } from 'react'
 import { BiPlus } from 'react-icons/bi'
 
 interface ISocialLinks {
 	editing: boolean
-	setSocialLinks: any
+	setSocialLinks: Dispatch<SetStateAction<string[]>>
 	socialLinks: string[]
 }
 
@@ -56,88 +56,90 @@ const SocialLinks: FC<ISocialLinks> = ({ editing, socialLinks, setSocialLinks })
 
 	return (
 		<>
-			{socialLinks.length !== 0 ? (
-				<Flex mt={'1em'} alignItems={'center'}>
-					<Text mr={'.5em'} fontSize={'2xl'}>
-						Социальные сети:
-					</Text>
-					<List display={'flex'}>
-						{socialLinks.map((link, index) => (
-							<ListItem
-								lineHeight={'1em'}
-								key={link}
-								fontSize={'2xl'}
-								mr={'.5em'}
-								alignItems={'flex-end'}
-								display={'flex'}
+			<Flex mt={'1em'} alignItems={'center'}>
+				{socialLinks.length !== 0 ? (
+					<>
+						<Text mr={'.5em'} fontSize={'2xl'}>
+							Социальные сети:
+						</Text>
+						<List display={'flex'}>
+							{socialLinks.map((link, index) => (
+								<ListItem
+									lineHeight={'1em'}
+									key={link}
+									fontSize={'2xl'}
+									mr={'.5em'}
+									alignItems={'flex-end'}
+									display={'flex'}
+								>
+									<Link href={`https://${link}`}>
+										{checkSocialLink(`${link}`)}
+									</Link>
+									{editing && (
+										<Button
+											size={'xs'}
+											_hover={{ bgColor: 'darkBlue' }}
+											bgColor={'lightBlue'}
+											ml={'1em'}
+											onClick={() => removeSocialLink(index)}
+										>
+											x
+										</Button>
+									)}
+								</ListItem>
+							))}
+						</List>
+					</>
+				) : (
+					<Flex>
+						<Text fontSize={'2xl'}>Соц. сети отсутствуют</Text>
+					</Flex>
+				)}
+				{editing && (
+					<Popover
+						isOpen={isOpen}
+						onOpen={onOpen}
+						initialFocusRef={socialLinkRef}
+						onClose={onClose}
+						placement='right'
+					>
+						<PopoverTrigger>
+							<Button
+								size={'xs'}
+								_hover={{ bgColor: 'darkBlue' }}
+								bgColor={'lightBlue'}
+								ml={'1em'}
 							>
-								<Link href={`https://${link}`}>{checkSocialLink(`${link}`)}</Link>
-								{editing && (
-									<Button
-										size={'xs'}
-										_hover={{ bgColor: 'darkBlue' }}
-										bgColor={'lightBlue'}
-										ml={'1em'}
-										onClick={() => removeSocialLink(index)}
-									>
-										x
-									</Button>
-								)}
-							</ListItem>
-						))}
-					</List>
-					{editing && (
-						<Popover
-							isOpen={isOpen}
-							onOpen={onOpen}
-							initialFocusRef={socialLinkRef}
-							onClose={onClose}
-							placement='right'
-						>
-							<PopoverTrigger>
+								<BiPlus />
+							</Button>
+						</PopoverTrigger>
+						<PopoverContent p={3} bgColor={'primary'}>
+							<PopoverArrow bgColor={'primary'} />
+							<PopoverCloseButton />
+							<HStack spacing={2} alignItems={'flex-end'}>
+								<FormControl>
+									<FormLabel>Введите ссылку</FormLabel>
+									<Input
+										ref={socialLinkRef}
+										onKeyDown={e => {
+											if (e.code === 'Enter') {
+												addSocialLink()
+											}
+										}}
+									/>
+								</FormControl>
 								<Button
-									size={'xs'}
 									_hover={{ bgColor: 'darkBlue' }}
 									bgColor={'lightBlue'}
-									ml={'1em'}
+									onClick={addSocialLink}
 								>
-									<BiPlus />
+									Добавить
 								</Button>
-							</PopoverTrigger>
-							<PopoverContent p={3} bgColor={'primary'}>
-								<PopoverArrow bgColor={'primary'} />
-								<PopoverCloseButton />
-								<HStack spacing={2} alignItems={'flex-end'}>
-									<FormControl>
-										<FormLabel>Введите ссылку</FormLabel>
-										<Input
-											ref={socialLinkRef}
-											onKeyDown={e => {
-												if (e.code === 'Enter') {
-													addSocialLink()
-												}
-											}}
-										/>
-									</FormControl>
-									<Button
-										_hover={{ bgColor: 'darkBlue' }}
-										bgColor={'lightBlue'}
-										onClick={addSocialLink}
-									>
-										Добавить
-									</Button>
-								</HStack>
-							</PopoverContent>
-						</Popover>
-					)}
-				</Flex>
-			) : (
-				<Flex>
-					<Text mt={'.5em'} fontSize={'2xl'}>
-						Соц. сети отсутствуют
-					</Text>
-				</Flex>
-			)}
+							</HStack>
+						</PopoverContent>
+					</Popover>
+				)}
+			</Flex>
 		</>
 	)
 }

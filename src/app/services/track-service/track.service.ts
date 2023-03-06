@@ -12,7 +12,7 @@ export const TrackService = {
 		const { data } = await axiosClassic.get<ITrack[]>(`track/author/${authorId}`)
 		return data
 	},
-	async createTrack(newTrack: any): Promise<ITrack> {
+	async createTrack(newTrack: FormData): Promise<ITrack> {
 		const { data } = await axiosAuth.post(`/track`, newTrack, {
 			headers: {
 				'Content-type': 'multipart/form-data'
@@ -20,11 +20,14 @@ export const TrackService = {
 		})
 		return data
 	},
-	async deleteTrack(trackId: number): Promise<any> {
+	async deleteTrack(trackId: number): Promise<{ status: number; message: string }> {
 		const { data } = await axiosAuth.delete(`/track/${trackId}`)
 		return data
 	},
-	async updateTrack(trackId: number, newTrack: any): Promise<any> {
+	async updateTrack(
+		trackId: number,
+		newTrack: FormData
+	): Promise<{ id: number; status: number; message: string }> {
 		const { data } = await axiosAuth.patch(`track/${trackId}`, newTrack, {
 			headers: {
 				'Content-type': 'multipart/form-data'

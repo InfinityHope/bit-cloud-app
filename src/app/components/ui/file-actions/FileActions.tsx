@@ -7,7 +7,7 @@ import { ChangeEvent, FC, useRef } from 'react'
 interface IFileActions {
 	audio: File | null
 	resources: File | null
-	setAudio: (e: any) => void
+	setAudio: (e: ChangeEvent<HTMLInputElement>) => void
 	setResources: (e: ChangeEvent<HTMLInputElement>) => void
 	setAudioDuration: (value: number) => void
 	variant?: string
@@ -58,7 +58,7 @@ const FileActions: FC<IFileActions> = ({
 	return (
 		<Stack direction={variant === 'vertical' ? 'row' : 'column'} spacing={3}>
 			{buttons.map(({ ref, fileName, accept, setFunction }, index) => (
-				<>
+				<div key={index}>
 					<MotionButton
 						variants={animationsConfig}
 						initial={'listInitialFade'}
@@ -71,7 +71,7 @@ const FileActions: FC<IFileActions> = ({
 						{fileName}
 					</MotionButton>
 					<Input ref={ref} type='file' accept={accept} onChange={setFunction} hidden />
-				</>
+				</div>
 			))}
 		</Stack>
 	)
