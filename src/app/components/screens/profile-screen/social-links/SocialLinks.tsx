@@ -1,25 +1,9 @@
+import { CustomPopover } from '@/app/components/ui'
 import { useNotification } from '@/app/hooks/useNotification'
 import { checkSocialLink } from '@/app/utils/checkSocialLink'
-import {
-	Button,
-	Flex,
-	FormControl,
-	FormLabel,
-	HStack,
-	Input,
-	Link,
-	List,
-	ListItem,
-	Popover,
-	PopoverArrow,
-	PopoverCloseButton,
-	PopoverContent,
-	PopoverTrigger,
-	Text,
-	useDisclosure
-} from '@chakra-ui/react'
+import { Button, Flex, Link, List, ListItem, Text } from '@chakra-ui/react'
 import { Dispatch, FC, SetStateAction, useRef } from 'react'
-import { BiPlus } from 'react-icons/bi'
+import styles from './SocialLinks.module.scss'
 
 interface ISocialLinks {
 	editing: boolean
@@ -28,7 +12,6 @@ interface ISocialLinks {
 }
 
 const SocialLinks: FC<ISocialLinks> = ({ editing, socialLinks, setSocialLinks }) => {
-	const { onOpen, onClose, isOpen } = useDisclosure()
 	const { errorMessage } = useNotification()
 	const socialLinkRef = useRef<HTMLInputElement | null>(null)
 
@@ -55,92 +38,44 @@ const SocialLinks: FC<ISocialLinks> = ({ editing, socialLinks, setSocialLinks })
 	}
 
 	return (
-		<>
-			<Flex mt={'1em'} alignItems={'center'}>
-				{socialLinks.length !== 0 ? (
-					<>
-						<Text mr={'.5em'} fontSize={'2xl'}>
-							Социальные сети:
-						</Text>
-						<List display={'flex'}>
-							{socialLinks.map((link, index) => (
-								<ListItem
-									lineHeight={'1em'}
-									key={link}
-									fontSize={'2xl'}
-									mr={'.5em'}
-									alignItems={'flex-end'}
-									display={'flex'}
-								>
-									<Link href={`https://${link}`}>
-										{checkSocialLink(`${link}`)}
-									</Link>
-									{editing && (
-										<Button
-											size={'xs'}
-											_hover={{ bgColor: 'darkBlue' }}
-											bgColor={'lightBlue'}
-											ml={'1em'}
-											onClick={() => removeSocialLink(index)}
-										>
-											x
-										</Button>
-									)}
-								</ListItem>
-							))}
-						</List>
-					</>
-				) : (
-					<Flex>
-						<Text fontSize={'2xl'}>Соц. сети отсутствуют</Text>
-					</Flex>
-				)}
-				{editing && (
-					<Popover
-						isOpen={isOpen}
-						onOpen={onOpen}
-						initialFocusRef={socialLinkRef}
-						onClose={onClose}
-						placement='right'
-					>
-						<PopoverTrigger>
-							<Button
-								size={'xs'}
-								_hover={{ bgColor: 'darkBlue' }}
-								bgColor={'lightBlue'}
-								ml={'1em'}
-							>
-								<BiPlus />
-							</Button>
-						</PopoverTrigger>
-						<PopoverContent p={3} bgColor={'primary'}>
-							<PopoverArrow bgColor={'primary'} />
-							<PopoverCloseButton />
-							<HStack spacing={2} alignItems={'flex-end'}>
-								<FormControl>
-									<FormLabel>Введите ссылку</FormLabel>
-									<Input
-										ref={socialLinkRef}
-										onKeyDown={e => {
-											if (e.code === 'Enter') {
-												addSocialLink()
-											}
-										}}
-									/>
-								</FormControl>
-								<Button
-									_hover={{ bgColor: 'darkBlue' }}
-									bgColor={'lightBlue'}
-									onClick={addSocialLink}
-								>
-									Добавить
-								</Button>
-							</HStack>
-						</PopoverContent>
-					</Popover>
-				)}
-			</Flex>
-		</>
+		<Flex mt={'1em'} alignItems={'center'} className={styles.SocialLinks}>
+			{socialLinks.length !== 0 ? (
+				<>
+					<Text mr={'.5em'} fontSize={'2xl'}>
+						Социальные сети:
+					</Text>
+					<List>
+						{socialLinks.map((link, index) => (
+							<ListItem key={link} fontSize={'2xl'}>
+								<Link target={'_blank'} href={`https://${link}`}>
+									{checkSocialLink(`${link}`)}
+								</Link>
+								{editing && (
+									<Button
+										size={'xs'}
+										ml={'1em'}
+										onClick={() => removeSocialLink(index)}
+									>
+										x
+									</Button>
+								)}
+							</ListItem>
+						))}
+					</List>
+				</>
+			) : (
+				<Flex>
+					<Text fontSize={'2xl'}>Соц. сети отсутствуют</Text>
+				</Flex>
+			)}
+			{editing && (
+				<CustomPopover
+					addFunc={addSocialLink}
+					formLabel={'Введите ссылку'}
+					ref={socialLinkRef}
+				/>
+			)}
+		</Flex>
 	)
 }
 

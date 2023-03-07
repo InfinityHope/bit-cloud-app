@@ -8,11 +8,20 @@ import { useActions, useAppSelector } from '@/hooks/redux-hooks'
 import { useDeleteTrack, useDownloadAudio } from '@/hooks/tracks-hooks'
 import { ITrack } from '@/types/interfaces/track.interface'
 import { msToTime } from '@/utils/msToTime'
-import { Box, Flex, Grid, GridItem, Image, Tooltip, useDisclosure } from '@chakra-ui/react'
+import {
+	Box,
+	Flex,
+	Grid,
+	GridItem,
+	Image,
+	Tooltip,
+	useDisclosure,
+	useMediaQuery
+} from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, memo, MouseEvent, useRef } from 'react'
+import { FC, memo, MouseEvent } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { CiPause1, CiPlay1 } from 'react-icons/ci'
 import { FiDownload } from 'react-icons/fi'
@@ -31,6 +40,11 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 	const { user } = useAuth()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
+	const [isLargerThan550] = useMediaQuery('(min-width: 550px)', {
+		ssr: true,
+		fallback: false
+	})
+
 	const { isPlaying, tracks, trackIndex } = useAppSelector(state => state.player)
 	const { setPlay, setPause } = useActions(playerActions)
 
@@ -38,8 +52,6 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 	const trackId = track.id
 
 	const data = useDownloadAudio(trackId)
-
-	const cancelRef = useRef<HTMLButtonElement>()
 
 	const deleteTrack = useDeleteTrack({ trackId, onClose })
 
@@ -76,7 +88,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 			onClick={() => push(`/tracks/${track.id}`)}
 			cursor='pointer'
 		>
-			<Box mr={'2.5em'}>
+			<Box mr={isLargerThan550 ? '2.5em' : '.5em'}>
 				{currentTrack ? (
 					isPlaying ? (
 						<CiPause1 size={40} cursor={'pointer'} onClick={pause} />
@@ -89,7 +101,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 			</Box>
 
 			<Grid
-				templateColumns='repeat(5, 1fr)'
+				templateColumns={isLargerThan550 ? 'repeat(5, 1fr)' : 'repeat(3, 1fr)'}
 				borderY={!currentTrack ? '2px solid' : '0px'}
 				borderRight={!currentTrack ? '2px solid' : '0px'}
 				borderColor={'#141115'}
@@ -108,7 +120,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 					/>
 				</GridItem>
 
-				<GridItem>{track.author?.nickName}</GridItem>
+				{isLargerThan550 && <GridItem>{track.author?.nickName}</GridItem>}
 
 				<GridItem display={'flex'} justifyContent={'center'}>
 					{track.title}
@@ -118,7 +130,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 					{msToTime(track.audio_duration)}
 				</GridItem>
 
-				{user?.id === track.author?.id ? (
+				{isLargerThan550 && user?.id === track.author?.id ? (
 					<Flex justifyContent={'space-evenly'} alignItems={'center'}>
 						<Tooltip label='Скачать аудиозапись' aria-label='download audio'>
 							<div>
@@ -151,7 +163,6 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 
 						<DeleteAlert
 							isOpen={isOpen}
-							cancelRef={cancelRef}
 							onClose={onClose}
 							onCloseHandler={closeAlert}
 							deleteTrack={deleteTrack}

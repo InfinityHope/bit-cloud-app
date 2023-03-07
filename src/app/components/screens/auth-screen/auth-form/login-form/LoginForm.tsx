@@ -16,25 +16,19 @@ import {
 	Text
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import styles from '../AuthForm.module.scss'
 
 const MotionFlex = motion(Flex)
 
-const LoginForm: FC = () => {
+const LoginForm = () => {
 	const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors }
-	} = useForm<ILoginFields>({
-		mode: 'onSubmit',
-		defaultValues: {
-			email: 'example@example.com',
-			password: 'example123'
-		}
-	})
+	} = useForm<ILoginFields>()
 
 	const [showPass, setShowPass] = useState<boolean>(false)
 	const { setAuthType } = useAuth()
@@ -83,9 +77,9 @@ const LoginForm: FC = () => {
 					/>
 					<InputRightElement>
 						<Button
-							colorScheme={''}
 							variant={'link'}
-							onClick={() => setShowPass(!showPass)}
+							onMouseUp={() => setShowPass(false)}
+							onMouseDown={() => setShowPass(true)}
 						>
 							{showPass ? <ViewOffIcon /> : <ViewIcon />}
 						</Button>
@@ -93,13 +87,7 @@ const LoginForm: FC = () => {
 				</InputGroup>
 				{errors.password && <FormErrorMessage>{errors.password?.message}</FormErrorMessage>}
 			</FormControl>
-			<Button
-				size={'lg'}
-				variant={'solid'}
-				width={'100%'}
-				type={'submit'}
-				colorScheme={'facebook'}
-			>
+			<Button width={'100%'} type={'submit'}>
 				Войти
 			</Button>
 			<Box marginTop={'25px'}>

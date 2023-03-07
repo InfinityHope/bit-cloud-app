@@ -29,6 +29,7 @@ export const useUpdateProfile = (userId: number) => {
 			}
 		}
 	)
+
 	return {
 		updateProfile
 	}

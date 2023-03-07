@@ -10,7 +10,7 @@ const MotionGridItem = motion(GridItem)
 
 const MusiciansList: FC<{ musicians: IUser[] }> = ({ musicians }) => {
 	return (
-		<Grid templateColumns='repeat(7, 1fr)' gap={6}>
+		<Grid p={4} marginTop={8} templateColumns='repeat(7, 1fr)' gap={6}>
 			{musicians.map((musician, index) => (
 				<Link key={musician.id} href={`/musicians/${musician.nickName}`}>
 					<MotionGridItem

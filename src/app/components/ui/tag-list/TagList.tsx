@@ -1,28 +1,9 @@
 import { animationsConfig } from '@/app/config/animations.config'
 import { useNotification } from '@/app/hooks/useNotification'
-import {
-	Button,
-	Flex,
-	FormControl,
-	FormLabel,
-	HStack,
-	Input,
-	List,
-	ListItem,
-	Popover,
-	PopoverArrow,
-	PopoverCloseButton,
-	PopoverContent,
-	PopoverTrigger,
-	Tag,
-	TagCloseButton,
-	TagLabel,
-	Text,
-	useDisclosure
-} from '@chakra-ui/react'
+import { Flex, List, ListItem, Tag, TagCloseButton, TagLabel, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FC, useRef } from 'react'
-import { BiPlus } from 'react-icons/bi'
+import CustomPopover from '../custom-popover/CustomPopover'
 
 interface ITagList {
 	tags: string[]
@@ -34,7 +15,6 @@ interface ITagList {
 const MotionListItem = motion(ListItem)
 
 const TagList: FC<ITagList> = ({ tags, addTag, removeTag, action = true }) => {
-	const { onOpen, onClose, isOpen } = useDisclosure()
 	const { errorMessage } = useNotification()
 	const tagRef = useRef<HTMLInputElement | null>(null)
 
@@ -76,49 +56,7 @@ const TagList: FC<ITagList> = ({ tags, addTag, removeTag, action = true }) => {
 						))}
 					</List>
 				)}
-				{action && (
-					<Popover
-						isOpen={isOpen}
-						onOpen={onOpen}
-						initialFocusRef={tagRef}
-						onClose={onClose}
-						placement='right'
-					>
-						<PopoverTrigger>
-							<Button
-								size={'xs'}
-								_hover={{ bgColor: 'darkBlue' }}
-								bgColor={'lightBlue'}
-							>
-								<BiPlus />
-							</Button>
-						</PopoverTrigger>
-						<PopoverContent p={3} bgColor={'primary'}>
-							<PopoverArrow bgColor={'primary'} />
-							<PopoverCloseButton />
-							<HStack spacing={2} alignItems={'flex-end'}>
-								<FormControl>
-									<FormLabel>Название тега</FormLabel>
-									<Input
-										ref={tagRef}
-										onKeyDown={e => {
-											if (e.code === 'Enter') {
-												add()
-											}
-										}}
-									/>
-								</FormControl>
-								<Button
-									_hover={{ bgColor: 'darkBlue' }}
-									bgColor={'lightBlue'}
-									onClick={add}
-								>
-									Добавить
-								</Button>
-							</HStack>
-						</PopoverContent>
-					</Popover>
-				)}
+				{action && <CustomPopover addFunc={add} ref={tagRef} formLabel={'Введите тег'} />}
 			</Flex>
 		</Flex>
 	)

@@ -18,7 +18,7 @@ interface ITrackProgress {
 }
 
 const TrackProgress: FC<ITrackProgress> = ({ currentValue, onChange, duration }) => {
-	const [showTooltip, setShowTooltip] = useState(false)
+	const [showTooltip, setShowTooltip] = useState<boolean>(false)
 
 	return (
 		<Flex justifyContent={'space-evenly'}>

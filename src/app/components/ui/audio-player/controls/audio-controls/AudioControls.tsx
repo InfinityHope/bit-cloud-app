@@ -23,7 +23,7 @@ const AudioControls: FC<IPlayButton> = ({
 	isRepeat
 }) => {
 	return (
-		<Flex alignItems={'center'} justifyContent={'space-around'}>
+		<Flex width={'full'} alignItems={'center'} justifyContent={'space-between'}>
 			<RxTrackPrevious size={30} cursor={'pointer'} onClick={prev} />
 			{isPlaying ? (
 				<CiPause1 size={45} cursor={'pointer'} onClick={pause} />

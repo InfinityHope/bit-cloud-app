@@ -1,10 +1,10 @@
+import { UploadImage } from '@/app/components/ui'
 import { animationsConfig } from '@/config/animations.config'
 import { useAuth, useRegister } from '@/hooks/auth-hooks'
 import { useMaskInput } from '@/hooks/useMaskInput'
 import { IRegisterFields } from '@/types/interfaces/auth.interface'
 import { ArrowBackIcon, PhoneIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
-	Avatar,
 	Button,
 	Checkbox,
 	Flex,
@@ -15,23 +15,20 @@ import {
 	Input,
 	InputGroup,
 	InputLeftElement,
-	InputRightElement,
-	Text
+	InputRightElement
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { ChangeEvent, FC, useRef, useState } from 'react'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import styles from '../AuthForm.module.scss'
 
 const MotionFlex = motion(Flex)
 
-const RegisterForm: FC = () => {
+const RegisterForm = () => {
 	const { setAuthType } = useAuth()
 	const { handlePhoneInput } = useMaskInput()
-	const [image, setImage] = useState<File | null>(null)
+	const [image, setImage] = useState<Blob | null>(null)
 	const [showPass, setShowPass] = useState<boolean>(false)
-
-	const inputFileRef = useRef<HTMLInputElement>(null)
 
 	const {
 		register,
@@ -46,13 +43,6 @@ const RegisterForm: FC = () => {
 	})
 
 	const registration = useRegister(reset)
-
-	const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) {
-			const file = e.target.files[0]
-			setImage(file)
-		}
-	}
 
 	const onSubmit: SubmitHandler<IRegisterFields> = data => {
 		const formData = new FormData()
@@ -96,26 +86,16 @@ const RegisterForm: FC = () => {
 			<Heading as='h2' size='xl'>
 				Регистрация
 			</Heading>
-			<FormControl textAlign={'center'} marginTop={'1.5em'}>
-				{!image?.name ? (
-					<Avatar
-						onClick={() => inputFileRef.current && inputFileRef.current.click()}
-						cursor={'pointer'}
-						name='Dan Abrahmov'
-						src={'http://localhost:5000/image/noAvatar.png'}
-					/>
-				) : (
-					<Text
-						cursor={'pointer'}
-						whiteSpace={'nowrap'}
-						overflow={'hidden'}
-						textOverflow={'ellipsis'}
-						onClick={() => inputFileRef.current && inputFileRef.current.click()}
-					>
-						Ваш аватар: {image.name}
-					</Text>
-				)}
-				<Input ref={inputFileRef} type='file' onChange={handleChangeFile} hidden />
+			<FormControl width={'fit-content'} textAlign={'center'} marginTop={'1.5em'}>
+				<UploadImage
+					upload={true}
+					setImage={setImage}
+					image={image}
+					initialImage={'image/noAvatar.png'}
+					width={'100px'}
+					height={'100px'}
+					borderRadius={'full'}
+				/>
 			</FormControl>
 			<FormControl isInvalid={!!errors.email}>
 				<FormLabel>E-mail</FormLabel>
@@ -151,9 +131,9 @@ const RegisterForm: FC = () => {
 					/>
 					<InputRightElement>
 						<Button
-							colorScheme={''}
 							variant={'link'}
-							onClick={() => setShowPass(!showPass)}
+							onMouseUp={() => setShowPass(false)}
+							onMouseDown={() => setShowPass(true)}
 						>
 							{showPass ? <ViewOffIcon /> : <ViewIcon />}
 						</Button>
@@ -207,13 +187,7 @@ const RegisterForm: FC = () => {
 					Зарегистрироваться как исполнитель?
 				</Checkbox>
 			</FormControl>
-			<Button
-				size={'lg'}
-				colorScheme={'facebook'}
-				variant={'solid'}
-				width={'100%'}
-				type={'submit'}
-			>
+			<Button width={'100%'} type={'submit'}>
 				Зарегистрироваться
 			</Button>
 		</MotionFlex>

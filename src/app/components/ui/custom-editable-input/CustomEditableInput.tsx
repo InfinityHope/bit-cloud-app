@@ -1,3 +1,4 @@
+import { useMaskInput } from '@/app/hooks/useMaskInput'
 import {
 	Editable,
 	EditableInput,
@@ -18,6 +19,7 @@ interface ICustomEditableInput {
 	patternMessage?: string
 	fontSize?: 'xl' | '2xl' | '3xl' | '4xl' | 'lg' | 'md' | 'xs'
 	fontWeight?: 'bold' | 'regular' | 'medium' | 'light'
+	isMobileInput?: boolean
 }
 
 const CustomEditableInput: FC<ICustomEditableInput> = ({
@@ -28,8 +30,11 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({
 	pattern,
 	patternMessage = '',
 	fontSize = '2xl',
-	fontWeight = 'regular'
+	fontWeight = 'regular',
+	isMobileInput
 }) => {
+	const { handlePhoneInput } = useMaskInput()
+
 	return (
 		<Controller
 			name={name}
@@ -56,6 +61,7 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({
 					>
 						<EditablePreview display={'block'} />
 						<Input
+							onInput={isMobileInput ? handlePhoneInput : undefined}
 							variant={'unstyled'}
 							fontSize={'3xl'}
 							onChange={field.onChange}

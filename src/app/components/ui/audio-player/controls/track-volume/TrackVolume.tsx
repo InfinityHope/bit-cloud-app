@@ -15,7 +15,7 @@ interface ITrackVolume {
 }
 
 const TrackVolume: FC<ITrackVolume> = ({ volume, changeVolume }) => {
-	const [showTooltip, setShowTooltip] = useState(false)
+	const [showTooltip, setShowTooltip] = useState<boolean>(false)
 	return (
 		<Flex alignItems={'center'} justifyContent={'space-evenly'}>
 			{volume === 0 ? <CiVolumeMute size={40} /> : <CiVolumeHigh size={40} />}

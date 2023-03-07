@@ -13,7 +13,7 @@ import {
 	MenuList,
 	useDisclosure
 } from '@chakra-ui/react'
-import { FC, useRef } from 'react'
+import { FC } from 'react'
 
 interface IMenuActions {
 	track: ITrack
@@ -25,7 +25,6 @@ const MenuActions: FC<IMenuActions> = ({ track, setEditing }) => {
 	const data = useDownloadAudio(trackId)
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const deleteTrack = useDeleteTrack({ trackId, onClose })
-	const cancelRef = useRef<HTMLButtonElement>()
 
 	return (
 		<Box mt={'2em'}>
@@ -56,7 +55,6 @@ const MenuActions: FC<IMenuActions> = ({ track, setEditing }) => {
 			</Menu>
 			<DeleteAlert
 				isOpen={isOpen}
-				cancelRef={cancelRef}
 				onClose={onClose}
 				deleteTrack={deleteTrack}
 				onCloseHandler={onClose}

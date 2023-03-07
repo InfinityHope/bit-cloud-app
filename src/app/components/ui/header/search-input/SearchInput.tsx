@@ -1,11 +1,12 @@
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/react'
-import { SearchIcon } from '@chakra-ui/icons'
+import { SearchIcon } from "@chakra-ui/icons"
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { FC } from "react"
 
-const SearchInput = () => {
+const SearchInput: FC<{ width: string }> = ({ width }) => {
 	return (
-		<InputGroup width={'60%'} alignItems={'center'}>
+		<InputGroup width={width} alignItems={"center"}>
 			<InputRightElement pointerEvents='none' children={<SearchIcon color='white' />} />
-			<Input variant={'unstyled'} placeholder={'Поиск по трекам'} />
+			<Input variant={"unstyled"} placeholder={"Поиск по трекам"} />
 		</InputGroup>
 	)
 }

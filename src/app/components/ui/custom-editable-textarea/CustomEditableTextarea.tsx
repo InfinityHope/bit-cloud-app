@@ -13,7 +13,7 @@ const CustomEditableTextarea: FC<ICustomEditableTextarea> = ({ name, control, de
 		<Controller
 			name={name}
 			control={control}
-			defaultValue={defaultValue}
+			defaultValue={defaultValue ? defaultValue : ''}
 			render={({ field }) => (
 				<Editable
 					border={'1px solid white'}

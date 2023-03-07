@@ -64,8 +64,6 @@ const FileActions: FC<IFileActions> = ({
 						initial={'listInitialFade'}
 						animate={'listAnimateFade'}
 						custom={index}
-						_hover={{ bgColor: 'darkBlue' }}
-						bgColor={'lightBlue'}
 						onClick={() => ref.current && ref.current.click()}
 					>
 						{fileName}

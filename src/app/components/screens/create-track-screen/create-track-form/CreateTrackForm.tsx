@@ -6,35 +6,40 @@ import { useActions, useAppSelector } from '@/app/hooks/redux-hooks'
 import { useCreateTrack } from '@/app/hooks/tracks-hooks/useCreateTrack'
 import { useNotification } from '@/app/hooks/useNotification'
 import { createTrackActions } from '@/app/store/reducers/create-track.reducer'
-import { ICreateTrackFields } from '@/app/types/interfaces/track.interface'
+import { ITrackFields } from '@/app/types/interfaces/track.interface'
 import { checkKeyDown } from '@/app/utils/checkKeyDown'
 import {
+	Box,
 	Button,
 	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Input,
-	Textarea
+	Textarea,
+	useMediaQuery
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-const MotionFlex = motion(Flex)
+const MotionBox = motion(Box)
 
 const CreateTrackForm = () => {
 	const { user } = useAuth()
 	const { push } = useRouter()
+
+	const [isLargerThan870] = useMediaQuery('(min-width: 870px)', {
+		ssr: true,
+		fallback: false
+	})
 
 	const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors }
-	} = useForm<ICreateTrackFields>({
-		mode: 'onSubmit'
-	})
+	} = useForm<ITrackFields>()
 
 	const { tags, audio, resources, img, audioDuration } = useAppSelector(
 		state => state.createTrack
@@ -46,7 +51,7 @@ const CreateTrackForm = () => {
 
 	const create = useCreateTrack()
 
-	const onSubmit: SubmitHandler<ICreateTrackFields> = data => {
+	const onSubmit: SubmitHandler<ITrackFields> = data => {
 		const formData: FormData = new FormData()
 		if (resources && audio && user) {
 			formData.append('audio', audio)
@@ -58,8 +63,6 @@ const CreateTrackForm = () => {
 			formData.append('description', data.description)
 			formData.append('tags', tags.join(','))
 
-			console.log(formData)
-
 			create(formData)
 			reset()
 			clearState()
@@ -70,12 +73,11 @@ const CreateTrackForm = () => {
 	}
 
 	return (
-		<MotionFlex
+		<MotionBox
 			as={'form'}
 			onSubmit={handleSubmit(onSubmit)}
 			onKeyDown={(e: KeyboardEvent) => checkKeyDown(e)}
 			mt={'2em'}
-			justifyContent={'space-between'}
 			initial={'initialFadeScale'}
 			animate={'animateFadeScale'}
 			transition={{
@@ -84,58 +86,71 @@ const CreateTrackForm = () => {
 			}}
 			variants={animationsConfig}
 		>
-			<Flex direction={'column'} width={'45%'} minHeight={'100%'}>
-				<FormControl isInvalid={!!errors.title}>
-					<FormLabel>Название трека</FormLabel>
-					<Input
-						placeholder='Введите название'
-						{...register('title', {
-							required: 'Поле обязательно для заполнения'
-						})}
-						type='text'
-					/>
-					{errors.title && <FormErrorMessage>{errors.title?.message}</FormErrorMessage>}
-				</FormControl>
-				<TagList tags={tags} addTag={addTag} removeTag={removeTag} />
-				<FormControl isInvalid={!!errors.description} mt={'1.5em'}>
-					<FormLabel>Описание для трека</FormLabel>
-					<Textarea
-						placeholder='Введите описание'
-						resize={'none'}
-						{...register('description')}
-					/>
-					{errors.description && (
-						<FormErrorMessage>{errors.description?.message}</FormErrorMessage>
-					)}
-				</FormControl>
-				<Button
-					mt={'1em'}
-					type={'submit'}
-					_hover={{ bgColor: 'darkBlue' }}
-					bgColor={'lightBlue'}
+			<Flex
+				flexDirection={!isLargerThan870 ? 'column' : 'row'}
+				width={'full'}
+				justifyContent={'space-between'}
+			>
+				<Flex
+					direction={'column'}
+					width={isLargerThan870 ? '45%' : '100%'}
+					minHeight={'100%'}
 				>
-					Создать
-				</Button>
+					<FormControl isInvalid={!!errors.title}>
+						<FormLabel>Название трека</FormLabel>
+						<Input
+							placeholder='Введите название'
+							{...register('title', {
+								required: 'Поле обязательно для заполнения'
+							})}
+							type='text'
+						/>
+						{errors.title && (
+							<FormErrorMessage>{errors.title?.message?.toString()}</FormErrorMessage>
+						)}
+					</FormControl>
+					<TagList tags={tags} addTag={addTag} removeTag={removeTag} />
+					<FormControl isInvalid={!!errors.description} mt={'1.5em'}>
+						<FormLabel>Описание для трека</FormLabel>
+						<Textarea
+							placeholder='Введите описание'
+							resize={'none'}
+							{...register('description')}
+						/>
+						{errors.description && (
+							<FormErrorMessage>
+								{errors.description?.message?.toString()}
+							</FormErrorMessage>
+						)}
+					</FormControl>
+				</Flex>
+				<Flex
+					wrap={'wrap'}
+					width={isLargerThan870 ? '45%' : '100%'}
+					mt={!isLargerThan870 ? '1em' : 0}
+				>
+					<UploadImage
+						upload={true}
+						image={img}
+						setImage={setImg}
+						initialImage={`image/noImage.png`}
+						width={'inherit'}
+						height={'inherit'}
+					/>
+					<FileActions
+						audio={audio}
+						resources={resources}
+						variant={'column'}
+						setAudio={setAudio}
+						setResources={setResources}
+						setAudioDuration={setAudioDuration}
+					/>
+				</Flex>
 			</Flex>
-			<Flex wrap={'wrap'} width={'45%'}>
-				<UploadImage
-					upload={true}
-					image={img}
-					setImage={setImg}
-					initialImage={`image/noImage.png`}
-					width={'inherit'}
-					height={'inherit'}
-				/>
-				<FileActions
-					audio={audio}
-					resources={resources}
-					variant={'column'}
-					setAudio={setAudio}
-					setResources={setResources}
-					setAudioDuration={setAudioDuration}
-				/>
-			</Flex>
-		</MotionFlex>
+			<Button mt={'1em'} type={'submit'} width={'45%'}>
+				Создать
+			</Button>
+		</MotionBox>
 	)
 }
 

@@ -3,7 +3,17 @@ import bgImg from '@/assets/background.jpg'
 import { PageHeader, TrackList } from '@/components/ui'
 import { ITrack } from '@/types/interfaces/track.interface'
 import { IUser } from '@/types/interfaces/user.interface'
-import { Avatar, Divider, Flex, Heading, Link, List, ListItem, Text } from '@chakra-ui/react'
+import {
+	Avatar,
+	Divider,
+	Flex,
+	Heading,
+	Link,
+	List,
+	ListItem,
+	Text,
+	useMediaQuery
+} from '@chakra-ui/react'
 import { FC } from 'react'
 import styles from './MusicianProfile.module.scss'
 
@@ -13,10 +23,15 @@ interface IMusicianProfile {
 }
 
 const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
+	const [isLargerThan500] = useMediaQuery('(min-width: 500px)', {
+		ssr: true,
+		fallback: false
+	})
+
 	return (
 		<Flex flexDirection={'column'} className={styles.MusicianProfile}>
 			<PageHeader bgImg={bgImg.src}>
-				<Heading as={'h2'} size={'4xl'} marginBottom={'0.5em'}>
+				<Heading as={'h2'} marginBottom={'0.5em'}>
 					{musician.nickName}
 				</Heading>
 
@@ -44,10 +59,10 @@ const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 				<Avatar
 					src={`${process.env.API_URL}/${musician.avatar}`}
 					name={musician.avatar}
-					boxSize={'10em'}
+					boxSize={isLargerThan500 ? '10em' : '4em'}
 				/>
 			</PageHeader>
-			<Heading as={'h3'} size={'xl'}>
+			<Heading size={isLargerThan500 ? '2xl' : 'lg'} as={'h3'}>
 				Музыка автора
 			</Heading>
 			{tracks.length > 0 ? (

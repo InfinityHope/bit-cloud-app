@@ -1,0 +1,13 @@
+.SocialLinks {
+	margin-top: 1em;
+	align-items: center;
+	> ul {
+		display: flex;
+		> li {
+			display: flex;
+			line-height: 1em;
+			margin-right: 0.5em;
+			align-items: flex-end;
+		}
+	}
+}

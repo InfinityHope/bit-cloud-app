@@ -7,29 +7,23 @@ import {
 	AlertDialogOverlay,
 	Button
 } from '@chakra-ui/react'
-import { FC, MouseEvent, MutableRefObject } from 'react'
+import { FC, MouseEvent, useRef } from 'react'
 
 interface IDeleteAlert {
 	isOpen: boolean
-	cancelRef: MutableRefObject<HTMLButtonElement | undefined>
 	onClose: () => void
 	onCloseHandler: (e: MouseEvent<HTMLButtonElement>) => void
 	deleteTrack: () => void
 }
 
-const DeleteAlert: FC<IDeleteAlert> = ({
-	isOpen,
-	onCloseHandler,
-	cancelRef,
-	onClose,
-	deleteTrack
-}) => {
+const DeleteAlert: FC<IDeleteAlert> = ({ isOpen, onCloseHandler, onClose, deleteTrack }) => {
+	const cancelRef = useRef<HTMLButtonElement | null>(null)
+
 	return (
 		<AlertDialog
 			isOpen={isOpen}
 			leastDestructiveRef={cancelRef}
 			onClose={onClose}
-			colorScheme={''}
 			motionPreset={'slideInBottom'}
 		>
 			<AlertDialogOverlay>
@@ -41,11 +35,11 @@ const DeleteAlert: FC<IDeleteAlert> = ({
 					<AlertDialogBody>Вы уверены, что хотите удалить трек?</AlertDialogBody>
 
 					<AlertDialogFooter>
-						<Button colorScheme={'facebook'} onClick={onCloseHandler} ref={cancelRef}>
-							Отменить
-						</Button>
-						<Button colorScheme='red' onClick={() => deleteTrack()} ml={3}>
+						<Button colorScheme='red' onClick={() => deleteTrack()}>
 							Удалить
+						</Button>
+						<Button ml={3} onClick={onCloseHandler} ref={cancelRef}>
+							Отменить
 						</Button>
 					</AlertDialogFooter>
 				</AlertDialogContent>

@@ -4,7 +4,7 @@ import { useUpdateProfile } from '@/app/hooks/user-hooks/useUpdateProfile'
 import { IProfileFields } from '@/app/types/interfaces/user.interface'
 import Meta from '@/components/meta/Meta'
 import { CustomEditableInput, UploadImage } from '@/components/ui'
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Text, useMediaQuery } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -15,16 +15,25 @@ const ProfileScreen = () => {
 	const { user } = useAuth()
 	const { tracks } = useAuthorTracks(user?.id)
 
-	const { handleSubmit, control } = useForm<IProfileFields>({
-		mode: 'onBlur'
+	const [isLargerThan700] = useMediaQuery('(min-width: 700px)', {
+		ssr: true,
+		fallback: false
 	})
+
+	const { handleSubmit, control, reset } = useForm<IProfileFields>()
 
 	const [socialLinks, setSocialLinks] = useState<string[]>([])
 	const [avatar, setAvatar] = useState<Blob | null>(null)
 	const [editing, setEditing] = useState<boolean>(false)
-	const [userId, setUserId] = useState(0)
+	const [userId, setUserId] = useState<number>(0)
 
 	const { updateProfile } = useUpdateProfile(userId)
+
+	useEffect(() => {
+		if (!editing) {
+			reset()
+		}
+	}, [editing])
 
 	useEffect(() => {
 		if (user) {
@@ -52,11 +61,13 @@ const ProfileScreen = () => {
 			<Meta title={`Bit Cloud Profile`} />
 			{user && (
 				<Box p={'3em'} color={'white'} overflowY={'auto'}>
-					<Flex>
+					<Flex flexDirection={isLargerThan700 ? 'row' : 'column'} alignItems={'center'}>
 						<UploadImage
 							upload={editing}
 							image={avatar}
 							setImage={setAvatar}
+							width={isLargerThan700 ? '300px' : '200px'}
+							height={isLargerThan700 ? '300px' : '200px'}
 							initialImage={user.avatar}
 							borderRadius={'full'}
 						/>
@@ -114,6 +125,7 @@ const ProfileScreen = () => {
 									<CustomEditableInput
 										name={'telephone'}
 										control={control}
+										isMobileInput
 										defaultValue={user.telephone}
 										isRequired
 										pattern={
@@ -128,50 +140,41 @@ const ProfileScreen = () => {
 								setSocialLinks={setSocialLinks}
 								socialLinks={socialLinks}
 							/>
-							<Text mt={'1em'} fontSize={'2xl'}>
-								Кол-во треков: {tracks?.length}
-							</Text>
+							{user.role === 'MUSICIAN' && (
+								<Text mt={'1em'} fontSize={'2xl'}>
+									Кол-во треков: {tracks?.length}
+								</Text>
+							)}
 						</Flex>
 					</Flex>
 
-					<Flex width={'fit-content'} mt={'3em'}>
+					<Flex
+						width={'full'}
+						flexDirection={isLargerThan700 ? 'row' : 'column'}
+						justifyContent={!isLargerThan700 ? 'center' : 'flex-start'}
+						alignItems={!isLargerThan700 ? 'center' : 'flex-start'}
+						mt={'3em'}
+					>
 						{!editing ? (
 							<Button
-								_hover={{ bgColor: 'darkBlue' }}
-								bgColor={'lightBlue'}
+								mt={'1em'}
 								type={'button'}
 								mr={'1em'}
-								onClick={() => {
-									setEditing(true)
-								}}
+								onClick={() => setEditing(true)}
 							>
 								Редактировать
 							</Button>
 						) : (
 							<>
-								<Button
-									_hover={{ bgColor: 'darkBlue' }}
-									bgColor={'lightBlue'}
-									onClick={handleSubmit(onSubmit)}
-									mr={'1em'}
-								>
+								<Button mt={'1em'} onClick={handleSubmit(onSubmit)} mr={'1em'}>
 									Сохранить
 								</Button>
-								<Button
-									mr={'1em'}
-									_hover={{ bgColor: 'darkBlue' }}
-									bgColor={'lightBlue'}
-									onClick={() => setEditing(false)}
-								>
+								<Button mt={'1em'} mr={'1em'} onClick={() => setEditing(false)}>
 									Отменить
 								</Button>
 							</>
 						)}
-						<Button
-							_hover={{ bgColor: 'darkBlue' }}
-							bgColor={'lightBlue'}
-							rightIcon={<BsArrowUpRightSquare />}
-						>
+						<Button mt={'1em'} rightIcon={<BsArrowUpRightSquare />}>
 							<Link href={'my-tracks'}>Перейти к моим трекам</Link>
 						</Button>
 					</Flex>

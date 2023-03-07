@@ -5,7 +5,7 @@ import { animationsConfig } from '@/config/animations.config'
 import { API_URL } from '@/constants/api.constants'
 import { useActions, useAppSelector } from '@/hooks/redux-hooks'
 import { usePlayer } from '@/hooks/usePlayer'
-import { Box, Flex, Grid, GridItem, Image, Text, VStack } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Image, Text, useMediaQuery, VStack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import styles from './AudioPlayer.module.scss'
@@ -31,6 +31,11 @@ const AudioPlayer = () => {
 		state => state.player
 	)
 	const { setPause, setDuration, setVolume, setTracks } = useActions(playerActions)
+
+	const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)', {
+		ssr: true,
+		fallback: false
+	})
 
 	useEffect(() => {
 		if (!audio.current) {
@@ -98,19 +103,20 @@ const AudioPlayer = () => {
 		>
 			<Grid
 				alignItems={'center'}
-				gridTemplateColumns={'10% 15% 50% 20%'}
+				flexWrap={'wrap'}
+				templateColumns={isLargerThan1000 ? '10% 15% 50% 20%' : 'repeat(2, 48%)'}
 				className={styles.AudioPlayerInner}
 				gap={30}
 			>
 				<GridItem>
-					<Flex alignItems={'center'} justifyContent={'space-between'}>
+					<Flex alignItems={'center'} justifyContent={'space-evenly'}>
 						<Image
 							boxSize='65px'
 							objectFit='cover'
 							src={currentTrack ? `${API_URL}/${currentTrack.img}` : trackImg.src}
 							alt={currentTrack?.img}
 						/>
-						<VStack>
+						<VStack gap={1}>
 							<Text>{currentTrack ? currentTrack.title : 'Untitled'}</Text>
 							<Text>{currentTrack ? currentTrack.author.nickName : 'Unnamed'}</Text>
 						</VStack>
