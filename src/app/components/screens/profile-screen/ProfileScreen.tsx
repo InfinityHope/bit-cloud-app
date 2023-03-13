@@ -60,8 +60,12 @@ const ProfileScreen = () => {
 		<>
 			<Meta title={`Bit Cloud Profile`} />
 			{user && (
-				<Box p={'3em'} color={'white'} overflowY={'auto'}>
-					<Flex flexDirection={isLargerThan700 ? 'row' : 'column'} alignItems={'center'}>
+				<Box p={isLargerThan700 ? '3em' : '1em'} color={'white'} overflowY={'auto'}>
+					<Flex
+						flexDirection={isLargerThan700 ? 'row' : 'column'}
+						alignItems={'center'}
+						fontSize={isLargerThan700 ? '2xl' : 'lg'}
+					>
 						<UploadImage
 							upload={editing}
 							image={avatar}
@@ -71,7 +75,11 @@ const ProfileScreen = () => {
 							initialImage={user.avatar}
 							borderRadius={'full'}
 						/>
-						<Flex ml={'3em'} flexDirection={'column'}>
+						<Flex
+							ml={isLargerThan700 ? '3em' : '0'}
+							mt={!isLargerThan700 ? '2em' : '0'}
+							flexDirection={'column'}
+						>
 							{!editing ? (
 								<Heading as={'h3'}>{user.nickName}</Heading>
 							) : (
@@ -81,29 +89,26 @@ const ProfileScreen = () => {
 										control={control}
 										defaultValue={user.nickName}
 										isRequired
+										fontSize={isLargerThan700 ? '2xl' : 'lg'}
 										fontWeight='bold'
-										fontSize='2xl'
 									/>
 								</Box>
 							)}
 							{!editing ? (
-								<Text mt={'1em'} fontSize={'2xl'}>
-									Имя: {user.name}
-								</Text>
+								<Text mt={'1em'}>Имя: {user.name}</Text>
 							) : (
 								<Box mt={'1em'}>
 									<CustomEditableInput
 										name={'name'}
 										control={control}
+										fontSize={isLargerThan700 ? '2xl' : 'lg'}
 										defaultValue={user.name}
 										isRequired
 									/>
 								</Box>
 							)}
 							{!editing ? (
-								<Text mt={'1em'} fontSize={'2xl'}>
-									E-mail: {user.email}
-								</Text>
+								<Text mt={'1em'}>E-mail: {user.email}</Text>
 							) : (
 								<Box mt={'1em'}>
 									<CustomEditableInput
@@ -111,21 +116,21 @@ const ProfileScreen = () => {
 										control={control}
 										defaultValue={user.email}
 										isRequired
+										fontSize={isLargerThan700 ? '2xl' : 'lg'}
 										pattern={/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
 										patternMessage={'Некорректный формат E-mail'}
 									/>
 								</Box>
 							)}
 							{!editing ? (
-								<Text mt={'1em'} fontSize={'2xl'}>
-									Телефон: {user.telephone}
-								</Text>
+								<Text mt={'1em'}>Телефон: {user.telephone}</Text>
 							) : (
 								<Box mt={'1em'}>
 									<CustomEditableInput
 										name={'telephone'}
 										control={control}
 										isMobileInput
+										fontSize={isLargerThan700 ? '2xl' : 'lg'}
 										defaultValue={user.telephone}
 										isRequired
 										pattern={
@@ -141,9 +146,7 @@ const ProfileScreen = () => {
 								socialLinks={socialLinks}
 							/>
 							{user.role === 'MUSICIAN' && (
-								<Text mt={'1em'} fontSize={'2xl'}>
-									Кол-во треков: {tracks?.length}
-								</Text>
+								<Text mt={'1em'}>Кол-во треков: {tracks?.length}</Text>
 							)}
 						</Flex>
 					</Flex>

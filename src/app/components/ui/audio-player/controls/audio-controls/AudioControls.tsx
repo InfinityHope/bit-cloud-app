@@ -24,16 +24,16 @@ const AudioControls: FC<IPlayButton> = ({
 }) => {
 	return (
 		<Flex width={'full'} alignItems={'center'} justifyContent={'space-between'}>
-			<RxTrackPrevious size={30} cursor={'pointer'} onClick={prev} />
+			<RxTrackPrevious size={25} cursor={'pointer'} onClick={prev} />
 			{isPlaying ? (
-				<CiPause1 size={45} cursor={'pointer'} onClick={pause} />
+				<CiPause1 size={35} cursor={'pointer'} onClick={pause} />
 			) : (
-				<CiPlay1 size={45} cursor={'pointer'} onClick={play} />
+				<CiPlay1 size={35} cursor={'pointer'} onClick={play} />
 			)}
-			<RxTrackNext size={30} cursor={'pointer'} onClick={next} />
+			<RxTrackNext size={25} cursor={'pointer'} onClick={next} />
 			<CiRepeat
 				color={isRepeat ? '#3542c6' : 'white'}
-				size={35}
+				size={30}
 				cursor={'pointer'}
 				onClick={repeat}
 			/>

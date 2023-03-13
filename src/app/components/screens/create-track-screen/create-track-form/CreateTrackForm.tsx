@@ -129,25 +129,29 @@ const CreateTrackForm = () => {
 					width={isLargerThan870 ? '45%' : '100%'}
 					mt={!isLargerThan870 ? '1em' : 0}
 				>
-					<UploadImage
-						upload={true}
-						image={img}
-						setImage={setImg}
-						initialImage={`image/noImage.png`}
-						width={'inherit'}
-						height={'inherit'}
-					/>
-					<FileActions
-						audio={audio}
-						resources={resources}
-						variant={'column'}
-						setAudio={setAudio}
-						setResources={setResources}
-						setAudioDuration={setAudioDuration}
-					/>
+					<Box mt={'1em'}>
+						<UploadImage
+							upload={true}
+							image={img}
+							setImage={setImg}
+							initialImage={`image/noImage.png`}
+							width={'inherit'}
+							height={'inherit'}
+						/>
+					</Box>
+					<Box mt={'1em'}>
+						<FileActions
+							audio={audio}
+							resources={resources}
+							variant={'column'}
+							setAudio={setAudio}
+							setResources={setResources}
+							setAudioDuration={setAudioDuration}
+						/>
+					</Box>
 				</Flex>
 			</Flex>
-			<Button mt={'1em'} type={'submit'} width={'45%'}>
+			<Button mt={'1em'} type={'submit'} width={isLargerThan870 ? '45%' : '100%'}>
 				Создать
 			</Button>
 		</MotionBox>

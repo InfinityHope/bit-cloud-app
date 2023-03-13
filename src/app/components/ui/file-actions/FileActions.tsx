@@ -1,6 +1,6 @@
 import { animationsConfig } from '@/app/config/animations.config'
 import { stringCut } from '@/app/utils/stringCut'
-import { Button, Input, Stack } from '@chakra-ui/react'
+import { Button, Input, Stack, useMediaQuery } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { ChangeEvent, FC, useRef } from 'react'
 
@@ -25,6 +25,11 @@ const FileActions: FC<IFileActions> = ({
 }) => {
 	const inputAudioRef = useRef<HTMLInputElement | null>(null)
 	const inputResourcesRef = useRef<HTMLInputElement | null>(null)
+
+	const [isLargerThan500] = useMediaQuery('(min-width: 500px)', {
+		ssr: true,
+		fallback: false
+	})
 
 	const setAudioHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {
@@ -56,7 +61,7 @@ const FileActions: FC<IFileActions> = ({
 	]
 
 	return (
-		<Stack direction={variant === 'vertical' ? 'row' : 'column'} spacing={3}>
+		<Stack direction={isLargerThan500 && variant === 'vertical' ? 'row' : 'column'} spacing={3}>
 			{buttons.map(({ ref, fileName, accept, setFunction }, index) => (
 				<div key={index}>
 					<MotionButton

@@ -4,8 +4,10 @@ import { axiosClassic } from './../../api/interceptor'
 import { ITrackResponse } from './../../types/interfaces/track.interface'
 
 export const TrackService = {
-	async getAllTracks(): Promise<ITrackResponse> {
-		const { data } = await axiosClassic.get<ITrackResponse>('/track')
+	async getAllTracks(searchTerm?: string): Promise<ITrackResponse> {
+		const { data } = await axiosClassic.get<ITrackResponse>(
+			`/track${searchTerm ? `/?q=${searchTerm}` : ''} `
+		)
 		return data
 	},
 	async getTracksByAuthor(authorId: number | undefined): Promise<ITrack[]> {

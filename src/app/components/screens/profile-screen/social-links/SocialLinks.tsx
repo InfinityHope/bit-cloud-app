@@ -38,15 +38,13 @@ const SocialLinks: FC<ISocialLinks> = ({ editing, socialLinks, setSocialLinks })
 	}
 
 	return (
-		<Flex mt={'1em'} alignItems={'center'} className={styles.SocialLinks}>
+		<Flex className={styles.SocialLinks}>
 			{socialLinks.length !== 0 ? (
 				<>
-					<Text mr={'.5em'} fontSize={'2xl'}>
-						Социальные сети:
-					</Text>
+					<Text mr={'.5em'}>Социальные сети:</Text>
 					<List>
 						{socialLinks.map((link, index) => (
-							<ListItem key={link} fontSize={'2xl'}>
+							<ListItem key={link}>
 								<Link target={'_blank'} href={`https://${link}`}>
 									{checkSocialLink(`${link}`)}
 								</Link>

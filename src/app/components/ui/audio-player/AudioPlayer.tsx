@@ -36,6 +36,10 @@ const AudioPlayer = () => {
 		ssr: true,
 		fallback: false
 	})
+	const [isLargerThan500] = useMediaQuery('(min-width: 500px)', {
+		ssr: true,
+		fallback: false
+	})
 
 	useEffect(() => {
 		if (!audio.current) {
@@ -104,17 +108,21 @@ const AudioPlayer = () => {
 			<Grid
 				alignItems={'center'}
 				flexWrap={'wrap'}
-				templateColumns={isLargerThan1000 ? '10% 15% 50% 20%' : 'repeat(2, 48%)'}
+				templateColumns={isLargerThan1000 ? '10% 15% 50% 20%' : 'repeat(2, 45%)'}
 				className={styles.AudioPlayerInner}
 				gap={30}
 			>
 				<GridItem>
-					<Flex alignItems={'center'} justifyContent={'space-evenly'}>
+					<Flex
+						alignItems={'center'}
+						justifyContent={isLargerThan500 ? 'space-evenly' : ''}
+					>
 						<Image
 							boxSize='65px'
 							objectFit='cover'
 							src={currentTrack ? `${API_URL}/${currentTrack.img}` : trackImg.src}
 							alt={currentTrack?.img}
+							mr={!isLargerThan500 ? '1em' : ''}
 						/>
 						<VStack gap={1}>
 							<Text>{currentTrack ? currentTrack.title : 'Untitled'}</Text>

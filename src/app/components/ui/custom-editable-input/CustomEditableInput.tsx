@@ -63,7 +63,7 @@ const CustomEditableInput: FC<ICustomEditableInput> = ({
 						<Input
 							onInput={isMobileInput ? handlePhoneInput : undefined}
 							variant={'unstyled'}
-							fontSize={'3xl'}
+							fontSize={fontSize}
 							onChange={field.onChange}
 							as={EditableInput}
 						/>

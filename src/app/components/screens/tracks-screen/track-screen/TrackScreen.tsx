@@ -5,11 +5,11 @@ import { ITrackFields } from '@/app/types/interfaces/track.interface'
 import Meta from '@/components/meta/Meta'
 import { CustomEditableTextarea, CustomSpinner, FileActions, TagList } from '@/components/ui'
 import { useTrack } from '@/hooks/tracks-hooks'
-import { Box, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text, useMediaQuery } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import TrackPageHeader from './track-page-header/TrackPageHeader'
+import TrackPageHeader from './track-screen-header/TrackScreenHeader'
 
 const TrackScreen = () => {
 	const { query } = useRouter()
@@ -17,6 +17,11 @@ const TrackScreen = () => {
 	const { track, isLoading } = useTrack(trackId)
 
 	const { control, handleSubmit, reset } = useForm<ITrackFields>()
+
+	const [isLargerThan500] = useMediaQuery('(min-width: 500px)', {
+		ssr: true,
+		fallback: false
+	})
 
 	const { editing, audio, resources, img, audioDuration, tags } = useAppSelector(
 		state => state.updateTrack
@@ -74,7 +79,7 @@ const TrackScreen = () => {
 			<Meta title={`Bit Cloud Track: ${track?.title}`} />
 			{isLoading ? <CustomSpinner /> : null}
 			{track && (
-				<Box p={'3em'} color={'white'} overflowY={'auto'}>
+				<Box p={isLargerThan500 ? '3em' : '.5em'} color={'white'} overflowY={'auto'}>
 					<TrackPageHeader
 						control={control}
 						handleSubmit={handleSubmit}

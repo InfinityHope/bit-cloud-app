@@ -1,6 +1,10 @@
 .SocialLinks {
 	margin-top: 1em;
 	align-items: center;
+	position: relative;
+	overflow-x: auto;
+	overflow-y: hidden;
+	width: 100%;
 	> ul {
 		display: flex;
 		> li {

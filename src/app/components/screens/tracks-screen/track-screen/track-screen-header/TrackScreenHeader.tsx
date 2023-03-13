@@ -5,11 +5,12 @@ import { ITrack, ITrackFields } from '@/app/types/interfaces/track.interface'
 import { convertDate } from '@/app/utils/convertDate'
 import { CustomEditableInput, UploadImage } from '@/components/ui'
 import { Button, ButtonGroup, Flex, Heading, Text, useMediaQuery } from '@chakra-ui/react'
+import Link from 'next/link'
 import { FC } from 'react'
 import { Control, UseFormHandleSubmit, UseFormReset } from 'react-hook-form'
 import MenuActions from '../menu-actions/MenuActions'
 
-interface ITrackPageHeader {
+interface ITrackScreenHeader {
 	track: ITrack
 	control: Control<ITrackFields>
 	reset: UseFormReset<ITrackFields>
@@ -17,7 +18,7 @@ interface ITrackPageHeader {
 	onSubmit: (data: ITrackFields) => void
 }
 
-const TrackPageHeader: FC<ITrackPageHeader> = ({
+const TrackScreenHeader: FC<ITrackScreenHeader> = ({
 	track,
 	control,
 	reset,
@@ -56,9 +57,11 @@ const TrackPageHeader: FC<ITrackPageHeader> = ({
 					/>
 				)}
 
-				<Text mt={'1em'} fontSize={'1.5em'}>
-					Автор: {track.author.nickName}
-				</Text>
+				<Link href={`/musicians/${track.author.nickName}`}>
+					<Text mt={'1em'} fontSize={'1.5em'} _hover={{ textDecoration: 'underline' }}>
+						Автор: {track.author.nickName}
+					</Text>
+				</Link>
 
 				<Text fontSize={'1.5em'} mt={'1em'}>
 					Дата создания: {convertDate(track.createdAt)}
@@ -89,4 +92,4 @@ const TrackPageHeader: FC<ITrackPageHeader> = ({
 	)
 }
 
-export default TrackPageHeader
+export default TrackScreenHeader

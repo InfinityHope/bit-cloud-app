@@ -34,7 +34,7 @@ const TagList: FC<ITagList> = ({ tags, addTag, removeTag, action = true }) => {
 	}
 
 	return (
-		<Flex mt={'1.5em'}>
+		<Flex mt={'1.5em'} alignItems={'center'} position={'relative'} overflowX={'auto'}>
 			<Text mr={'1em'}>Теги:</Text>
 			<Flex alignItems={'center'}>
 				{tags.length !== 0 && (
