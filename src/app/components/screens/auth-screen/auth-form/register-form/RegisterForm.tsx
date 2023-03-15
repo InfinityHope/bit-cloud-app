@@ -1,4 +1,5 @@
 import { UploadImage } from '@/app/components/ui'
+import noAvatar from '@/assets/noAvatar.png'
 import { animationsConfig } from '@/config/animations.config'
 import { useAuth, useRegister } from '@/hooks/auth-hooks'
 import { useMaskInput } from '@/hooks/useMaskInput'
@@ -91,7 +92,7 @@ const RegisterForm = () => {
 					upload={true}
 					setImage={setImage}
 					image={image}
-					initialImage={'image/noAvatar.png'}
+					initialImage={noAvatar.src}
 					width={'100px'}
 					height={'100px'}
 					borderRadius={'full'}
