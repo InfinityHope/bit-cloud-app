@@ -117,7 +117,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 						boxSize='70px'
 						objectFit='cover'
 						src={
-							track.img === 'image/noImage.jpg'
+							track.img === 'image/noImage.png'
 								? noImage.src
 								: `${API_URL}/${track.img}`
 						}
