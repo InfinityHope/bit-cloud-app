@@ -1,7 +1,9 @@
+import { API_URL } from '@/app/constants/api.constants'
 import { useAuth } from '@/app/hooks/auth-hooks'
 import { useAuthorTracks } from '@/app/hooks/tracks-hooks'
 import { useUpdateProfile } from '@/app/hooks/user-hooks/useUpdateProfile'
 import { IProfileFields } from '@/app/types/interfaces/user.interface'
+import noAvatar from '@/assets/noAvatar.png'
 import Meta from '@/components/meta/Meta'
 import { CustomEditableInput, UploadImage } from '@/components/ui'
 import { Box, Button, Flex, Heading, Text, useMediaQuery } from '@chakra-ui/react'
@@ -72,7 +74,11 @@ const ProfileScreen = () => {
 							setImage={setAvatar}
 							width={isLargerThan700 ? '300px' : '200px'}
 							height={isLargerThan700 ? '300px' : '200px'}
-							initialImage={user.avatar}
+							initialImage={
+								user?.avatar === 'image/noAvatar.png'
+									? `${API_URL}/${user?.avatar}`
+									: noAvatar.src
+							}
 							borderRadius={'full'}
 						/>
 						<Flex

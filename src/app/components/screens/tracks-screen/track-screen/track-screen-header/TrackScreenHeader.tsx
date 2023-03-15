@@ -3,6 +3,7 @@ import { useActions, useAppSelector } from '@/app/hooks/redux-hooks'
 import { updateTrackActions } from '@/app/store/reducers/update-track.reducer'
 import { ITrack, ITrackFields } from '@/app/types/interfaces/track.interface'
 import { convertDate } from '@/app/utils/convertDate'
+import noImage from '@/assets/noImage.png'
 import { CustomEditableInput, UploadImage } from '@/components/ui'
 import { Button, ButtonGroup, Flex, Heading, Text, useMediaQuery } from '@chakra-ui/react'
 import Link from 'next/link'
@@ -41,7 +42,7 @@ const TrackScreenHeader: FC<ITrackScreenHeader> = ({
 				upload={editing}
 				image={img}
 				setImage={setImg}
-				initialImage={track.img}
+				initialImage={track.img === 'image/noImage.png' ? noImage.src : track.img}
 				width={isLargerThan870 ? '300px' : '200px'}
 				height={isLargerThan870 ? '300px' : '200px'}
 			/>

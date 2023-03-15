@@ -1,5 +1,7 @@
+import { API_URL } from '@/app/constants/api.constants'
 import { checkSocialLink } from '@/app/utils/checkSocialLink'
 import bgImg from '@/assets/background.jpg'
+import noAvatar from '@/assets/noAvatar.png'
 import { PageHeader, TrackList } from '@/components/ui'
 import { ITrack } from '@/types/interfaces/track.interface'
 import { IUser } from '@/types/interfaces/user.interface'
@@ -57,7 +59,11 @@ const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 					)}
 				</Flex>
 				<Avatar
-					src={`${process.env.API_URL}/${musician.avatar}`}
+					src={
+						musician?.avatar === 'image/noAvatar.png'
+							? `${API_URL}/${musician?.avatar}`
+							: noAvatar.src
+					}
 					name={musician.avatar}
 					boxSize={isLargerThan500 ? '10em' : '4em'}
 				/>

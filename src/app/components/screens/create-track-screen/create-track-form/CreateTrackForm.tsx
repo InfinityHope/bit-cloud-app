@@ -8,6 +8,7 @@ import { useNotification } from '@/app/hooks/useNotification'
 import { createTrackActions } from '@/app/store/reducers/create-track.reducer'
 import { ITrackFields } from '@/app/types/interfaces/track.interface'
 import { checkKeyDown } from '@/app/utils/checkKeyDown'
+import noImage from '@/assets/noImage.png'
 import {
 	Box,
 	Button,
@@ -134,7 +135,7 @@ const CreateTrackForm = () => {
 							upload={true}
 							image={img}
 							setImage={setImg}
-							initialImage={`image/noImage.png`}
+							initialImage={noImage.src}
 							width={'inherit'}
 							height={'inherit'}
 						/>

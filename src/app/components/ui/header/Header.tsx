@@ -1,5 +1,6 @@
 import { API_URL } from '@/app/constants/api.constants'
 import { useSidebar } from '@/app/hooks/useSidebar'
+import noAvatar from '@/assets/noAvatar.png'
 import { SearchInput } from '@/components/ui'
 import { animationsConfig } from '@/config/animations.config'
 import { useAuth } from '@/hooks/auth-hooks'
@@ -68,7 +69,13 @@ const Header = () => {
 					{isLargerThan1200 ? (
 						user ? (
 							<Link href={'/profile'}>
-								<Avatar src={`${API_URL}/${user?.avatar}`} />
+								<Avatar
+									src={
+										user?.avatar === 'image/noAvatar.png'
+											? `${API_URL}/${user?.avatar}`
+											: noAvatar.src
+									}
+								/>
 							</Link>
 						) : (
 							<Link href={'/auth'}>

@@ -1,5 +1,5 @@
 import { playerActions } from '@/app/store/reducers/player.reducer'
-import trackImg from '@/assets/background.jpg'
+import trackImg from '@/assets/noImage.jpg'
 import { AudioControls, TrackProgress, TrackVolume } from '@/components/ui'
 import { animationsConfig } from '@/config/animations.config'
 import { API_URL } from '@/constants/api.constants'
@@ -120,7 +120,11 @@ const AudioPlayer = () => {
 						<Image
 							boxSize='65px'
 							objectFit='cover'
-							src={currentTrack ? `${API_URL}/${currentTrack.img}` : trackImg.src}
+							src={
+								currentTrack?.img === 'noImage.png'
+									? trackImg.src
+									: `${API_URL}/${currentTrack?.img}`
+							}
 							alt={currentTrack?.img}
 							mr={!isLargerThan500 ? '1em' : ''}
 						/>

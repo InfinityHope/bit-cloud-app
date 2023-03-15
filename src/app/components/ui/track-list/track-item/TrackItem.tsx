@@ -1,6 +1,7 @@
 import { animationsConfig } from '@/app/config/animations.config'
 import { playerActions } from '@/app/store/reducers/player.reducer'
 import { createDownloadUrl } from '@/app/utils/createDownloadUrl'
+import noImage from '@/assets/noImage.png'
 import { DeleteAlert } from '@/components/ui'
 import { API_URL } from '@/constants/api.constants'
 import { useAuth } from '@/hooks/auth-hooks'
@@ -106,6 +107,7 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 				borderRight={!currentTrack ? '2px solid' : '0px'}
 				borderColor={'#141115'}
 				alignItems={'center'}
+				_last={{ alignItems: 'none' }}
 				backgroundColor={currentTrack ? 'black' : 'transparent'}
 				borderRadius={'5px'}
 				width={'100%'}
@@ -114,7 +116,11 @@ const TrackItem: FC<ITrackItem> = memo(({ track, index, selectTrack }) => {
 					<Image
 						boxSize='70px'
 						objectFit='cover'
-						src={`${API_URL}/${track.img}`}
+						src={
+							track.img === 'image/noImage.jpg'
+								? noImage.src
+								: `${API_URL}/${track.img}`
+						}
 						alt={track.img}
 						borderRadius={'5px'}
 					/>

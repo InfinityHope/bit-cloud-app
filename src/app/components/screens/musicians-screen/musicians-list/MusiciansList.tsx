@@ -1,4 +1,5 @@
 import { API_URL } from '@/app/constants/api.constants'
+import noAvatar from '@/assets/noAvatar.png'
 import { animationsConfig } from '@/config/animations.config'
 import { IUser } from '@/types/interfaces/user.interface'
 import { Avatar, Grid, GridItem, Text } from '@chakra-ui/react'
@@ -21,7 +22,14 @@ const MusiciansList: FC<{ musicians: IUser[] }> = ({ musicians }) => {
 						animate={'listAnimateTop'}
 						custom={index}
 					>
-						<Avatar size='xl' src={`${API_URL}/${musician.avatar}`} />
+						<Avatar
+							size='xl'
+							src={
+								musician?.avatar === 'image/noAvatar.png'
+									? `${API_URL}/${musician?.avatar}`
+									: noAvatar.src
+							}
+						/>
 						<Text color={'primaryTextColor'} fontWeight={'semibold'} marginTop={2}>
 							{musician.nickName}
 						</Text>
