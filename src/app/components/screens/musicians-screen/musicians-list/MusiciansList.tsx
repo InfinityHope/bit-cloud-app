@@ -26,8 +26,8 @@ const MusiciansList: FC<{ musicians: IUser[] }> = ({ musicians }) => {
 							size='xl'
 							src={
 								musician?.avatar === 'image/noAvatar.png'
-									? `${API_URL}/${musician?.avatar}`
-									: noAvatar.src
+									? noAvatar.src
+									: `${API_URL}/${musician?.avatar}`
 							}
 						/>
 						<Text color={'primaryTextColor'} fontWeight={'semibold'} marginTop={2}>

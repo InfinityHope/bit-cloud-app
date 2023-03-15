@@ -4,8 +4,9 @@ const nextConfig = {
 	env: {
 		API_URL: process.env.API_URL
 	},
+
 	images: {
-		domains: ['localhost']
+		domains: ['localhost:3000']
 	}
 }
 

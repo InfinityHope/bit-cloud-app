@@ -72,8 +72,8 @@ const Header = () => {
 								<Avatar
 									src={
 										user?.avatar === 'image/noAvatar.png'
-											? `${API_URL}/${user?.avatar}`
-											: noAvatar.src
+											? noAvatar.src
+											: `${API_URL}/${user?.avatar}`
 									}
 								/>
 							</Link>

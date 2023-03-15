@@ -61,8 +61,8 @@ const MusicianProfile: FC<IMusicianProfile> = ({ musician, tracks }) => {
 				<Avatar
 					src={
 						musician?.avatar === 'image/noAvatar.png'
-							? `${API_URL}/${musician?.avatar}`
-							: noAvatar.src
+							? noAvatar.src
+							: `${API_URL}/${musician?.avatar}`
 					}
 					name={musician.avatar}
 					boxSize={isLargerThan500 ? '10em' : '4em'}

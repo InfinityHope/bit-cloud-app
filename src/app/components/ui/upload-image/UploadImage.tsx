@@ -1,5 +1,4 @@
 import { animationsConfig } from '@/app/config/animations.config'
-import { API_URL } from '@/app/constants/api.constants'
 import { Box, Image as Img, Input } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { ChangeEvent, Dispatch, FC, SetStateAction, useRef, useState } from 'react'
@@ -57,7 +56,7 @@ const UploadImage: FC<IUploadImage> = ({
 				border={upload ? '3px solid white' : ''}
 				objectFit={'cover'}
 				borderRadius={borderRadius}
-				src={imageSrc ? imageSrc : `${API_URL}/${initialImage}`}
+				src={imageSrc ? imageSrc : initialImage}
 				alt={initialImage}
 				onClick={() => imgRef.current && upload && imgRef.current.click()}
 				mr={'1em'}

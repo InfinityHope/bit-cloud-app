@@ -76,8 +76,8 @@ const ProfileScreen = () => {
 							height={isLargerThan700 ? '300px' : '200px'}
 							initialImage={
 								user?.avatar === 'image/noAvatar.png'
-									? `${API_URL}/${user?.avatar}`
-									: noAvatar.src
+									? noAvatar.src
+									: `${API_URL}/${user?.avatar}`
 							}
 							borderRadius={'full'}
 						/>
