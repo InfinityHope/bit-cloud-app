@@ -1,5 +1,5 @@
 import { playerActions } from '@/app/store/reducers/player.reducer'
-import trackImg from '@/assets/noImage.jpg'
+import trackImg from '@/assets/noImage.png'
 import { AudioControls, TrackProgress, TrackVolume } from '@/components/ui'
 import { animationsConfig } from '@/config/animations.config'
 import { API_URL } from '@/constants/api.constants'
